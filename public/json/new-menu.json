@@ -1,0 +1,353 @@
+[
+    {
+        "id" : "1",
+        "name": "Dashboard",
+        "module": "admin-dashboard",
+        "slug": "dashboard",
+        "icon": "fal fa-house",
+        "url": "/home",
+        "parent_id": null,
+        "order": "1",
+        "is_active": "1",
+        "childrens": []
+    },
+    {
+        "id": "2",
+        "name": "Data Master",
+        "module": "master",
+        "slug": "master",
+        "icon": "fal fa-database",
+        "url": "#",
+        "parent_id": null,
+        "order": "2",
+        "is_active": "1",
+        "childrens": [
+            {
+                "id": "3",
+                "name": "Provinsi",
+                "module": "master-provinsi",
+                "slug": "master-provinsi",
+                "icon": "fal fa-map-marker-alt",
+                "url": "/admin/master/provinsi",
+                "parent_id": 2,
+                "order": "1",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "4",
+                "name": "kabupaten/Kota",
+                "module": "master-kabupaten",
+                "slug": "master-kabupaten",
+                "icon": "fal fa-map-marker-alt",
+                "url": "/admin/master/kabupaten",
+                "parent_id": 2,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "4",
+                "name": "Kecamatan",
+                "module": "master-kecamatan",
+                "slug": "master-kecamatan",
+                "icon": "fal fa-map-marker-alt",
+                "url": "/admin/master/kecamatan",
+                "parent_id": 2,
+                "order": "3",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "5",
+                "name": "Jenjang pendidikan",
+                "module": "master-jenjang-pendidikan",
+                "slug": "master-jenjang-pendidikan",
+                "icon": "fal fa-graduation-cap",
+                "url": "/admin/master/jenjang",
+                "parent_id": 2,
+                "order": "4",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "6",
+                "name": "Bobot Penilaian",
+                "module": "master-bobot",
+                "slug": "master-bobot",
+                "icon": "fal fa-balance-scale",
+                "url": "/admin/master/bobot",
+                "parent_id": 2,
+                "order": "5",
+                "is_active": "1",
+                "childrens": []
+            }
+        ]
+    },
+    {
+        "id": "7",
+        "name": "Akademik",
+        "module": "akademik",
+        "slug": "akademik",
+        "icon": "fal fa-graduation-cap",
+        "url": "#",
+        "parent_id": null,
+        "order": "3",
+        "is_active": "1",
+        "childrens": [
+            {
+                "id": "8",
+                "name": "Tahun Ajaran",
+                "module": "akademik-ta",
+                "slug": "akademik-tahun-ajaran",
+                "icon": "fal fa-calendar-alt",
+                "url": "/admin/akademik/tahun-ajaran",
+                "parent_id": 7,
+                "order": "1",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "9",
+                "name": "Institusi",
+                "module": "akademik-institusi",
+                "slug": "akademik-institusi",
+                "icon": "fal fa-university",
+                "url": "/admin/akademik/institusi",
+                "parent_id": 7,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "10",
+                "name": "Prodi",
+                "module": "akademi-prodi",
+                "slug": "akademi-prodi",
+                "icon": "fal fa-book",
+                "url": "/admin/akademik/prodi",
+                "parent_id": 7,
+                "order": "3",
+                "is_active": "1",
+                "childrens": []
+            }
+        ]
+    },
+    {
+        "id": "11",
+        "name": "CMS",
+        "module": "cms",
+        "slug": "cms",
+        "icon": "fal fa-newspaper",
+        "url": "#",
+        "parent_id": null,
+        "order": "4",
+        "is_active": "1",
+        "childrens": [{
+                "id": "12",
+                "name": "Slide show",
+                "module": "csm-slide-show",
+                "slug": "cms-slide-show",
+                "icon": "fal fa-images",
+                "url": "/admin/cms/slideshow",
+                "parent_id": 11,
+                "order": "1",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "13",
+                "name": "News",
+                "module": "cms-news",
+                "slug": "cms-news",
+                "icon": "fal fa-newspaper",
+                "url": "/admin/cms/news",
+                "parent_id": 11,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "14",
+                "name": "Documents",
+                "module": "cms-document",
+                "slug": "cms-document",
+                "icon": "fal fa-file-alt",
+                "url": "/admin/cms/document",
+                "parent_id": 11,
+                "order": "3",
+                "is_active": "1",
+                "childrens": []
+            }
+        ]
+    },
+    {
+        "id": "15",
+        "name": "RPL",
+        "module": "rpl",
+        "slug": "rpl",
+        "icon": "fal fa-sync",
+        "url": "#",
+        "parent_id": null,
+        "order": "5",
+        "is_active": "1",
+        "childrens": [{
+                "id": "16",
+                "name": "Asesor Akademisi",
+                "module": "rpl-asesor-akademisi",
+                "slug": "rpl-asesor-akademisi",
+                "icon": "fal fa-user-tie",
+                "url": "/admin/rpl/asesor/akademisi",
+                "parent_id": 15,
+                "order": "1",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "17",
+                "name": "Asesor Praktisi",
+                "module": "rpl-asesor-praktisi",
+                "slug": "rpl-asesor-praktisi",
+                "icon": "fal fa-user-tie",
+                "url": "/admin/rpl/asesor/praktisi",
+                "parent_id": 15,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "18",
+                "name": "Mata kuliah",
+                "module": "rpl-matakuliah",
+                "slug": "rpl-matakuliah",
+                "icon": "fal fa-book",
+                "url": "/admin/rpl/matakuliah",
+                "parent_id": 15,
+                "order": "3",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "19",
+                "name": "CPM RPL",
+                "module": "rpl-matakuliah-cpm",
+                "slug": "rpl-matakuliah-cpm",
+                "icon": "fal fa-book",
+                "url": "/admin/rpl/cpm",
+                "parent_id": 15,
+                "order": "3",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "20",
+                "name": "Syarat Pendaftaran",
+                "module": "rpl-persyaratan",
+                "slug": "rpl-persyaratan",
+                "icon": "fal fa-book",
+                "url": "/admin/rpl/persyaratan",
+                "parent_id": 15,
+                "order": "3",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "id": "21",
+                "name": "Jadwal Pendaftaran",
+                "module": "rpl-jadwal",
+                "slug": "rpl-jadwal",
+                "icon": "fal fa-calendar-alt",
+                "url": "/admin/rpl/jadwal",
+                "parent_id": 15,
+                "order": "3",
+                "is_active": "1",
+                "childrens": []
+            },
+             {
+                 "id": "22",
+                 "name": "Maping Mata kuliah",
+                 "module": "rpl-maping-matakuliah",
+                 "slug": "rpl-maping-matakuliah",
+                 "icon": "fal fa-calendar-alt",
+                 "url": "/admin/rpl/matakuliah/maping",
+                 "parent_id": 15,
+                 "order": "3",
+                 "is_active": "1",
+                 "childrens": []
+             },
+              {
+                  "id": "23",
+                  "name": "Maping Pilihan Prodi",
+                  "module": "rpl-maping-prodi",
+                  "slug": "rpl-maping-prodi",
+                  "icon": "fal fa-book",
+                  "url": "/admin/rpl/prodi/maping",
+                  "parent_id": 15,
+                  "order": "3",
+                  "is_active": "1",
+                  "childrens": []
+              }
+        ]
+    },
+     {
+         "id": "24",
+         "name": "Pendaftar RPL",
+         "module": "rpl-person",
+         "slug": "rpl-person",
+         "icon": "fal fa-sync",
+         "url": "#",
+         "parent_id": null,
+         "order": "5",
+         "is_active": "1",
+         "childrens": [
+             {
+                 "id": "25",
+                 "name": "Pendaftar RPL",
+                 "module": "rpl-person-register",
+                 "slug": "rpl-person-register",
+                 "icon": "fal fa-user-tie",
+                 "url": "/admin/rpl/pendaftar",
+                 "parent_id": 24,
+                 "order": "1",
+                 "is_active": "1",
+                 "childrens": []
+             },
+              {
+                  "id": "26",
+                  "name": "Peserta",
+                  "module": "rpl-person-peserta",
+                  "slug": "rpl-person-peserta",
+                  "icon": "fal fa-user-tie",
+                  "url": "/admin/rpl/peserta",
+                  "parent_id": 15,
+                  "order": "2",
+                  "is_active": "1",
+                  "childrens": []
+              }
+         ]
+     },
+      {
+          "id": "27",
+          "name": "Maping Asesor",
+          "module": "asesor-maping",
+          "slug": "asesor-maping",
+          "icon": "fal fa-sync",
+          "url": "/admin/rpl/asesor/maping",
+          "parent_id": null,
+          "order": "6",
+          "is_active": "1",
+          "childrens": []
+      },
+       {
+           "id": "28",
+           "name": "Penetapan Kompetensi",
+           "module": "kompetensi",
+           "slug": "kompetensi",
+           "icon": "fal fa-sync",
+           "url": "/admin/kompetensi",
+           "parent_id": 15,
+           "order": "3",
+           "is_active": "1",
+           "childrens": []
+       }
+]
