@@ -12,7 +12,7 @@ class SystemSettingController extends Controller
 {
     public function index(SystemSettingDataTable $dataTable)
     {
-        return $dataTable->render('pages.admin.system-setting.index');
+        return $dataTable->render('pages.admin.setting.system-setting.index');
     }
 
     public function store(StoreSettingRequest $request)
