@@ -2,6 +2,7 @@
 
 namespace App\Models\Master;
 
+use App\Models\SlaughteringPlace;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +22,8 @@ class KabupatenKota extends Model
     public function kecamatan()
     {
         return $this->hasMany(Kecamatan::class, 'kabupaten_kota_id', 'id');
+    }
+    public function slaughtering_place(){
+        return $this->hasMany(SlaughteringPlace::class, 'kabupaten_id', 'id');
     }
 }
