@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center align-items-center gap-2">
 
-    
+
     <a href="javascript:void(0)" class="btn btn-light btn-active-light-primary p-3 btn-center btn-sm editNews" data-id="{{ $news->id }}">
         <i class="ki-outline ki-pencil fs-2"></i>
     </a>

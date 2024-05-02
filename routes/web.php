@@ -39,4 +39,7 @@ Route::get('/defaults', function () {
 });
 
  // Your new content here
+ Route::get('/auth/passwords/email', function () {
+    return view::make('auth.passwords.email');
+});
  // Your new content here
