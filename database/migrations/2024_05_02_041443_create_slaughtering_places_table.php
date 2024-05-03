@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignId('type_of_place_id')->constrained('type_of_places');
             $table->foreignId('provinsi_id')->constrained('ref_provinsi');
-            $table->foreignId('kabupaten_id')->constrained('ref_kabupaten');
+            $table->foreignId('kabupaten_id')->constrained('ref_kabupaten_kota');
             $table->foreignId('kecamatan_id')->constrained('ref_kecamatan');
             $table->foreignId('kelurahan_id')->constrained('ref_kelurahan');
             $table->string('cutting_place')->nullable();

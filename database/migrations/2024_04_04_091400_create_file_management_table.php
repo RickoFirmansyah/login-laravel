@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('file_management', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignUuid('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('keterangan', 255);
             $table->text('file');
             $table->tinyInteger('status')->default(1);
