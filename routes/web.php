@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImpersonateController;
+use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 
@@ -20,6 +21,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
+    Route::resource('/provinsi', ProvinsiController::class)->names('provinsi');
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
 
