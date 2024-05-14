@@ -45,3 +45,10 @@ Route::get('/defaults', function () {
     return view::make('auth.passwords.email');
 });
  // Your new content here
+ Route::get('/auth/passwords/reset', function () {
+    return view('auth.passwords.reset');
+});
+
+Route::get('/auth/passwords/confirm', function () {
+    return view('auth.passwords.confirm');
+});

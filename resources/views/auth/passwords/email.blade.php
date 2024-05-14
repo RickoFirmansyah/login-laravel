@@ -8,11 +8,11 @@
                     <img src="{{ asset('assets/images/profile/foto login.jpg') }}" width="600" alt="">
                 </a>
             </div>
-                <div class="col-md-6">
-                    <h2>Lupa Kata Sandi</h2>
-                    <p class="mb-4">
-                        Silahkan masukan email anda untuk<br>kami kirim tautan reset password.
-                    </p>
+            <div class="col-md-6">
+                <h2>Lupa Kata Sandi</h2>
+                <p class="mb-4">
+                    Silahkan masukan email anda untuk<br>kami kirim tautan reset password.
+                </p>
                 <form>
                     <div class="form group mb-4">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
