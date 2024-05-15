@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SlaughteringPlace;
 use Illuminate\Http\Request;
+use App\Models\SlaughteringPlace;
+use App\Http\Controllers\Controller;
+use App\DataTables\Map\SlaughteringPlaceDataTable;
 
 class SlaughteringPlaceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SlaughteringPlaceDataTable $dataTable)
     {
-        //
+        return $dataTable->render('pages.admin.map-pemotongan.index');
     }
 
     /**

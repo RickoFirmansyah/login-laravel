@@ -62,17 +62,18 @@ class SlaughteringPlaceDataTable extends DataTable
                     ->setTableId('slaughteringplace-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax(script: "
-                                data._token = '".csrf_token()."';
+                                data._token = '" . csrf_token() . "';
                                 data._p = 'POST';
                             ")
+                    ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
                     ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
-                    ->setTableHeadClass('text-start text-muted fw-bold text-uppercase gs-0')
+                    ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
                     ->language(url('json/lang.json'))
-                    ->orderBy(2)
+                    ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
+                    ->orderBy(0)
                     ->select(false)
-                    ->drawCallbackWithLivewire(file_get_contents(public_path('assets/js/dataTables/drawCallback.js')))
                     ->buttons([]);
-    }
+            }
 
     /**
      * Get the dataTable columns definition.
