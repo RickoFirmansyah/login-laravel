@@ -23,7 +23,7 @@ class SlaughteringPlaceDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'slaughteringplace.action')
+            // ->addColumn('action', 'slaughteringplace.action')
             ->addIndexColumn()
             ->editColumn('kelurahan_id', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->kelurahan->nama;
@@ -40,7 +40,7 @@ class SlaughteringPlaceDataTable extends DataTable
             ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->user->email;
             })
-            ->rawColumns(['action'])
+            // ->rawColumns(['action'])
             ->setRowId('id');
     }
 
@@ -84,12 +84,12 @@ class SlaughteringPlaceDataTable extends DataTable
             Column::computed('DT_RowIndex')
                 ->title('No.')
                 ->width(20),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
-            Column::make('Tempat Pemotongan'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
+            Column::make('cutting_place')->title('Tempat Pemotongan'),
             Column::make('kelurahan_id')->title('Desa/Kelurahan'),
             Column::make('kecamatan_id')->title('Kemacamatan'),
             Column::make('user_id')->title('Nama Petugas'),
