@@ -75,6 +75,6 @@ class UserController extends Controller
         $user = User::find($id);
         User::destroy($user->id);
 
-        return redirect()->route('user-list.index')->with('error', 'User deleted successfully');
+        return response()-> json(['success' => 'User deleted successfully']);
     }
 }
