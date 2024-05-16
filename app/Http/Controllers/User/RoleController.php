@@ -64,7 +64,7 @@ class RoleController extends Controller
         $role->guard_name = $request->guard_name;
         $role->save();
 
-        return ResponseFormatter::success('Role updated successfully');
+        return redirect()->route('role.index')->with('success', 'Role updated successfully');
     }
 
     public function destroy(string $id)
