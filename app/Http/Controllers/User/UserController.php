@@ -59,6 +59,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        $user = User::find($request->user_id);
         $user->name = $request->name;
         $user->email = $request->email;
         if ($request->password) {
@@ -67,7 +68,7 @@ class UserController extends Controller
         $user->save();
         $user->syncRoles($request->role);
 
-        return redirect()->route('user-list.index')->with('success', 'User updated successfully');
+        return response()-> json(['success' => 'User updated successfully']);
     }
 
     public function destroy(string $id)
