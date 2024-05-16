@@ -4,7 +4,7 @@
     <div class="py-4">
         <div class="row">
             <div class="col-md-12">
-                <form method="POST" action="{{ route('user-list.update', $user->id) }}">
+                <form method="POST" action="{{ route('user-list.update', $user->id) }}" custom-action="true">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
