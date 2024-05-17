@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\LaporanStatistik\QurbanDataDataTable;
 use App\Models\QurbanData;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,9 @@ class QurbanDataController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(QurbanDataDataTable $dataTable)
     {
-        //
+        return $dataTable->render('pages.admin.laporan-statistik.index');
     }
 
     /**

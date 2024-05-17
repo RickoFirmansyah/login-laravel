@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('qurban_reports', function (Blueprint $table) {
+        Schema::create('years', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('monitoring_officer_id')->constrained('monitoring_officers');
-            $table->foreignId('slaughtering_place_id')->constrained('slaughtering_places');
-            $table->foreignId('year_id')->constrained('years');
-            $table->date('date');
+            $table->year('tahun');
+            $table->enum('status', ['Aktif', 'Non Aktif']);
             $table->char('created_by',36);
             $table->char('update_by',36);
             $table->timestamp('created_at')->useCurrent();
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('qurban_reports');
+        Schema::dropIfExists('years');
     }
 };

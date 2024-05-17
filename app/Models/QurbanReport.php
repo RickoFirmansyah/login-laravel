@@ -14,6 +14,9 @@ class QurbanReport extends Model
     protected $fillable=['date'];
 
 
+    public function year() {
+        return $this->belongsTo(Year::class, 'year_id', 'id');
+    }
     public function monitoring_officer() {
         return $this->belongsTo(MonitoringOfficer::class, 'monitoring_officer_id', 'id');
     }
