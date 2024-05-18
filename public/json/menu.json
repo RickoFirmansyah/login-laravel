@@ -90,8 +90,8 @@
             },
             {
                 "name": "Jenis Kelamin Hewan",
-                "module": "laporan-jeniskelamin-hewan",
-                "slug": "laporan-jeniskelamin-hewan",
+                "module": "laporan-jenis-kelamin-hewan",
+                "slug": "laporan-jenis-kelamin-hewan",
                 "icon": "fal fa-chart-bar",
                 "url": "/admin/laporan/jenis-kelamin",
                 "parent_id": 15,
