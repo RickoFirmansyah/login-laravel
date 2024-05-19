@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ref_kecamatan', function (Blueprint $table) {
             $table->id();
+            $table->integer('provinsi_id');
             $table->integer('kabupaten_kota_id');
             $table->char('kode',2);
             $table->string('nama', 100);
