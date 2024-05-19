@@ -10,6 +10,7 @@ use App\Models\User\Role as ModelsRole;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use ResponseFormatter;
 
 class UserController extends Controller
 {
@@ -41,7 +42,7 @@ class UserController extends Controller
         $user->save();
         $user->assignRole($request->role);
 
-        return redirect()->route('user-list.index')->with('success', 'User '.$user->name.' created successfully');
+        return redirect()->route('user-list.index')->with('success', 'User created successfully');
     }
 
     public function show(string $id)
@@ -59,6 +60,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        $user = User::find($request->user_id);
         $user->name = $request->name;
         $user->email = $request->email;
         if ($request->password) {
@@ -66,6 +68,7 @@ class UserController extends Controller
         }
         $user->save();
         $user->syncRoles($request->role);
+
 
         return redirect()->route('user-list.index')->with('success', 'User updated successfully');
     }
@@ -75,6 +78,6 @@ class UserController extends Controller
         $user = User::find($id);
         User::destroy($user->id);
 
-        return redirect()->route('user-list.index')->with('error', 'User deleted successfully');
+        return ResponseFormatter::success('User deleted successfully');
     }
 }
