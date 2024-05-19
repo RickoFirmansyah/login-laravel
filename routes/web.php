@@ -24,7 +24,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
     Route::resource('/map-pemotongan', SlaughteringPlaceController::class)->names('map-pemotongan');
-    Route::resource('/laporan-statistik', QurbanDataController::class)->names('laporan-statistik');
+    Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
+    Route::resource('/laporan-statistik-penyakit', QurbanDataController::class)->names('laporan-statistik-penyakit');
+    // Route::resource('/laporan-statistik-', QurbanDataController::class)->names('laporan-statistik');
 
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
