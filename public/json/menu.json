@@ -1,126 +1,172 @@
 [
     {
-        "name": "Dashboard",
-        "module": "admin-dashboard",
-        "slug": "dashboard",
-        "icon": "fal fa-house",
-        "url": "/dashboard",
-        "parent_id": null,
-        "order": "0",
-        "is_active": "1",
-        "childrens": []
-    },
-    {
         "name": "Data Master",
         "module": "master",
         "slug": "master",
         "icon": "fal fa-database",
+        "url": "/admin/master",
+        "parent_id": null,
+        "order": "0",
+        "is_active": "1",
+        "childrens": [
+            {
+                "name": "Jenis Kurban",
+                "module": "jenis-kurban",
+                "slug": "jenis-kurban",
+                "icon": "fal fa-university",
+                "url": "/master/jenis-kurban",
+                "parent_id": 1,
+                "order": "1",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "name": "tahun",
+                "module": "tahun",
+                "slug": "tahun",
+                "icon": "fal fa-user-tie",
+                "url": "/master/jenis-kurban",
+                "parent_id": 1,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            }
+        ]
+    },
+    {
+        "name": "Data Pokok",
+        "module": "data-pokok",
+        "slug": "data-pokok",
+        "icon": "fal fa-server",
         "url": "",
         "parent_id": null,
         "order": "1",
         "is_active": "1",
         "childrens": [
             {
-                "name": "Provinsi",
-                "module": "master-provinsi",
-                "slug": "master-provinsi",
-                "icon": "fal fa-map-marker-alt",
-                "url": "/admin/master/provinsi",
+                "name": "Tempat Pemotongan",
+                "module": "pokok-tempat-pemotongan",
+                "slug": "pokok-tempat-pemotongan",
+                "icon": "fal fa-university",
+                "url": "/admin/data-pokok/tempat-pemotongan",
                 "parent_id": 2,
                 "order": "1",
                 "is_active": "1",
                 "childrens": []
             },
             {
-                "name": "Kabupaten/Kota",
-                "module": "master-kabupaten",
-                "slug": "master-kabupaten",
-                "icon": "fal fa-map-marker-alt",
-                "url": "/admin/master/kabupaten",
+                "name": "Petugas Pemantauan",
+                "module": "pokok-petugas-pemantauan",
+                "slug": "pokok-petugas-pemantauan",
+                "icon": "fal fa-user-tie",
+                "url": "/admin/data-pokok/petugas-pemantauan",
                 "parent_id": 2,
                 "order": "2",
                 "is_active": "1",
                 "childrens": []
             },
             {
-                "name": "Kecamatan",
-                "module": "master-kecamatan",
-                "slug": "master-kecamatan",
-                "icon": "fal fa-map-marker-alt",
-                "url": "/admin/master/kecamatan",
+                "name": "Penugasan",
+                "module": "pokok-penugasan",
+                "slug": "pokok-penugasan",
+                "icon": "fal fa-chalkboard-teacher",
+                "url": "/admin/data-pokok/penugasan",
                 "parent_id": 2,
                 "order": "3",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Jenjang pendidikan",
-                "module": "master-jenjang-pendidikan",
-                "slug": "master-jenjang-pendidikan",
-                "icon": "fal fa-graduation-cap",
-                "url": "/admin/master/jenjang",
-                "parent_id": 2,
-                "order": "4",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Bobot Penilaian",
-                "module": "master-bobot",
-                "slug": "master-bobot",
-                "icon": "fal fa-balance-scale",
-                "url": "/admin/master/bobot",
-                "parent_id": 2,
-                "order": "5",
                 "is_active": "1",
                 "childrens": []
             }
         ]
     },
     {
-        "name": "Akademik",
-        "module": "akademik",
-        "slug": "akademik",
-        "icon": "fal fa-graduation-cap",
-        "url": "",
+        "name": "Lokasi Pemotongan",
+        "module": "lokasi-pemotongan",
+        "slug": "lokasi-pemotongan",
+        "icon": "fal fa-map-marker-alt",
+        "url": "/admin/lokasi-pemotongan",
         "parent_id": null,
         "order": "2",
         "is_active": "1",
+        "childrens": []
+    },
+
+    {
+        "name": "Laporan Statistik",
+        "module": "laporan-statistik",
+        "slug": "laporan-statistik",
+        "icon": "fal fa-chart-bar",
+        "url": "",
+        "parent_id": null,
+        "order": "3",
+        "is_active": "1",
         "childrens": [
             {
-                "name": "Tahun Ajaran",
-                "module": "akademik-ta",
-                "slug": "akademik-tahun-ajaran",
-                "icon": "fal fa-calendar-alt",
-                "url": "/admin/akademik/tahun-ajaran",
-                "parent_id": 7,
+                "name": "Jenis Hewan",
+                "module": "laporan-jenis-hewan",
+                "slug": "laporan-jenis-hewan",
+                "icon": "fal fa-chart-bar",
+                "url": "/admin/laporan/jenis-hewan",
+                "parent_id": 15,
                 "order": "1",
                 "is_active": "1",
                 "childrens": []
             },
             {
-                "name": "Institusi",
-                "module": "akademik-institusi",
-                "slug": "akademik-institusi",
-                "icon": "fal fa-university",
-                "url": "/admin/akademik/institusi",
-                "parent_id": 7,
+                "name": "Jenis Kelamin Hewan",
+                "module": "laporan-jenis-kelamin-hewan",
+                "slug": "laporan-jenis-kelamin-hewan",
+                "icon": "fal fa-chart-bar",
+                "url": "/admin/laporan/jenis-kelamin",
+                "parent_id": 15,
                 "order": "2",
                 "is_active": "1",
                 "childrens": []
             },
             {
-                "name": "Prodi",
-                "module": "akademi-prodi",
-                "slug": "akademi-prodi",
-                "icon": "fal fa-book",
-                "url": "/admin/akademik/prodi",
-                "parent_id": 7,
+                "name": "Penyakit Hewan",
+                "module": "laporan-penyakit-hewan",
+                "slug": "laporan-penyakit-hewan",
+                "icon": "fal fa-chart-bar",
+                "url": "/admin/laporan/penyakit",
+                "parent_id": 15,
                 "order": "3",
                 "is_active": "1",
                 "childrens": []
             }
         ]
+    },
+    {
+        "name": "Dokumentasi",
+        "module": "dokumentasi",
+        "slug": "dokumentasi",
+        "icon": "fal fa-file-alt",
+        "url": "/admin/dokumentasi",
+        "parent_id": null,
+        "order": "4",
+        "is_active": "1",
+        "childrens": []
+    },
+    {
+        "name": "Daftar Lokasi Pemantauan",
+        "module": "daftar-lokasi-pemantauan",
+        "slug": "daftar-lokasi-pemantauan",
+        "icon": "fal fa-bookmark",
+        "url": "/admin/daftar-lokasi-pemantauan",
+        "parent_id": null,
+        "order": "5",
+        "is_active": "1",
+        "childrens": []
+    },
+    {
+        "name": "Laporan Pemantauan",
+        "module": "laporan-pemantauan",
+        "slug": "laporan-pemantauan",
+        "icon": "fal fa-file-alt",
+        "url": "/admin/laporan-pemantauan",
+        "parent_id": null,
+        "order": "6",
+        "is_active": "1",
+        "childrens": []
     },
     {
         "name": "CMS",
@@ -129,7 +175,7 @@
         "icon": "fal fa-newspaper",
         "url": "",
         "parent_id": null,
-        "order": "3",
+        "order": "7",
         "is_active": "1",
         "childrens": [
             {
@@ -166,173 +212,6 @@
                 "childrens": []
             }
         ]
-    },
-    {
-        "name": "RPL",
-        "module": "rpl",
-        "slug": "rpl",
-        "icon": "fal fa-school",
-        "url": "",
-        "parent_id": null,
-        "order": "4",
-        "is_active": "1",
-        "childrens": [
-            {
-                "name": "Asesor Akademisi",
-                "module": "rpl-asesor-akademisi",
-                "slug": "rpl-asesor-akademisi",
-                "icon": "fal fa-user-tie",
-                "url": "/admin/rpl/asesor/akademisi",
-                "parent_id": 15,
-                "order": "1",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Asesor Praktisi",
-                "module": "rpl-asesor-praktisi",
-                "slug": "rpl-asesor-praktisi",
-                "icon": "fal fa-user-tie",
-                "url": "/admin/rpl/asesor/praktisi",
-                "parent_id": 15,
-                "order": "2",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Mata Kuliah",
-                "module": "rpl-matakuliah",
-                "slug": "rpl-matakuliah",
-                "icon": "fal fa-book",
-                "url": "/admin/rpl/matakuliah",
-                "parent_id": 15,
-                "order": "3",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "CPM RPL",
-                "module": "rpl-matakuliah-cpm",
-                "slug": "rpl-matakuliah-cpm",
-                "icon": "fal fa-book",
-                "url": "/admin/rpl/cpm",
-                "parent_id": 15,
-                "order": "4",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Syarat Pendaftaran",
-                "module": "rpl-persyaratan",
-                "slug": "rpl-persyaratan",
-                "icon": "fal fa-book",
-                "url": "/admin/rpl/persyaratan",
-                "parent_id": 15,
-                "order": "5",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Jadwal Pendaftaran",
-                "module": "rpl-jadwal",
-                "slug": "rpl-jadwal",
-                "icon": "fal fa-calendar-alt",
-                "url": "/admin/rpl/jadwal",
-                "parent_id": 15,
-                "order": "6",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Maping Mata kuliah",
-                "module": "rpl-maping-matakuliah",
-                "slug": "rpl-maping-matakuliah",
-                "icon": "fal fa-calendar-alt",
-                "url": "/admin/rpl/matakuliah/maping",
-                "parent_id": 15,
-                "order": "7",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Maping Pilihan Prodi",
-                "module": "rpl-maping-prodi",
-                "slug": "rpl-maping-prodi",
-                "icon": "fal fa-book",
-                "url": "/admin/rpl/prodi/maping",
-                "parent_id": 15,
-                "order": "8",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Mata Kuliah Settings",
-                "module": "rpl-matakuliah-settings",
-                "slug": "rpl-matakuliah-settings",
-                "icon": "fal fa-calendar-alt",
-                "url": "/admin/rpl/matakuliah/setting",
-                "parent_id": 15,
-                "order": "9",
-                "is_active": "1",
-                "childrens": []
-            }
-        ]
-    },
-    {
-        "name": "Pendaftar RPL",
-        "module": "rpl-person",
-        "slug": "rpl-person",
-        "icon": "fal fa-users",
-        "url": "",
-        "parent_id": null,
-        "order": "5",
-        "is_active": "1",
-        "childrens": [
-            {
-                "name": "Pendaftar",
-                "module": "rpl-person-register",
-                "slug": "rpl-person-register",
-                "icon": "fal fa-user-tie",
-                "url": "/admin/rpl/pendaftar",
-                "parent_id": 24,
-                "order": "1",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Peserta",
-                "module": "rpl-person-peserta",
-                "slug": "rpl-person-peserta",
-                "icon": "fal fa-user-tie",
-                "url": "/admin/rpl/peserta",
-                "parent_id": 15,
-                "order": "2",
-                "is_active": "1",
-                "childrens": []
-            }
-        ]
-    },
-    {
-        "name": "Maping Asesor",
-        "module": "asesor-maping",
-        "slug": "asesor-maping",
-        "icon": "fal fa-chalkboard-teacher",
-        "url": "/admin/rpl/asesor/maping",
-        "parent_id": null,
-        "order": "6",
-        "is_active": "1",
-        "childrens": []
-    },
-    {
-        "name": "Penetapan Kompetensi",
-        "module": "kompetensi",
-        "slug": "kompetensi",
-        "icon": "fal fa-sync",
-        "url": "/admin/kompetensi",
-        "parent_id": null,
-        "order": "7",
-        "is_active": "1",
-        "childrens": []
     },
     {
         "name": "Settings",

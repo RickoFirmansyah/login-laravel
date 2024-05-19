@@ -23,14 +23,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
+
     Route::resource('/map-pemotongan', SlaughteringPlaceController::class)->names('map-pemotongan');
-    Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
-    Route::resource('/laporan-statistik-penyakit', QurbanDataController::class)->names('laporan-statistik-penyakit');
-    // Route::resource('/laporan-statistik-', QurbanDataController::class)->names('laporan-statistik');
+
+
+
+Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
+Route::resource('/laporan-statistik-penyakit', QurbanDataController::class)->names('laporan-statistik-penyakit');
 
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
-
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
 });
 
@@ -46,12 +48,12 @@ Route::get('/defaults', function () {
     return View::make('pages.admin.dashboard.defaults');
 });
 
- // Your new content here
- Route::get('/auth/passwords/email', function () {
+// Your new content here
+Route::get('/auth/passwords/email', function () {
     return view::make('auth.passwords.email');
 });
- // Your new content here
- Route::get('/auth/passwords/reset', function () {
+// Your new content here
+Route::get('/auth/passwords/reset', function () {
     return view('auth.passwords.reset');
 });
 
