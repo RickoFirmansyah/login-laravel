@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Menus;
+use App\Models\Setting\Menus;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\EloquentDataTable;

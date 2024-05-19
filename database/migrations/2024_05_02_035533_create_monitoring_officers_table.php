@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('monitoring_officers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignUuid('user_id')->constrained('users');
             $table->string('name');
             $table->enum('gender', ['Laki-laki', 'perempuan']);
             $table->string('address')->nullable();
