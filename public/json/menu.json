@@ -8,7 +8,30 @@
         "parent_id": null,
         "order": "0",
         "is_active": "1",
-        "childrens": []
+        "childrens": [
+            {
+                "name": "Jenis Kurban",
+                "module": "jenis-kurban",
+                "slug": "jenis-kurban",
+                "icon": "fal fa-university",
+                "url": "/master/jenis-kurban",
+                "parent_id": 1,
+                "order": "1",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "name": "tahun",
+                "module": "tahun",
+                "slug": "tahun",
+                "icon": "fal fa-user-tie",
+                "url": "/master/jenis-kurban",
+                "parent_id": 1,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            }
+        ]
     },
     {
         "name": "Data Pokok",
