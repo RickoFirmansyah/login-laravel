@@ -5,12 +5,12 @@ $('[data-action="delete"]').each(function (element) {
         const url = $(this).data("url");
         const csrf = $(this).data("csrf-token");
         Swal.fire({
-            text: 'Are you sure you want to remove "' + dataName + '"?',
+            text: 'Apa kamu yakin ingin menghapus "' + dataName + '"?',
             icon: "warning",
             buttonsStyling: false,
             showCancelButton: true,
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
             customClass: {
                 confirmButton: "btn btn-danger",
                 cancelButton: "btn btn-secondary",
