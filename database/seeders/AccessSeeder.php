@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Setting\Menus;
+use App\Models\User\Role;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
+
 
 class AccessSeeder extends Seeder
 {
@@ -23,7 +24,7 @@ class AccessSeeder extends Seeder
         }
 
         foreach ($roles as $role) {
-            $role->givePermissionTo($accesses);
+            $role->syncPermissions($accesses);
         }
     }
 }

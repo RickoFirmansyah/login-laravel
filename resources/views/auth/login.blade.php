@@ -40,7 +40,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100 login-btn mb-4 rounded-2">Login</button>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <a class="text-primary fw-medium ms-2" href="#">Forgot your password?</a>
+                                    <a class="text-primary fw-medium ms-2" href="auth/passwords/email">Forgot your password?</a>
                                 </div>
                             </form>
                         </div>
