@@ -93,14 +93,29 @@
         </div>
 
         {{-- end --}}
-        <div class="d-flex align-items-center justify-content-end">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-provinsi_modal" data-action="edit"
-                data-url="" id="createNewProvinsi">
+
+        <div class="d-flex align-items-center justify-content-between">
+        <h5><b> Grafik Laporan </b></h5>
+            <div class="d-flex align-items-center position-relative my-1 ms-auto">
+                <div class="d-flex align-items-center position-relative my-1">
+                    <input type="date" id="tanggal" name="tanggal" class="form-control form-control-solid" style="width: 150px; margin-right: 10px;">
+                </div>
+            </div>
+        </div>
+        
+        @include('pages.admin.laporan-statistik.laporan-statistik-jenishewan.grafik')
+        
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center position-relative my-1 ms-auto">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-kabupatenkota_modal"
+                data-action="edit" data-url="">
                 <i class="fal fa-download fs-3"></i>
                 <span class="ms-2">
                     Unduh Laporan
                 </span>
             </button>
+            </div>
+            
             <div class="d-flex align-items-center position-relative my-1">
                 <span class="ki-outline ki-magnifier fs-3 position-absolute ms-5"></span>
                 <input type="text" data-kt-user-table-filter="search" data-table-id="qurbandata-table"
@@ -112,12 +127,10 @@
         </div>
     </div>
 
-    @include('pages.admin.map-pemotongan.modal')
-
     @push('scripts')
         {{ $dataTable->scripts() }}
         <script>
-            const tableId = 'qurbandata2-table';
+            const tableId = 'qurbandata3-table';
 
             $(document).ready(function() {
                 $('[data-kt-user-table-filter="search"]').on('input', function() {

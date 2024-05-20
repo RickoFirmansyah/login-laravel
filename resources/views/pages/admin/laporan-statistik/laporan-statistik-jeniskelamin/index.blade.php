@@ -2,6 +2,21 @@
 
 @section('content')
     <div class="card-body py-4">
+        <div class="mb-4 d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center position-relative my-1 ms-auto">
+                <div class="d-flex align-items-center position-relative my-1">
+                    <input type="date" id="tanggal" name="tanggal" class="form-control form-control-solid" style="width: 150px; margin-right: 10px;">
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-kabupatenkota_modal"
+                data-action="edit" data-url="">
+                <i class="fal fa-download fs-3"></i>
+                <span class="ms-2">
+                    Unduh Laporan
+                </span>
+            </button>
+        </div>
         {{-- card tiap jenis kurban --}}
         <div class="row">    
             <div class="col-md-3">
