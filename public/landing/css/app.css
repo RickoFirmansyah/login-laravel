@@ -164,6 +164,12 @@ th {
     background-size: cover;
 }
 
+.login-bg-login {
+    background-image: url("../images/backgrounds/10638.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
 .login-btn {
     padding: 12px 0;
 }
