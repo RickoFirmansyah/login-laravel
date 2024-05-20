@@ -93,31 +93,18 @@
         </div>
 
         {{-- end --}}
-        <div class="d-flex align-items-center justify-content-end">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-provinsi_modal" data-action="edit"
-                data-url="" id="createNewProvinsi">
-                <i class="fal fa-download fs-3"></i>
-                <span class="ms-2">
-                    Unduh Laporan
-                </span>
-            </button>
-            <div class="d-flex align-items-center position-relative my-1">
-                <span class="ki-outline ki-magnifier fs-3 position-absolute ms-5"></span>
-                <input type="text" data-kt-user-table-filter="search" data-table-id="qurbandata-table"
-                    class="form-control form-control-solid w-250px ps-13" placeholder="Search" id="mySearchInput" />
-            </div>
-        </div>
+
+        <h5><b> Grafik Laporan </b></h5>
+        
         <div class="table-responsive">
             {{ $dataTable->table() }}
         </div>
     </div>
 
-    @include('pages.admin.map-pemotongan.modal')
-
     @push('scripts')
         {{ $dataTable->scripts() }}
         <script>
-            const tableId = 'qurbandata2-table';
+            const tableId = 'qurbandata3-table';
 
             $(document).ready(function() {
                 $('[data-kt-user-table-filter="search"]').on('input', function() {
