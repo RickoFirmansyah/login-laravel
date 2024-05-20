@@ -65,4 +65,5 @@ Route::get('/auth/passwords/confirm', function () {
     return view('auth.passwords.confirm');
 });
 
+
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');

@@ -3,7 +3,6 @@
 namespace App\DataTables\LaporanStatistik;
 
 use App\Models\QurbanData;
-use App\Models\QurbanData3;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
