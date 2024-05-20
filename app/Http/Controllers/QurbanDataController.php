@@ -13,7 +13,7 @@ class QurbanDataController extends Controller
      */
     public function index(QurbanDataDataTable $dataTable)
     {
-        return $dataTable->render('pages.admin.laporan-statistik.index');
+        return $dataTable->render('pages.admin.laporan-statistik.laporan-statistik-jeniskelamin.index');
     }
 
     /**

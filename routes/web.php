@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImpersonateController;
-use App\Http\Controllers\Master\ProvinsiController;
+use App\Http\Controllers\QurbanData2Controller;
 use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\SlaughteringPlaceController;
+use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 
@@ -23,8 +24,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
+
     Route::resource('/map-pemotongan', SlaughteringPlaceController::class)->names('map-pemotongan');
-    Route::resource('/laporan-statistik', QurbanDataController::class)->names('laporan-statistik');
+    Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
+    Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
@@ -54,3 +57,5 @@ Route::get('/auth/passwords/reset', function () {
 Route::get('/auth/passwords/confirm', function () {
     return view('auth.passwords.confirm');
 });
+
+Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');

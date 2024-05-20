@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class QurbanDataDataTable extends DataTable
+class QurbanData2DataTable extends DataTable
 {
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -96,7 +96,7 @@ class QurbanDataDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('qurbandata-table')
+            ->setTableId('qurbandata2-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
