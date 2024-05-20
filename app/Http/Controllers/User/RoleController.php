@@ -31,7 +31,7 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        ModelsRole::create($request->all());
+        $role = ModelsRole::create($request->only('name', 'guard_name'));
 
         return redirect()->route('role.index')->with('success', 'Role created successfully');
     }
@@ -40,7 +40,7 @@ class RoleController extends Controller
     {
         $menus = Menus::all();
         $roleName = PermissionModelsRole::findByName($role->name);
-        $permissions = PermissionModelsRole::findByName($role->name)->permissions->pluck('name')->toArray();
+        $permissions = $roleName->permissions->pluck('name')->toArray();
         $access = Access::all();
 
         return view('pages.admin.user.role.show', compact('menus', 'permissions', 'access', 'role'));
@@ -48,33 +48,29 @@ class RoleController extends Controller
 
     public function edit(ModelsRole $role)
     {
-        return view('pages.admin.user.role.edit', [
-            'role' => $role,
-        ]);
+        return view('pages.admin.user.role.edit', compact('role'));
     }
 
     public function update(UpdateRoleRequest $request, ModelsRole $role)
     {
-        $role->name = $request->name;
-        $role->guard_name = $request->guard_name;
-        $role->save();
+        $role->update($request->only('name', 'guard_name'));
 
         return redirect()->route('role.index')->with('success', 'Role updated successfully');
     }
 
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $role = ModelsRole::find($id);
+        $role = ModelsRole::findOrFail($id);
         $role->delete();
 
-        return redirect()->route('role.index')->with('error', 'User deleted successfully');
+        return redirect()->route('role.index')->with('success', 'Role deleted successfully');
     }
 
     public function updatePermissions(Request $request, ModelsRole $role)
     {
         $rolePermission = PermissionModelsRole::findByName($role->name);
-        $allAccess = $request->except(['_token', '_method']);
-        $rolePermission->syncPermissions(array_keys(array_filter($allAccess)));
+        $permissions = array_keys($request->except('_token', '_method'));
+        $rolePermission->syncPermissions($permissions);
 
         return redirect()->back()->with('success', 'Permissions updated successfully');
     }
