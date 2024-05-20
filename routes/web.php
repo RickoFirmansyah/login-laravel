@@ -11,6 +11,7 @@ use App\Http\Controllers\SlaughteringPlaceController;
 use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\YearController;
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -59,3 +60,4 @@ Route::get('/auth/passwords/confirm', function () {
 });
 
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
+Route::resource('tahun', YearController::class)->names('jenis-kurban');
