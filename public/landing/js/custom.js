@@ -1,10 +1,9 @@
 $(function () {
-
     // =================================
     // Tooltip
     // =================================
     var tooltipTriggerList = [].slice.call(
-        document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        document.querySelectorAll('[data-bs-toggle="tooltip"]'),
     );
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -14,30 +13,46 @@ $(function () {
 
     $(".scroll-link").on("click", function (t) {
         var o = $(this);
-        $("html, body").stop().animate({
-           scrollTop: $(o.attr("href")).offset().top - 160
-        }, 1e3), t.preventDefault()
-     })
+        $("html, body")
+            .stop()
+            .animate(
+                {
+                    scrollTop: $(o.attr("href")).offset().top - 160,
+                },
+                1e3,
+            ),
+            t.preventDefault();
+    });
 
     // fixed header
 
     $(window).scroll(function () {
         if ($(window).scrollTop() >= 60) {
-            $('header').addClass('fixed-header');
+            $("header").addClass("fixed-header");
         } else {
-            $('header').removeClass('fixed-header');
+            $("header").removeClass("fixed-header");
         }
     });
 
     // Aos
 
     AOS.init({
-		once: true,
-	});
+        once: true,
+    });
+
+    // logo scroll hide
+    window.addEventListener("scroll", function () {
+        const logo = document.getElementById("logo");
+        if (window.scrollY > 0) {
+            logo.style.display = "none";
+        } else {
+            logo.style.display = "block";
+        }
+    });
 
     // Production Slider
 
-    $('.production-slider .owl-carousel').owlCarousel({
+    $(".production-slider .owl-carousel").owlCarousel({
         nav: false,
         dots: true,
         loop: true,
@@ -45,13 +60,12 @@ $(function () {
         dots: true,
         autoplay: true,
         autoplayTimeout: 5000,
-        autoplayHoverPause: true
-    })
-
+        autoplayHoverPause: true,
+    });
 
     // Review Slider
 
-    $('.review-slider .owl-carousel').owlCarousel({
+    $(".review-slider .owl-carousel").owlCarousel({
         loop: true,
         margin: 0,
         dots: true,
@@ -60,15 +74,14 @@ $(function () {
         autoplayHoverPause: true,
         responsive: {
             0: {
-                items: 1
+                items: 1,
             },
             768: {
-                items: 2
+                items: 2,
             },
             1200: {
-                items: 3
-            }
-        }
-    })
-
+                items: 3,
+            },
+        },
+    });
 });
