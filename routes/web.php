@@ -13,6 +13,7 @@ use App\Http\Controllers\SlaughteringPlaceController;
 use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\YearController;
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -29,10 +30,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/map-pemotongan', SlaughteringPlaceController::class)->names('map-pemotongan');
 
-    Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
-    Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
-    Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
 
+
+Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
+Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
+Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
@@ -65,3 +67,4 @@ Route::get('/auth/passwords/confirm', function () {
 
 
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
+Route::resource('tahun', YearController::class)->names('tahun');
