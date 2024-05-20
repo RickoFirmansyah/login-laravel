@@ -20,9 +20,8 @@ class QurbanDataDataTable extends DataTable
             'slaughtering_places.cutting_place',
             'ref_kelurahan.nama as village_name',
             'ref_kecamatan.nama as district_name',
-            'qurban_data.type_of_qurban_id',
             'type_of_qurbans.type_of_animal',
-            'qurban_data.gender',
+            'qurban_data.disease',
             'qurban_data.id'
         ])
             ->join('qurban_reports', 'qurban_data.qurban_report_id', '=', 'qurban_reports.id')
@@ -39,7 +38,7 @@ class QurbanDataDataTable extends DataTable
                 'ref_kelurahan.nama',
                 'ref_kecamatan.nama',
                 'type_of_qurbans.type_of_animal',
-                'qurban_data.gender'
+                'qurban_data.disease'
             ])
             ->selectRaw('COUNT(qurban_data.id) as count');
 
@@ -54,49 +53,38 @@ class QurbanDataDataTable extends DataTable
             ->editColumn('kecamatan_id', function ($qurbanData) {
                 return $qurbanData->district_name;
             })
-            ->editColumn('sapi_jantan', function ($qurbanData) {
-                return $this->getAnimalCount($qurbanData, 'Sapi', 'Jantan');
+            ->editColumn('sapi', function ($qurbanData) {
+                return $this->getAnimalDiseaseCount($qurbanData, 'Sapi');
             })
-            ->editColumn('sapi_betina', function ($qurbanData) {
-                return $this->getAnimalCount($qurbanData, 'Sapi', 'Betina');
+            ->editColumn('kerbau', function ($qurbanData) {
+                return $this->getAnimalDiseaseCount($qurbanData, 'Kerbau');
             })
-            ->editColumn('kerbau_jantan', function ($qurbanData) {
-                return $this->getAnimalCount($qurbanData, 'Kerbau', 'Jantan');
+            ->editColumn('kambing', function ($qurbanData) {
+                return $this->getAnimalDiseaseCount($qurbanData, 'Kambing');
             })
-            ->editColumn('kerbau_betina', function ($qurbanData) {
-                return $this->getAnimalCount($qurbanData, 'Kerbau', 'Betina');
-            })
-            ->editColumn('kambing_jantan', function ($qurbanData) {
-                return $this->getAnimalCount($qurbanData, 'Kambing', 'Jantan');
-            })
-            ->editColumn('kambing_betina', function ($qurbanData) {
-                return $this->getAnimalCount($qurbanData, 'Kambing', 'Betina');
-            })
-            ->editColumn('domba_jantan', function ($qurbanData) {
-                return $this->getAnimalCount($qurbanData, 'Domba', 'Jantan');
-            })
-            ->editColumn('domba_betina', function ($qurbanData) {
-                return $this->getAnimalCount($qurbanData, 'Domba', 'Betina');
+            ->editColumn('domba', function ($qurbanData) {
+                return $this->getAnimalDiseaseCount($qurbanData, 'Domba');
             })
             ->editColumn('total', function ($qurbanData) {
-                return $this->getTotalAnimals($qurbanData);
+                return $this->getTotalDiseases($qurbanData);
             })
             ->rawColumns(['total'])
             ->setRowId('id');
     }
 
-    private function getAnimalCount($qurbanData, $animalType, $gender)
+    private function getAnimalDiseaseCount($qurbanData, $animalType)
     {
         return QurbanData::join('type_of_qurbans', 'qurban_data.type_of_qurban_id', '=', 'type_of_qurbans.id')
             ->where('qurban_data.qurban_report_id', $qurbanData->qurban_report_id)
             ->where('type_of_qurbans.type_of_animal', $animalType)
-            ->where('qurban_data.gender', $gender)
+            ->whereNotNull('qurban_data.disease')
             ->count();
     }
 
-    private function getTotalAnimals($qurbanData)
+    private function getTotalDiseases($qurbanData)
     {
         return QurbanData::where('qurban_data.qurban_report_id', $qurbanData->qurban_report_id)
+            ->whereNotNull('qurban_data.disease')
             ->count();
     }
 
@@ -108,7 +96,7 @@ class QurbanDataDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('qurbandata-table')
+            ->setTableId('qurbandata2-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
@@ -129,15 +117,11 @@ class QurbanDataDataTable extends DataTable
             Column::make('cutting_place')->title('Tempat Pemotongan'),
             Column::make('kelurahan_id')->title('Desa/Kelurahan'),
             Column::make('kecamatan_id')->title('Kecamatan'),
-            Column::make('sapi_jantan')->title('Sapi Jantan'),
-            Column::make('sapi_betina')->title('Sapi Betina'),
-            Column::make('kerbau_jantan')->title('Kerbau Jantan'),
-            Column::make('kerbau_betina')->title('Kerbau Betina'),
-            Column::make('kambing_jantan')->title('Kambing Jantan'),
-            Column::make('kambing_betina')->title('Kambing Betina'),
-            Column::make('domba_jantan')->title('Domba Jantan'),
-            Column::make('domba_betina')->title('Domba Betina'),
-            Column::make('total')->title('Total Qurban'),
+            Column::make('sapi')->title('Sapi'),
+            Column::make('kerbau')->title('Kerbau'),
+            Column::make('kambing')->title('Kambing'),
+            Column::make('domba')->title('Domba'),
+            Column::make('total')->title('Total Penyakit'),
         ];
     }
 

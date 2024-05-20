@@ -14,7 +14,8 @@ class SlaughteringPlaceController extends Controller
      */
     public function index(SlaughteringPlaceDataTable $dataTable)
     {
-        return $dataTable->render('pages.admin.map-pemotongan.index');
+        $slaughteringPlaces = SlaughteringPlace::all(['latitude', 'longitude', 'cutting_place']);
+        return $dataTable->render('pages.admin.map-pemotongan.index',compact('slaughteringPlaces'));
     }
 
     /**

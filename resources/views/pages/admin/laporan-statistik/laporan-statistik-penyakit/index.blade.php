@@ -122,7 +122,7 @@
     @push('scripts')
         {{ $dataTable->scripts() }}
         <script>
-            const tableId = 'qurbandata-table';
+            const tableId = 'qurbandata2-table';
 
             $(document).ready(function() {
                 $('[data-kt-user-table-filter="search"]').on('input', function() {
