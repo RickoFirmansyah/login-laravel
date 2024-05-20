@@ -24,7 +24,7 @@
             <div class="fixed-top">
                 <nav class="navbar navbar-expand-lg py-0 px-2 px-lg-5 mt-4">
                     <div class="container-fluid rounded shadow-lg py-1 px-2 px-lg-4 bg-white">
-                        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
                             <img src="{{ asset('landing/images/logos/logo.png') }}" alt="img-fluid">
                             <h5 class="fw-bolder">Pantau Ternak</h5>
                         </a>
