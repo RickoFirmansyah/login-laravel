@@ -39,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
+    Route::get('/admin/profile/myprofile', function () {
+        return view('pages.admin.profile.myprofile.index');
+    })->name('profile.myprofile');
 });
 
 Route::middleware("auth")->prefix("user")->name("user.")->group(function () {
