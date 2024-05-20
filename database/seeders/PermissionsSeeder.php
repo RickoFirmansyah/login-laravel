@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Setting\Access;
 use App\Models\Setting\Menus;
+use App\Models\User\Permission;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
+
 
 class PermissionsSeeder extends Seeder
 {
@@ -39,7 +40,9 @@ class PermissionsSeeder extends Seeder
                 ];
             }
         }
-        Permission::insert($permissions);
+        foreach ($permissions as $permissions) {
+            Permission::create($permissions);
+        }
         Access::insert($accesses);
     }
 }

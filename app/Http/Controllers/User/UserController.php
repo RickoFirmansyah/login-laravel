@@ -10,7 +10,11 @@ use App\Models\User\Role as ModelsRole;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+<<<<<<< HEAD
 use Illuminate\Http\Request;
+=======
+use ResponseFormatter;
+>>>>>>> 3aa3bb8916d6f53311b8042b05806fd9d658f78c
 
 class UserController extends Controller
 {
@@ -42,7 +46,7 @@ class UserController extends Controller
         $user->save();
         $user->assignRole($request->role);
 
-        return redirect()->route('user-list.index')->with('success', 'User '.$user->name.' created successfully');
+        return redirect()->route('user-list.index')->with('success', 'User created successfully');
     }
 
     public function show(string $id)
@@ -61,7 +65,11 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, $id)
     {
+<<<<<<< HEAD
         $user = User::findOrFail($id);
+=======
+        $user = User::find($request->user_id);
+>>>>>>> 3aa3bb8916d6f53311b8042b05806fd9d658f78c
         $user->name = $request->name;
         $user->email = $request->email;
         
@@ -78,6 +86,7 @@ class UserController extends Controller
         $user->save();
         $user->syncRoles($request->role);
 
+
         return redirect()->route('user-list.index')->with('success', 'User updated successfully');
     }
 
@@ -86,6 +95,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
+<<<<<<< HEAD
         return redirect()->route('user-list.index')->with('success', 'User deleted successfully');
+=======
+        return ResponseFormatter::success('User deleted successfully');
+>>>>>>> 3aa3bb8916d6f53311b8042b05806fd9d658f78c
     }
 }

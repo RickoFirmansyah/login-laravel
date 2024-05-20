@@ -3,7 +3,7 @@
 @section('content')
     <div class="py-4">
         <div class="row">
-            <form method="POST" action="{{ route('role.update', $role->id) }}">
+            <form method="POST" action="{{ route('role.update', $role->id) }}" custom-action="true">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">

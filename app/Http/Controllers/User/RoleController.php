@@ -10,6 +10,8 @@ use App\Models\Setting\Access;
 use App\Models\Setting\Menus;
 use App\Models\User\Role as ModelsRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use ResponseFormatter;
 use Spatie\Permission\Models\Role as PermissionModelsRole;
 
 class RoleController extends Controller
@@ -31,7 +33,7 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        $role = ModelsRole::create($request->only('name', 'guard_name'));
+        ModelsRole::create($request->all());
 
         return redirect()->route('role.index')->with('success', 'Role created successfully');
     }
@@ -63,7 +65,7 @@ class RoleController extends Controller
         $role = ModelsRole::findOrFail($id);
         $role->delete();
 
-        return redirect()->route('role.index')->with('success', 'Role deleted successfully');
+        return redirect()->route('role.index')->with('error', 'User deleted successfully');
     }
 
     public function updatePermissions(Request $request, ModelsRole $role)
