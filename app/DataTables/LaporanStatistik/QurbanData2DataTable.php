@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class QurbanDataDataTable extends DataTable
+class QurbanData2DataTable extends DataTable
 {
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -114,7 +114,7 @@ class QurbanDataDataTable extends DataTable
             Column::computed('DT_RowIndex')
                 ->title('No.')
                 ->width(20),
-            Column::make('cutting_place')->title('Tempat Pemotongan'),
+            Column::make('disease')->title('Jenis Penyakit'),
             Column::make('kelurahan_id')->title('Desa/Kelurahan'),
             Column::make('kecamatan_id')->title('Kecamatan'),
             Column::make('sapi')->title('Sapi'),
