@@ -5,10 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImpersonateController;
-use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\QurbanData2Controller;
 use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\SlaughteringPlaceController;
+use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 
@@ -57,3 +57,5 @@ Route::get('/auth/passwords/reset', function () {
 Route::get('/auth/passwords/confirm', function () {
     return view('auth.passwords.confirm');
 });
+
+Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
