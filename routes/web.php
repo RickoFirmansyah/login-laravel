@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\Master\ProvinsiController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QurbanData2Controller;
 
 use App\Http\Controllers\QurbanDataController;
@@ -39,9 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
-    Route::get('/admin/profile/myprofile', function () {
-        return view('pages.admin.profile.myprofile.index');
-    })->name('profile.myprofile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
 });
 
 Route::middleware("auth")->prefix("user")->name("user.")->group(function () {
