@@ -29,20 +29,32 @@ class TypeOfQurbanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'jenis_kurban' => 'required',
+        ]);
+
+        // dd($request->all());
+
         if ($request->id != null) {
-            $kabupatenkota = TypeOfQurban::find($request->id);
-            $kabupatenkota->update(array_merge($request->all(), ['updated_by' => auth()->id(), 'created_by' => auth()->id()]));
-            // $kabupatenkota->update($request->all());
-            return response()->json([
-                'success' => 'Data Jenis Kurban Berhasil Diubah'
-            ]);
+            $data = TypeOfQurban::findOrFail($request->id);
+            $data->update(
+                array_merge(
+                    ['type_of_animal' => $request->jenis_kurban],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return response()->json(['success' => ' updated successfully']);
         } else {
-            $data = array_merge($request->all(), ['created_by' => auth()->id(), 'update_by' => auth()->id()]);
-            TypeOfQurban::create($data);
-            // TypeOfQurban::create($request->all());
-            return response()->json([
-                'success' => 'Data Jenis Kurban Berhasil Ditambahkan'
-            ]);
+            TypeOfQurban::create(
+                array_merge(
+                    ['type_of_animal' => $request->jenis_kurban],
+                    ['created_by' => auth()->user()->id],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return response()->json(['success' => 'News added successfully']);
         }
     }
 
