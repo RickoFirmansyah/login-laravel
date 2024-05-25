@@ -37,8 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
     Route::resource('/laporan-statistik-penyakit', QurbanDataController::class)->names('laporan-statistik-penyakit');
     Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
-    Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
+    Route::resource('/role', RoleController::class);
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
 });

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\User;
 
-use App\DataTables\User\UserListDataTable;
+use App\Models\User;
+use ResponseFormatter;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User\Role as ModelsRole;
+use App\DataTables\User\UserListDataTable;
 use App\Http\Requests\Users\User\StoreUserRequest;
 use App\Http\Requests\Users\User\UpdateUserRequest;
-use App\Models\User\Role as ModelsRole;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 
 class UserController extends Controller
@@ -42,7 +43,7 @@ class UserController extends Controller
         $user->save();
         $user->assignRole($request->role);
 
-        return redirect()->route('user-list.index')->with('success', 'User '.$user->name.' created successfully');
+        return redirect()->route('user-list.index')->with('success', 'User created successfully');
     }
 
     public function show(string $id)
@@ -64,19 +65,16 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        
+
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
 
-        if ($request->email_verified_at) {
-            $user->email_verified_at = \Carbon\Carbon::createFromFormat('Y-m-d\TH:i', $request->email_verified_at);
-        } else {
-            $user->email_verified_at = null;
+        if ($request->role) {
+            $user->syncRoles($request->role);
         }
 
         $user->save();
-        $user->syncRoles($request->role);
 
         return redirect()->route('user-list.index')->with('success', 'User updated successfully');
     }
@@ -86,6 +84,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('user-list.index')->with('success', 'User deleted successfully');
+        return ResponseFormatter::success('User deleted successfully');
     }
 }
