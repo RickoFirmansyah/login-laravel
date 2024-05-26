@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             KelurahanSeeder::class,
             JenisKurban::class,
             TypeOfPlacesSeeder::class,
-            SlaughteringPlacesSeeder::class,
+            // SlaughteringPlacesSeeder::class,
         ]);
     }
 }

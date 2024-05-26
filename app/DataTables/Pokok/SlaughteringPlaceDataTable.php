@@ -24,6 +24,12 @@ class SlaughteringPlaceDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             // ->addColumn('action', 'slaughteringplace.action')
+            ->addColumn('action', function (SlaughteringPlace $slaughteringPlace) {
+                return view('pages.admin.data-pokok.tempat-pemotongan.action', compact('slaughteringPlace'));
+            })
+            ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
+                return $slaughteringPlace->user->id;
+            })
             ->addIndexColumn()
             ->editColumn('kelurahan_id', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->kelurahan->nama;
@@ -31,16 +37,13 @@ class SlaughteringPlaceDataTable extends DataTable
             ->editColumn('kecamatan_id', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->kecamatan->nama;
             })
-            ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->user->name;
+            ->editColumn('created_by', function (SlaughteringPlace $slaughteringPlace) {
+                return $slaughteringPlace->createdByUser->name;
             })
-            // ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
-            //     return $slaughteringPlace->user->no_tlp;
-            // })
-            ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->user->email;
+            ->editColumn('update_by', function (SlaughteringPlace $slaughteringPlace) {
+                return $slaughteringPlace->updatedByUser->name;
             })
-            // ->rawColumns(['action'])
+            ->rawColumns(['action'])
             ->setRowId('id');
     }
 
@@ -72,6 +75,7 @@ class SlaughteringPlaceDataTable extends DataTable
             ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
             ->orderBy(0)
             ->select(false)
+            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
             ->buttons([]);
     }
 
@@ -84,19 +88,18 @@ class SlaughteringPlaceDataTable extends DataTable
             Column::computed('DT_RowIndex')
                 ->title('No.')
                 ->width(20),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
             Column::make('cutting_place')->title('Tempat Pemotongan'),
             Column::make('kelurahan_id')->title('Desa/Kelurahan'),
             Column::make('kecamatan_id')->title('Kemacamatan'),
-            Column::make('user_id')->title('Nama Petugas'),
-            // Column::make('user_id')->title('No Telepon'),
-            Column::make('user_id')->title('Email'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('created_by')->title('Dibuat Oleh'),
+            Column::make('update_by')->title('Diubah Oleh'),
+            Column::computed('action')
+                ->title('Aksi')
+                ->exportable(false)
+                ->printable(false)
+                ->width(100)
+                ->addClass('text-center')
+                ->view('pages.admin.data-pokok.tempat-pemotongan.action'), // Ganti dengan view yang sesuai
         ];
     }
 
