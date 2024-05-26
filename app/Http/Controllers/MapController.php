@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SlaughteringPlace;
 use App\Http\Controllers\Controller;
-use App\DataTables\Pokok\SlaughteringPlaceDataTable;
+use App\DataTables\Map\MapDataTable;
 
-
-class SlaughteringPlaceController extends Controller
+class MapController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(SlaughteringPlaceDataTable $dataTable)
+    public function index(MapDataTable $dataTable)
     {
         $slaughteringPlaces = SlaughteringPlace::all(['latitude', 'longitude', 'cutting_place']);
         return $dataTable->render('pages.admin.map-pemotongan.index', compact('slaughteringPlaces'));

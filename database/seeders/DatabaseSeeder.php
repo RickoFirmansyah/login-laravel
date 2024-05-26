@@ -17,14 +17,16 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             PermissionsSeeder::class,
-            BackupScheduleSeeder::class,
-            BackupScheduleTablesSeeder::class,
+            // BackupScheduleSeeder::class,
+            // BackupScheduleTablesSeeder::class,
             AccessSeeder::class,
             ProvinsiSeeder::class,
             KabupatenKotaSeeder::class,
             KecamatanSeeder::class,
             KelurahanSeeder::class,
             JenisKurban::class,
+            TypeOfPlacesSeeder::class,
+            SlaughteringPlacesSeeder::class,
         ]);
     }
 }

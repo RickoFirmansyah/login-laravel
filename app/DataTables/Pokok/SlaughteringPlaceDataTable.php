@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables\Map;
+namespace App\DataTables\Pokok;
 
 use App\Models\Master\KabupatenKota;
 use App\Models\SlaughteringPlace;
@@ -58,22 +58,22 @@ class SlaughteringPlaceDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    
-                    ->setTableId('slaughteringplace-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax(script: "
+
+            ->setTableId('slaughteringplace-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax(script: "
                                 data._token = '" . csrf_token() . "';
                                 data._p = 'POST';
                             ")
-                    ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
-                    ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
-                    ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
-                    ->language(url('json/lang.json'))
-                    ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
-                    ->orderBy(0)
-                    ->select(false)
-                    ->buttons([]);
-            }
+            ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
+            ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
+            ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
+            ->language(url('json/lang.json'))
+            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
+            ->orderBy(0)
+            ->select(false)
+            ->buttons([]);
+    }
 
     /**
      * Get the dataTable columns definition.
