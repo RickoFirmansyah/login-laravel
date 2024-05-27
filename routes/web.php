@@ -7,7 +7,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\QurbanData2Controller;
 
 use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\QurbanData2Controller;
