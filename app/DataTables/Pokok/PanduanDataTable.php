@@ -25,19 +25,10 @@ class PanduanDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('action', function(Panduan $val) {
-                return view('pages.admin.map-pemotongan.action',['tempatPemotongan' =>$val]);
+                return view('pages.admin.panduan.action',['tempatPemotongan' =>$val]);
             })
-            ->editColumn('kelurahan_id', function (Panduan $Panduan) {
-                return $Panduan->kelurahan->nama;
-            })
-            ->editColumn('kecamatan_id', function (Panduan $Panduan) {
-                return $Panduan->kecamatan->nama;
-            })
-            ->editColumn('user_id', function (Panduan $Panduan) {
-                return $Panduan->user->name;
-            })
-            ->editColumn('user_id', function (Panduan $Panduan) {
-                return $Panduan->user->email;
+            ->editColumn('numbers', function (Panduan $Panduan) {
+                return (int)$Panduan->numbers;
             })
             ->rawColumns(['action'])
             ->setRowId('id');
@@ -88,14 +79,9 @@ class PanduanDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('cutting_place')->title('Tempat Pemotongan'),
-            Column::make('kelurahan_id')->title('Desa/Kelurahan'),
-            Column::make('kecamatan_id')->title('Kemacamatan'),
-            Column::make('user_id')->title('Nama Petugas'),
-            // Column::make('user_id')->title('No Telepon'),
-            Column::make('user_id')->title('Email'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('title')->title('Title'),
+            Column::make('description')->title('Description'),
+            Column::make('numbers')->title('Numbers'),
         ];
     }
 

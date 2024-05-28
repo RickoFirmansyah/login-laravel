@@ -9,7 +9,7 @@ class Panduan extends Model
 {
     use HasFactory;
 
-    protected $table = 'panduan_unduhan';
+    protected $table = 'panduan';
     protected $guards = [];
     // protected $fillable=['user_id','type_of_place_id','cutting_place','address','latitude','longitude','type_of_place_id','kabupaten_id',
     // 'kecamatan_id','created_by','update_by','provinsi_id','keluarahan_id'

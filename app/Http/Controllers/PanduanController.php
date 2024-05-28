@@ -22,8 +22,8 @@ class PanduanController extends Controller
      */
     public function index(PanduanDataTable $dataTable)
     {
-        $Panduans = Panduan::all(['latitude', 'longitude', 'cutting_place']);
-        return $dataTable->render('pages.admin.map-pemotongan.index', compact('Panduans'));
+        $Panduans = Panduan::all();
+        return $dataTable->render('pages.admin.panduan.index', compact('Panduans'));
     }
 
     /**
@@ -31,13 +31,13 @@ class PanduanController extends Controller
      */
     public function create()
     {
-        $provinsi = Provinsi::all();
-        $kabupatenKota = KabupatenKota::all();
-        $kecamatan = Kecamatan::all();
-        $kelurahan = Kelurahan::all();
-        $tempatType = TypeOfPlace::all();
+        // $provinsi = Provinsi::all();
+        // $kabupatenKota = KabupatenKota::all();
+        // $kecamatan = Kecamatan::all();
+        // $kelurahan = Kelurahan::all();
+        // $tempatType = TypeOfPlace::all();
 
-        return view('pages.admin.map-pemotongan.create',compact('provinsi', 'kabupatenKota', 'kecamatan', 'kelurahan','tempatType'));
+        return view('pages.admin.panduan.create');
     }
 
     /**
@@ -46,22 +46,15 @@ class PanduanController extends Controller
     public function store(Request $request)
     {
         $StoreTempatPemotonganRequest = new Panduan();
-        $StoreTempatPemotonganRequest->user_id = Auth::id();
-        $StoreTempatPemotonganRequest->type_of_place_id = $request->typeOfPlace;
-        $StoreTempatPemotonganRequest->cutting_place = $request->nama_tempat;
-        $StoreTempatPemotonganRequest->address = $request->alamat_lengkap;
-        $StoreTempatPemotonganRequest->provinsi_id = $request->provinsi;
-        $StoreTempatPemotonganRequest->kabupaten_id= $request->kabupatenKota;
-        $StoreTempatPemotonganRequest->kecamatan_id = $request->kecamatan;
-        $StoreTempatPemotonganRequest->kelurahan_id = $request->kelurahan;
-        $StoreTempatPemotonganRequest->latitude = $request->latitude;
-        $StoreTempatPemotonganRequest->longitude = $request->longtitude;
+        $StoreTempatPemotonganRequest->title = $request->title;
+        $StoreTempatPemotonganRequest->numbers = $request->numbers;
+        $StoreTempatPemotonganRequest->description = $request->description;
         $StoreTempatPemotonganRequest->created_by = Auth::id();
         $StoreTempatPemotonganRequest->update_by = Auth::id();
         $StoreTempatPemotonganRequest->save();
 
-        // return response()->json(['url' => route('admin.data-pokok.tempat-pemotongan.index'),'pesan' => 'Tempat Pemotongan berhasil dibuat.' ]);
-        return redirect()->route('admin.data-pokok.tempat-pemotongan.index')->with('success', 'Tempat Pemotongan '. 'created successfully');
+        // return response()->json(['url' => route('admin.data-pokok.panduan.index'),'pesan' => 'Tempat Pemotongan berhasil dibuat.' ]);
+        return redirect()->route('admin.data-pokok.panduan.index')->with('success', 'Panduan '. 'created successfully');
     
     }
 
@@ -97,7 +90,7 @@ class PanduanController extends Controller
         $tempatPemotongan = Panduan::find($id);
         Panduan::destroy($tempatPemotongan->id);
 
-        return redirect()->route('admin.data-pokok.tempat-pemotongan.index')->with('success', 'Tempat Pemotongan '. 'delete successfully');
+        return redirect()->route('admin.data-pokok.panduan.index')->with('success', 'Tempat Pemotongan '. 'delete successfully');
     }
 
 

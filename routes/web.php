@@ -17,6 +17,7 @@ use App\Http\Controllers\QurbanData3Controller;
 use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\SlaughteringPlaceController;
+use App\Http\Controllers\PanduanController;
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -32,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/user-list', UserController::class)->names('user-list');
 
     // PANDUAN
-    Route::resource('/admin/data-pokok/panduan', SlaughteringPlaceController::class)->names('admin.data-pokok.panduan');
+    Route::resource('/admin/data-pokok/panduan', PanduanController::class)->names('admin.data-pokok.panduan');
     
     // TEMPAT PEMOTONGAN
     Route::resource('/admin/data-pokok/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.data-pokok.tempat-pemotongan');
