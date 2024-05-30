@@ -15,7 +15,7 @@ class SlaughteringPlace extends Model
     use HasFactory;
 
     protected $table = 'slaughtering_places';
-    protected $guards = [];
+    protected $guards = ['id'];
     protected $fillable = ['cutting_place', 'address', 'latitude', 'longitude', 'user_id', 'type_of_place_id', 'kecamatan_id', 'kelurahan_id', 'provinsi_id', 'kabupaten_id', 'created_by', 'update_by',];
 
 

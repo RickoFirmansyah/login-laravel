@@ -13,7 +13,7 @@ use App\Models\Master\Kelurahan;
 use App\Models\Master\Provinsi;
 use App\Models\TypeOfPlace;
 use Illuminate\Support\Facades\DB;
-
+use ResponseFormatter;
 
 class PanduanController extends Controller
 {
@@ -69,17 +69,28 @@ class PanduanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Panduan $Panduan)
+    public function edit($id)
     {
         //
+        $panduan = Panduan::findOrFail($id);
+        return view('pages.admin.panduan.edit', compact('panduan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Panduan $Panduan)
+    public function update(Request $request, $id)
     {
-        //
+
+        $panduan = Panduan::findOrFail($id);
+        $panduan->title = $request->title;
+        $panduan->numbers = $request->numbers;
+        $panduan->description = $request->description;
+        $panduan->created_by = Auth::id();
+        $panduan->update_by = Auth::id();
+        $panduan->save();
+
+        return redirect()->route('admin.data-pokok.panduan.index')->with('success', 'Panduan '. 'updated successfully');
     }
 
     /**
@@ -90,7 +101,8 @@ class PanduanController extends Controller
         $tempatPemotongan = Panduan::find($id);
         Panduan::destroy($tempatPemotongan->id);
 
-        return redirect()->route('admin.data-pokok.panduan.index')->with('success', 'Tempat Pemotongan '. 'delete successfully');
+        return ResponseFormatter::success('Panduan berhasil dihapus');
+        // return redirect()->route('admin.data-pokok.panduan.index')->with('success', 'Panduan '. 'delete successfully');
     }
 
 

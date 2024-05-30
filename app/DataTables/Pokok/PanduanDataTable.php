@@ -25,7 +25,7 @@ class PanduanDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('action', function(Panduan $val) {
-                return view('pages.admin.panduan.action',['tempatPemotongan' =>$val]);
+                return view('pages.admin.panduan.action',['panduan' =>$val]);
             })
             ->editColumn('numbers', function (Panduan $Panduan) {
                 return (int)$Panduan->numbers;

@@ -74,12 +74,14 @@ class SlaughteringPlaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SlaughteringPlace $slaughteringPlace)
+    public function edit($id)
     {
         $typeOfPlace = ModelsTypeOfPlace::all();
         $kecamatan = ModelsKecamatan::pluck('nama', 'id');
         $kelurahan = ModelsKelurahan::all();
-        return view('pages.admin.data-pokok.tempat-pemotongan.edit', compact('typeOfPlace', 'kecamatan', 'kelurahan', 'slaughteringPlace'));
+        $slaughteringPlace = SlaughteringPlace::findOrFail($id);
+        return view('pages.admin.data-pokok.tempat-pemotongan.edit', compact('typeOfPlace', 'kecamatan', 'kelurahan', 
+        'slaughteringPlace'));
     }
 
     /**
