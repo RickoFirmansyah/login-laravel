@@ -83,7 +83,12 @@ class YearController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Year::findOrFail($id);
+        $user->tahun = $request->tahun;
+        $user->status = $request->status;
+        $user->save();
+
+        return redirect()->route('tahun.index')->with('success', 'Berhasil Updated successfully');
     }
 
     /**
