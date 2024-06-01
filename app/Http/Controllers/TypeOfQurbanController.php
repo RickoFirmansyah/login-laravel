@@ -56,7 +56,7 @@ class TypeOfQurbanController extends Controller
             );
 
             return
-                redirect()->route('jenis-kurban.index')->with('success', 'User created successfully');
+                redirect()->route('jenis-kurban.index')->with('success', 'created successfully');
         }
     }
 
@@ -96,6 +96,6 @@ class TypeOfQurbanController extends Controller
     {
         $provinsi = TypeOfQurban::find($id);
         $provinsi->delete();
-        return ResponseFormatter::success('User deleted successfully');
+        return ResponseFormatter::success('Deleted successfully');
     }
 }
