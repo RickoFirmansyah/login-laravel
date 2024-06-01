@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\Master\JenisKurbanDataTable;
 use App\Models\TypeOfQurban;
 use Illuminate\Http\Request;
+use ResponseFormatter;
 
 class TypeOfQurbanController extends Controller
 {
@@ -13,7 +14,7 @@ class TypeOfQurbanController extends Controller
      */
     public function index(JenisKurbanDataTable $jenisKurbanDataTable)
     {
-        return $jenisKurbanDataTable->render('pages.admin.master.jenis_kurban.index');
+        return $jenisKurbanDataTable->render('pages.admin.master.jenis_kurbanv2.index');
     }
 
     /**
@@ -21,7 +22,7 @@ class TypeOfQurbanController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.master.jenis_kurbanv2.create');
     }
 
     /**
@@ -54,7 +55,8 @@ class TypeOfQurbanController extends Controller
                 )
             );
 
-            return response()->json(['success' => 'News added successfully']);
+            return
+                redirect()->route('jenis-kurban.index')->with('success', 'User created successfully');
         }
     }
 
@@ -69,17 +71,22 @@ class TypeOfQurbanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TypeOfQurban $typeOfQurban)
+    public function edit($id)
     {
-        //
+        $user = TypeOfQurban::findOrFail($id);
+        return view('pages.admin.master.jenis_kurbanv2.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TypeOfQurban $typeOfQurban)
+    public function update(Request $request, $id)
     {
-        //
+        $user = TypeOfQurban::findOrFail($id);
+        $user->type_of_animal = $request->name;
+        $user->save();
+
+        return redirect()->route('jenis-kurban.index')->with('success', 'Data Kurban Berhasil updated successfully');
     }
 
     /**
@@ -89,8 +96,6 @@ class TypeOfQurbanController extends Controller
     {
         $provinsi = TypeOfQurban::find($id);
         $provinsi->delete();
-        return response()->json([
-            'success' => 'Data Jenis Kurban Berhasil Dihapus ' . $id
-        ]);
+        return ResponseFormatter::success('User deleted successfully');
     }
 }
