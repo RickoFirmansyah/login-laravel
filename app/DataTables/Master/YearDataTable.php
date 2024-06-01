@@ -6,8 +6,6 @@ use App\Models\Year;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -22,7 +20,9 @@ class YearDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'year.action')
+            ->addColumn('action', function (Year $row) {
+                return view('pages.admin.master.tahun.action', ['tahun' => $row]);
+            })
             ->setRowId('id');
     }
 
