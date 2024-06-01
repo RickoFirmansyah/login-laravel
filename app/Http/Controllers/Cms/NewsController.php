@@ -15,6 +15,15 @@ class NewsController extends Controller
         return $dataTable->render('pages.admin.cms.news.index');
     }
 
+    // public function show(){
+    //     $beritas = News::all();
+    //     return view('layouts.guest', compact('berita'));
+    // }
+
+    public function create(){
+        return view('pages.admin.cms.news.create');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -47,6 +56,31 @@ class NewsController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $data = News::findOrFail($id);
+        return view('pages.admin.cms.news.edit', compact('data'));
+
+        // // dd($data);
+        // return Response()->json($data);
+    }
+
+    public function update(Request $request, $id){
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+
+        ]);
+
+        $news = News::findOrFail($id);
+        $news->title = $request->input('title');
+        $news->description = $request->input('description');
+        $news->save();
+
+        return redirect()->route('admin.cms.news.index')->with('success', 'News updated successfully');
+    }
+
+
     public function destroy($id)
     {
         try {
@@ -55,15 +89,7 @@ class NewsController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return redirect()->route('admin.cms.news.index');
-    }
-
-    public function edit($id)
-    {
-        $data = News::findOrFail($id);
-
-        // dd($data);
-
-        return Response()->json($data);
+        return redirect()->route('admin.cms.news.index')->with('success', 'News updated successfully');
     }
 }
+

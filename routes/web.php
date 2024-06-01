@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Cms\NewsController;
+use App\Http\Controllers\Guest\NewsGuestController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -82,3 +84,9 @@ Route::get('/auth/passwords/confirm', function () {
 
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
 Route::resource('tahun', YearController::class)->names('tahun');
+
+// Route::get('/berita', function(){
+//     return view('pages.guest.news');
+// });
+Route::get('/berita', [NewsGuestController::class, 'index'])->name('berita');
+
