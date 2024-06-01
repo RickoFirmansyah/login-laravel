@@ -50,7 +50,7 @@ class YearDataTable extends DataTable
             ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
             ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
             ->language(url('json/lang.json'))
-            // ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
+            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
             ->orderBy(2)
             ->select(false)
             ->buttons([]);
