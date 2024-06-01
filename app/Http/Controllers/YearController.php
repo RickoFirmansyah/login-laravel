@@ -74,7 +74,8 @@ class YearController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = Year::findOrFail($id);
+        return view('pages.admin.master.tahun.edit', compact('user'));
     }
 
     /**
