@@ -96,6 +96,8 @@ class YearController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $provinsi = Year::find($id);
+        $provinsi->delete();
+        return ResponseFormatter::success('Deleted successfully');
     }
 }
