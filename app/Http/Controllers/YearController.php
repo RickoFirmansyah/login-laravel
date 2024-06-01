@@ -31,7 +31,34 @@ class YearController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tahun' => 'required'
+        ]);
+
+        if ($request->id != null) {
+            $data = Year::findOrFail($request->id);
+            $data->update(
+                array_merge(
+                    ['tahun' => $request->tahun],
+                    ['status' => $request->status],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return response()->json(['success' => 'Updated successfully']);
+        } else {
+            Year::create(
+                array_merge(
+                    ['tahun' => $request->tahun],
+                    ['status' => $request->status],
+                    ['created_by' => auth()->user()->id],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return
+                redirect()->route('tahun.index')->with('success', 'Created successfully');
+        }
     }
 
     /**
