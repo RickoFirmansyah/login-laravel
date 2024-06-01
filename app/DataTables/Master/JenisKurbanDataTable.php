@@ -24,7 +24,7 @@ class JenisKurbanDataTable extends DataTable
         return (new EloquentDataTable($query))
             // ->addColumn('action', 'pages.admin.master.jenis_kurban.action')
             ->addColumn('action', function (TypeOfQurban $row) {
-                return view('pages.admin.master.jenis_kurban.action', ['jenis_kurban' => $row]);
+                return view('pages.admin.master.jenis_kurbanv2.action', ['jenis_kurban' => $row]);
             })
             ->setRowId('id');
     }
