@@ -4,7 +4,7 @@
     <div class="py-4">
         <div class="row">
             <div class="col-md-12">
-                <form method="POST"
+                <form 
                     action="{{ route('admin.data-pokok.tempat-pemotongan.update', $slaughteringPlace->id) }}">
                     @csrf
                     @method('PUT')

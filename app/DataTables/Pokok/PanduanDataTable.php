@@ -3,7 +3,7 @@
 namespace App\DataTables\Pokok;
 
 use App\Models\Master\KabupatenKota;
-use App\Models\SlaughteringPlace;
+use App\Models\Panduan;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -13,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SlaughteringPlaceDataTable extends DataTable
+class PanduanDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -24,22 +24,11 @@ class SlaughteringPlaceDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', function(SlaughteringPlace $val) {
-                // $id  = $va
-                // return $val->id;
-                return view('pages.admin.map-pemotongan.action',['tempatPemotongan' =>$val]);
+            ->addColumn('action', function(Panduan $val) {
+                return view('pages.admin.panduan.action',['panduan' =>$val]);
             })
-            ->editColumn('kelurahan_id', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->kelurahan->nama;
-            })
-            ->editColumn('kecamatan_id', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->kecamatan->nama;
-            })
-            ->editColumn('created_by', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->createdByUser->name;
-            })
-            ->editColumn('update_by', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->updatedByUser->name;
+            ->editColumn('numbers', function (Panduan $Panduan) {
+                return (int)$Panduan->numbers;
             })
             ->rawColumns(['action'])
             ->setRowId('id');
@@ -48,7 +37,7 @@ class SlaughteringPlaceDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(SlaughteringPlace $model): QueryBuilder
+    public function query(Panduan $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -60,7 +49,7 @@ class SlaughteringPlaceDataTable extends DataTable
     {
         return $this->builder()
 
-            ->setTableId('slaughteringplace-table')
+            ->setTableId('Panduan-table')
             ->columns($this->getColumns())
             ->minifiedAjax(script: "
                                 data._token = '" . csrf_token() . "';
@@ -73,7 +62,6 @@ class SlaughteringPlaceDataTable extends DataTable
             ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
             ->orderBy(0)
             ->select(false)
-            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
             ->buttons([]);
     }
 
@@ -86,18 +74,14 @@ class SlaughteringPlaceDataTable extends DataTable
             Column::computed('DT_RowIndex')
                 ->title('No.')
                 ->width(20),
-            Column::make('cutting_place')->title('Tempat Pemotongan'),
-            Column::make('kelurahan_id')->title('Desa/Kelurahan'),
-            Column::make('kecamatan_id')->title('Kemacamatan'),
-            Column::make('created_by')->title('Dibuat Oleh'),
-            Column::make('update_by')->title('Diubah Oleh'),
             Column::computed('action')
-                ->title('Aksi')
                 ->exportable(false)
                 ->printable(false)
-                ->width(100)
-                ->addClass('text-center')
-                ->view('pages.admin.data-pokok.tempat-pemotongan.action'), // Ganti dengan view yang sesuai
+                ->width(60)
+                ->addClass('text-center'),
+            Column::make('title')->title('Title'),
+            Column::make('description')->title('Description'),
+            Column::make('numbers')->title('Numbers'),
         ];
     }
 
@@ -106,6 +90,6 @@ class SlaughteringPlaceDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'SlaughteringPlace_' . date('YmdHis');
+        return 'Panduan_' . date('YmdHis');
     }
 }
