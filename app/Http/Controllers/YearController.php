@@ -56,6 +56,9 @@ class YearController extends Controller
                 )
             );
 
+            Year::where('tahun', '!=', $request->tahun)
+                ->update(['status' => 'Non Aktif']);
+
             return
                 redirect()->route('tahun.index')->with('success', 'Created successfully');
         }
@@ -87,6 +90,9 @@ class YearController extends Controller
         $user->tahun = $request->tahun;
         $user->status = $request->status;
         $user->save();
+
+        if ($request->status == 'Aktif') Year::where('tahun', '!=', $request->tahun)
+            ->update(['status' => 'Non Aktif']);
 
         return redirect()->route('tahun.index')->with('success', 'Berhasil Updated successfully');
     }
