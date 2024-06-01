@@ -50,7 +50,7 @@ class YearController extends Controller
             Year::create(
                 array_merge(
                     ['tahun' => $request->tahun],
-                    ['status' => $request->status],
+                    ['status' => 'Aktif'],
                     ['created_by' => auth()->user()->id],
                     ['update_by' => auth()->user()->id]
                 )
