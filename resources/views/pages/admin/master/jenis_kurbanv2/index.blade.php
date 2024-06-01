@@ -19,13 +19,12 @@
                 <label class="position-absolute " for="searchBox">
                     <i class="fal fa-search fs-3"></i>
                 </label>
-                <input type="text" data-table-id="userlist-table" id="searchBox" data-action="search"
-                    class="form-control form-control-solid w-250px ps-13" placeholder="Search User" />
+                <input type="text" data-table-id="userlist-table" id="searchBox" data-action="search" class="form-control form-control-solid w-250px ps-13" placeholder="Search User" />
             </div>
             <a href="{{ route('jenis-kurban.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus fa-sm text-white-50"></i>
                 <span class="ms-2">
-                    Add Jenis Kurban
+                    Tambah Jenis Kurban
                 </span>
             </a>
         </div>
