@@ -23,7 +23,7 @@ class YearController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.master.tahun.create');
     }
 
     /**
