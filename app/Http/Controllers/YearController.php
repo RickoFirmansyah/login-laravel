@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Master\YearDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Year;
 use Illuminate\Http\Request;
+use ResponseFormatter;
 
 class YearController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(YearDataTable $yearDataTable)
     {
-        //
+        return $yearDataTable->render('pages.admin.master.tahun.index');
     }
 
     /**
