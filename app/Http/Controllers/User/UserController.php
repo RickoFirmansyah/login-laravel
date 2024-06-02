@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\User;
 
-use App\DataTables\User\UserListDataTable;
+use App\Models\User;
+use ResponseFormatter;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User\Role as ModelsRole;
+use App\DataTables\User\UserListDataTable;
 use App\Http\Requests\Users\User\StoreUserRequest;
 use App\Http\Requests\Users\User\UpdateUserRequest;
-use App\Models\User\Role as ModelsRole;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 
 class UserController extends Controller
@@ -86,6 +88,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('user-list.index')->with('success', 'User deleted successfully');
+        return ResponseFormatter::created('Data berhasil dihapus');
     }
 }
