@@ -31,7 +31,7 @@ class SlaughteringPlaceDataTable extends DataTable
             ->editColumn('kecamatan_id', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->kecamatan->nama;
             })
-            ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
+            ->editColumn('name', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->user->name;
             })
             // ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
@@ -92,7 +92,7 @@ class SlaughteringPlaceDataTable extends DataTable
             Column::make('cutting_place')->title('Tempat Pemotongan'),
             Column::make('kelurahan_id')->title('Desa/Kelurahan'),
             Column::make('kecamatan_id')->title('Kemacamatan'),
-            Column::make('user_id')->title('Nama Petugas'),
+            Column::make('name')->title('Nama Petugas'),
             // Column::make('user_id')->title('No Telepon'),
             Column::make('user_id')->title('Email'),
             // Column::make('created_at'),

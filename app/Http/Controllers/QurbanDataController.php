@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\LaporanStatistik\JenisKelaminDataTable;
 use App\Models\QurbanData;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -13,7 +14,7 @@ class QurbanDataController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(QurbanDataDataTable $dataTable)
+    public function index(JenisKelaminDataTable $dataTable)
     {
         // Mengambil data dari kolom 'date' di qurban_reports dan mengelompokkan berdasarkan tahun dan jenis kelamin
         $qurbanData = DB::table('qurban_data')

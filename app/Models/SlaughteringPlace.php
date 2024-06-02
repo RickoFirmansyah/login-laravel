@@ -42,4 +42,8 @@ class SlaughteringPlace extends Model
     {
         return $this->belongsTo(Kelurahan::class, 'kelurahan_id', 'id');
     }
+    public function qurbanReport()
+    {
+        return $this->hasMany(QurbanReport::class, 'slaughtering_place_id', 'id');
+    }
 }
