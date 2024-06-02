@@ -15,6 +15,7 @@ use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\YearController;
+use App\Http\Controllers\MonitoringLocationsController;
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -31,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/map-pemotongan', SlaughteringPlaceController::class)->names('map-pemotongan');
 
+    Route::resource('/daftar-lokasi-pemantauan', MonitoringLocationsController::class)->names('daftar-lokasi-pemantauan');
 
 
     Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
