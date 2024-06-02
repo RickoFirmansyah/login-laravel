@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cms\News;
 use DOMDocument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -27,69 +28,75 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required'
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        if ($request->id != null) {
-            $data = News::findOrFail($request->id);
-            $data->update(
-                array_merge(
-                    ['title' => $request->title],
-                    ['description' => $request->description],
-                    ['updated_by' => auth()->user()->id]
-                    )
-                );
+        $data = $request->only(['title', 'description']);
+        $data['created_by'] = auth()->user()->id;
+        $data['updated_by'] = auth()->user()->id;
 
-            return response()->json(['success' => 'News updated successfully']);
-        } else {
-            News::create(
-                array_merge(
-                    ['title' => $request->title],
-                    ['description' => $request->description],
-                    ['created_by' => auth()->user()->id],
-                    ['updated_by' => auth()->user()->id]
-                )
-            );
-
-            return response()->json(['success' => 'News added successfully']);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $data['image'] = $imagePath;
         }
+
+        News::create($data);
+
+        return response()->json(['success' => 'News added successfully']);
     }
 
     public function edit($id)
     {
         $data = News::findOrFail($id);
         return view('pages.admin.cms.news.edit', compact('data'));
-
-        // // dd($data);
-        // return Response()->json($data);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $news = News::findOrFail($id);
-        $news->title = $request->input('title');
-        $news->description = $request->input('description');
-        $news->save();
+
+        $data = $request->only(['title', 'description']);
+        $data['updated_by'] = auth()->user()->id;
+
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama
+            if ($news->image) {
+                Storage::disk('public')->delete($news->image);
+            }
+
+            // Simpan gambar baru
+            $imagePath = $request->file('image')->store('images', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        $news->update($data);
 
         return redirect()->route('admin.cms.news.index')->with('success', 'News updated successfully');
     }
-
 
     public function destroy($id)
     {
         try {
-            News::findOrFail($id)->delete();
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+            $news = News::findOrFail($id);
 
-        return redirect()->route('admin.cms.news.index')->with('success', 'News updated successfully');
+            // Hapus gambar
+            if ($news->image) {
+                Storage::disk('public')->delete($news->image);
+            }
+            $news->delete();
+
+            return redirect()->route('admin.cms.news.index')->with('success', 'News deleted successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete news: ' . $e->getMessage());
+        }
     }
 }
 

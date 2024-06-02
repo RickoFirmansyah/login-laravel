@@ -75,5 +75,5 @@ Route::resource('tahun', YearController::class)->names('tahun');
 // Route::get('/berita', function(){
 //     return view('pages.guest.news');
 // });
-Route::get('/berita', [NewsGuestController::class, 'index'])->name('berita');
+Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
 
