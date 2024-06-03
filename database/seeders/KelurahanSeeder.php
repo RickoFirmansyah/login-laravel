@@ -18,18 +18,24 @@ class KelurahanSeeder extends Seeder
         foreach ($file as $index => $row) {
             if ($index > 0) {
                 if ($row[0] != null && $row[1] != null) {
-                    $kode_kecamatan = explode('.', $row[0])[2];
+                    $kode_provinsi = (int)explode('.', $row[0])[0];
+                    $kode_kabupaten = (int)explode('.', $row[0])[1];
+                    $kode_kecamatan = (int)explode('.', $row[0])[2];
                     $kode_kelurahan = explode('.', $row[0])[3];
 
-                    $kecamatan = \App\Models\Master\Kecamatan::where('kode', $kode_kecamatan)->first();
+                    // Hanya memasukkan data dengan kode provinsi 35 dan kode kabupaten 05
+                    if ($kode_provinsi === 35 && $kode_kabupaten === 5) {
+                        $kecamatan = \App\Models\Master\Kecamatan::where('kode', $kode_kecamatan)
+                            ->where('kabupaten_kota_id', $kode_kabupaten)
+                            ->first();
 
-                    if ($kecamatan) {
-                        $kode_kecamatan = $kecamatan->id;
-                        \App\Models\Master\Kelurahan::create([
-                            'kecamatan_id' => (int)$kode_kecamatan,
-                            'kode' => $kode_kelurahan,
-                            'nama' => $row[1]
-                        ]);
+                        if ($kecamatan) {
+                            \App\Models\Master\Kelurahan::create([
+                                'kecamatan_id' => $kecamatan->id,
+                                'kode' => $kode_kelurahan,
+                                'nama' => $row[1]
+                            ]);
+                        }
                     }
                 }
             }

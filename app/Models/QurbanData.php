@@ -14,10 +14,10 @@ class QurbanData extends Model
     protected $fillable=['gender','weight','disease','price'];
 
 
-    public function qurban_report() {
+    public function qurbanReport() {
         return $this->belongsTo(QurbanReport::class, 'qurban_report_id', 'id');
     }
-    public function type_of_qurban()
+    public function typeOfQurban()
     {
         return $this->belongsTo(TypeOfQurban::class, 'type_of_qurban_id', 'id');
     }

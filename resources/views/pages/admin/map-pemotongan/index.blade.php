@@ -5,6 +5,9 @@
         <div id="map" class="mb-5" style="height: 450px;"></div>
 
         <div class="container">
+            <div class="d-flex align-items-center justify-content-between position-relative mb-3">
+
+            </div>
             <form action="#" method="GET" class="d-flex flex-wrap justify-content-between">
                 @csrf
                 <div class="col-md-4">
@@ -56,6 +59,29 @@
                     Tambah Provinsi
                 </span>
             </button> --}}
+        </div>
+        <br><br>
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+        @endif
+        <div class="containter">
+            <div class="d-flex align-items-center justify-content-between position-relative mb-3">
+                <a href="{{ route('admin.data-pokok.tempat-pemotongan.create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus fa-sm text-white-50"></i>
+                    <span class="ms-2">
+                        Add Tempat Pemotongan
+                    </span>
+                </a>
+            </div>
+
         </div>
         <div class="table-responsive">
             {{ $dataTable->table() }}

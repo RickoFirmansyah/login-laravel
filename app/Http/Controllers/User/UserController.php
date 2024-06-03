@@ -44,7 +44,7 @@ class UserController extends Controller
         $user->save();
         $user->assignRole($request->role);
 
-        return redirect()->route('user-list.index')->with('success', 'User '.$user->name.' created successfully');
+        return redirect()->route('user-list.index')->with('success', 'User created successfully');
     }
 
     public function show(string $id)
@@ -66,19 +66,16 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        
+
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
 
-        if ($request->email_verified_at) {
-            $user->email_verified_at = \Carbon\Carbon::createFromFormat('Y-m-d\TH:i', $request->email_verified_at);
-        } else {
-            $user->email_verified_at = null;
+        if ($request->role) {
+            $user->syncRoles($request->role);
         }
 
         $user->save();
-        $user->syncRoles($request->role);
 
         return redirect()->route('user-list.index')->with('success', 'User updated successfully');
     }
@@ -89,5 +86,6 @@ class UserController extends Controller
         $user->delete();
 
         return ResponseFormatter::created('Data berhasil dihapus');
+        return ResponseFormatter::success('User deleted successfully');
     }
 }

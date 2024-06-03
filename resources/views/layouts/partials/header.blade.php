@@ -197,7 +197,7 @@ $currentUser = auth()->user();
                                     </div>
                                 </div>
                                 <div class="message-body">
-                                    <a href="./page-user-profile.html"
+                                    <a href="{{ route('profile.myprofile') }}"
                                         class="py-8 px-7 mt-8 d-flex align-items-center">
                                         <span
                                             class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">

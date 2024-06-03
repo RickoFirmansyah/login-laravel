@@ -12,14 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class SlaughteringPlace extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $table = 'slaughtering_places';
-    protected $guards = [];
-    protected $fillable=['cutting_place','address','latitude','longtitude'];
+    protected $guards = ['id'];
+    protected $fillable = ['cutting_place', 'address', 'latitude', 'longitude', 'user_id', 'type_of_place_id', 'kecamatan_id', 'kelurahan_id', 'provinsi_id', 'kabupaten_id', 'created_by', 'update_by',];
 
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
     public function type_of_place()
@@ -41,5 +42,17 @@ class SlaughteringPlace extends Model
     public function kelurahan()
     {
         return $this->belongsTo(Kelurahan::class, 'kelurahan_id', 'id');
+    }
+    public function qurbanReport()
+    {
+        return $this->hasMany(QurbanReport::class, 'slaughtering_place_id', 'id');
+    public function createdByUser()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updatedByUser()
+    {
+        return $this->belongsTo(User::class, 'update_by');
     }
 }

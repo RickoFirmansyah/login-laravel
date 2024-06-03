@@ -20,10 +20,10 @@ class QurbanReport extends Model
     public function monitoring_officer() {
         return $this->belongsTo(MonitoringOfficer::class, 'monitoring_officer_id', 'id');
     }
-    public function slaughtering_place() {
+    public function slaughteringPlace() {
         return $this->belongsTo(SlaughteringPlace::class, 'slaughtering_place_id', 'id');
     }
-    public function qurban_data()
+    public function qurbanData()
     {
         return $this->hasMany(QurbanData::class, 'qurban_report_id', 'id');
     }

@@ -18,17 +18,19 @@ class KecamatanSeeder extends Seeder
         foreach ($file as $index => $row) {
             if ($index > 0) {
                 if ($row[0] != null && $row[1] != null) {
-                    $kode_provinsi = explode('.', $row[0])[0];
-                    $kode_kabupaten = explode('.', $row[0])[1];
+                    $kode_provinsi = (int)explode('.', $row[0])[0];
+                    $kode_kabupaten = (int)explode('.', $row[0])[1];
                     $kode_kecamatan = explode('.', $row[0])[2];
 
-                    \App\Models\Master\Kecamatan::create([
-                        'provinsi_id' => (int)$kode_provinsi,
-                        'kabupaten_kota_id' => (int)$kode_kabupaten,
-                        'kabupaten_kota_id' => (int)$kode_kabupaten,
-                        'kode' => $kode_kecamatan,
-                        'nama' => $row[1]
-                    ]);
+                    // Hanya memasukkan data dengan kode provinsi 35 dan kode kabupaten 05
+                    if ($kode_provinsi === 35 && $kode_kabupaten === 05) {
+                        \App\Models\Master\Kecamatan::create([
+                            'provinsi_id' => $kode_provinsi,
+                            'kabupaten_kota_id' => $kode_kabupaten,
+                            'kode' => $kode_kecamatan,
+                            'nama' => $row[1]
+                        ]);
+                    }
                 }
             }
         }
