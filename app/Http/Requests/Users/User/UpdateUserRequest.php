@@ -13,20 +13,22 @@ class UpdateUserRequest extends FormRequest
 
     public function rules(): array
     {
-        $userId = $this->route('user_list');
+        // $userId = $this->user->id;
 
         return [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$userId,
+            'email' => 'required|email',
+            'role' => 'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'Name is required',
-            'email.required' => 'Email is required',
-            'email.unique' => 'Email already exists',
+            'name.required' => 'Nama User tidak boleh kosong',
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email' => 'Email harus menggunakan alamat email yang valid',
+            'role.required' => 'Role tidak boleh kosong',
         ];
     }
 }

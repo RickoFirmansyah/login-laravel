@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        $admin->assignRole('admin');
+        $admin->assignRole('admin-desa');
 
         $operator = User::create([
             'name' => 'Operator',
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        $operator->assignRole('admin-prodi');
+        $operator->assignRole('admin-kabupaten');
 
         for ($i = 1; $i <= 10; $i++) {
             $camaba = User::create([
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
 
-            $camaba->assignRole('camaba');
+            $camaba->assignRole('admin-petugas-lapangan');
         }
     }
 }

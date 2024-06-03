@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\User;
 use ResponseFormatter;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User\Role as ModelsRole;
@@ -84,6 +85,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
+        return ResponseFormatter::created('Data berhasil dihapus');
         return ResponseFormatter::success('User deleted successfully');
     }
 }

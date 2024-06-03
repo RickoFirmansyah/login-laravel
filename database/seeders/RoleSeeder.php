@@ -13,16 +13,13 @@ class RoleSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         Role::create([
-            'name' => 'admin',
+            'name' => 'admin-desa',
         ]);
         Role::create([
-            'name' => 'admin-prodi',
+            'name' => 'admin-kabupaten',
         ]);
         Role::create([
-            'name' => 'asesor',
-        ]);
-        Role::create([
-            'name' => 'camaba',
+            'name' => 'admin-petugas-lapangan',
         ]);
     }
 }
