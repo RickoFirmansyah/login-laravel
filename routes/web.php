@@ -8,6 +8,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\PlaceController;
+
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
@@ -20,21 +21,21 @@ use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\PetugasPemantauanController;
 use App\Http\Controllers\SlaughteringPlaceController;
 use Illuminate\Support\Facades\View;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImpersonateController;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\MonitoringLocationsController;
-// use App\Http\Controllers\HomeController;
-// use App\Http\Controllers\ImpersonateController;
-// use App\Http\Controllers\MapController;
 
-// use App\Http\Controllers\QurbanDataController;
-// use App\Http\Controllers\QurbanData2Controller;
-// use App\Http\Controllers\QurbanData3Controller;
-// use App\Http\Controllers\SlaughteringPlaceController;
-// use App\Http\Controllers\TypeOfQurbanController;
-// use App\Http\Controllers\User\RoleController;
-// use App\Http\Controllers\User\UserController;
-// use App\Http\Controllers\YearController;
-// use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\QurbanDataController;
+use App\Http\Controllers\QurbanData2Controller;
+use App\Http\Controllers\QurbanData3Controller;
+use App\Http\Controllers\SlaughteringPlaceController;
+use App\Http\Controllers\TypeOfQurbanController;
+use App\Http\Controllers\User\RoleController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\YearController;
+use App\Http\Controllers\MonitoringLocationsController;
+use App\Http\Controllers\PanduanController;
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -69,10 +70,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
     Route::resource('/laporan-statistik-penyakit', QurbanDataController::class)->names('laporan-statistik-penyakit');
     Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
-    // Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
-    // Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
-    // Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
-    
+    Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
+    Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
+    Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
     Route::resource('/role', RoleController::class);
