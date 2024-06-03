@@ -34,6 +34,7 @@ use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\YearController;
+use App\Http\Controllers\MonitoringLocationsController;
 use App\Http\Controllers\PanduanController;
 
 Auth::routes();
@@ -63,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/admin/data-pokok/petugas-pemantauan', PetugasPemantauanController::class)->names('petugas-pemantauan');
 
 
+    Route::resource('/daftar-lokasi-pemantauan', MonitoringLocationsController::class)->names('daftar-lokasi-pemantauan');
 
 
     Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
