@@ -43,6 +43,9 @@ class SlaughteringPlace extends Model
     {
         return $this->belongsTo(Kelurahan::class, 'kelurahan_id', 'id');
     }
+    public function qurbanReport()
+    {
+        return $this->hasMany(QurbanReport::class, 'slaughtering_place_id', 'id');
     public function createdByUser()
     {
         return $this->belongsTo(User::class, 'created_by');

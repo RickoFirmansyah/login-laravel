@@ -2,23 +2,14 @@
 
 @section('content')
     <div class="card-body py-4">
-        <div class="mb-4 d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center position-relative my-1 ms-auto">
-                <div class="d-flex align-items-center position-relative my-1">
-                    <input type="date" id="tanggal" name="tanggal" class="form-control form-control-solid" style="width: 150px; margin-right: 10px;">
-                </div>
-            </div>
-            
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-kabupatenkota_modal"
-                data-action="edit" data-url="">
+        <div class="mb-4 d-flex align-items-center justify-content-end">
+            <button class="btn btn-primary" id="export-excel">
                 <i class="fal fa-download fs-3"></i>
-                <span class="ms-2">
-                    Unduh Laporan
-                </span>
+                <span class="ms-2">Unduh Laporan</span>
             </button>
         </div>
-        {{-- card tiap jenis kurban --}}
-        <div class="row">    
+        
+        <div class="row">
             @foreach ($formattedDataCard as $data)
                 <div class="col-md-3">
                     <div class="card bg-primary rounded-0">
@@ -26,7 +17,6 @@
                             <div class="row">
                                 <div class="col-6">
                                     <h5 class="card-title text-white">{{ $data['type_of_animal'] }}</h5>
-                                    <!-- Icon hewan -->
                                     <img src="{{ asset('assets/images/' . $data['type_of_animal'] . '-removebg-preview.png') }}" class="img-fluid" alt="Icon Hewan" style='width:55%;'>
                                 </div>
                                 <div class="col-6">
@@ -40,7 +30,6 @@
                                     <p class="pb-0 mb-0 text-white">JANTAN</p>
                                     <h1 class="text-white fw-bolder fs-11">{{ $data['Jantan'] }}</h1>
                                 </div>
-                                
                                 <div class="col-6">
                                     <p class="pb-0 mb-0 text-white">BETINA</p>
                                     <h1 class="text-white fw-bolder fs-11">{{ $data['Betina'] }}</h1>
@@ -52,20 +41,23 @@
             @endforeach
         </div>
 
-        {{-- end --}}
-
-        {{-- chart --}}
         <div id="chart" class="m-2"></div>
-        {{-- end --}}
 
         <div class="d-flex align-items-center justify-content-end">
             <div class="d-flex align-items-center position-relative my-1">
-                <input type="date" id="tanggal" name="tanggal" class="form-control form-control-solid" style="width: 150px; margin-right: 10px;">
+                {{-- <input type="date" id="datarange" name="tanggal" class="form-control form-control-solid" style="width: 150px; margin-right: 10px;"> --}}
+                <div id="datarange" class="form-control form-control-solid" style="width: 100%; margin-right: 10px;">
+                    <i class="fal fa-calendar fs-4"></i>            
+                    <span></span>
+                </div>
             </div>
             <div class="d-flex align-items-center position-relative my-1">
-                <span class="ki-outline ki-magnifier fs-3 position-absolute ms-5"></span>
-                <input type="text" data-kt-user-table-filter="search" data-table-id="qurbandata-table"
-                    class="form-control form-control-solid w-250px ps-13" placeholder="Search" id="mySearchInput" />
+                <div class="search-box">
+                    <label class="position-absolute" for="searchBox">
+                        <i class="fal fa-search fs-3"></i>
+                    </label>
+                    <input type="text" data-table-id="qurbandata-table" id="search" data-action="search" class="form-control form-control-solid w-250px ps-13" placeholder="Search User" />
+                </div>
             </div>
         </div>
 
@@ -80,16 +72,42 @@
         {{ $dataTable->scripts() }}
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script>
-            const tableId = 'qurbandata-table';
 
-            $(document).ready(function() {
-                $('[data-kt-user-table-filter="search"]').on('input', function() {
-                    window.LaravelDataTables[`${tableId}`].search($(this).val()).draw();
+        $(document).ready(function() {
+                var start_date = moment().subtract(1, 'M');
+                var end_date = moment();
+
+                $('#datarange span').html(start_date.format('D MMMM, YYYY') + ' - ' + end_date.format('D MMMM, YYYY'));
+
+                $('#datarange').daterangepicker({
+                    startDate: start_date,
+                    endDate: end_date,
+                    locale: {
+                        format: 'YYYY-MM-DD'
+                    }
+                }, function(start, end) {
+                    $('#datarange span').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'));
+
+                    var startDate = start.format('YYYY-MM-DD');
+                    var endDate = end.format('YYYY-MM-DD');
+
+                    window.LaravelDataTables['qurbandata-table'].ajax.url(
+                        '?start_date=' + startDate + '&end_date=' + endDate
+                    ).load();
                 });
+
+                $('#search').on('input', function() {
+                    window.LaravelDataTables['qurbandata-table'].search($(this).val()).draw();
+                });
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
+                });
+
+                $('#export-excel').on('click', function() {
+                    window.LaravelDataTables['qurbandata-table'].button('.buttons-excel').trigger();
                 });
             });
 
@@ -117,11 +135,7 @@
                         columnWidth: '55%',
                         endingShape: 'rounded',
                         dataLabels: {
-                            position: 'top', // top, center, bottom
-                        },
-                        group: {
-                            bars: true, // ensure bars are grouped together
-                            horizontal: false
+                            position: 'top',
                         },
                     },
                 },
@@ -184,4 +198,3 @@
         </script>
     @endpush
 @endsection
-

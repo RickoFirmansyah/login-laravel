@@ -37,6 +37,8 @@ class SlaughteringPlaceDataTable extends DataTable
             })
             ->editColumn('created_by', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->createdByUser->name;
+            ->editColumn('name', function (SlaughteringPlace $slaughteringPlace) {
+                return $slaughteringPlace->user->name;
             })
             ->editColumn('update_by', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->updatedByUser->name;
@@ -98,6 +100,11 @@ class SlaughteringPlaceDataTable extends DataTable
                 ->width(100)
                 ->addClass('text-center')
                 ->view('pages.admin.data-pokok.tempat-pemotongan.action'), // Ganti dengan view yang sesuai
+            Column::make('name')->title('Nama Petugas'),
+            // Column::make('user_id')->title('No Telepon'),
+            Column::make('user_id')->title('Email'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
         ];
     }
 
