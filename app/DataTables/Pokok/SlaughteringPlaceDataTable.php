@@ -37,6 +37,7 @@ class SlaughteringPlaceDataTable extends DataTable
             })
             ->editColumn('created_by', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->createdByUser->name;
+            })
             ->editColumn('name', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->user->name;
             })
