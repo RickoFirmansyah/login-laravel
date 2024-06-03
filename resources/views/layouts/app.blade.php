@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="handheldfriendly" content="true" />
     <meta name="MobileOptimized" content="width" />
-    <meta name="csrf-token" content="{{csrf_token()}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Mordenize" />
     <meta name="author" content="" />
     <meta name="keywords" content="Mordenize" />
@@ -17,11 +17,16 @@
     <link rel="stylesheet" href="{{ asset('assets/libs/fontawesome/css/all.min.css') }}">
     <link id="themeColors" rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" />
     {{-- <link rel="stylesheet" href="{{ asset('assets/libs/datatables/datatables.bundle.css') }}"/> --}}
-    <link rel="stylesheet" href="{{ asset('assets/plugins/global/plugins.bundle.css') }}"/>
+    <!-- Add these lines in your layouts/app.blade.php in the <head> section -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     @stack('vendor-css')
     @stack('css')
 </head>
@@ -69,7 +74,7 @@
         </aside>
 
         <div class="body-wrapper">
-           <x-header />
+            <x-header />
             <div class="container-xxl" style="max-width: 1560px;">
                 <div class="row justify-content-center">
                     <div class="col-md-12">

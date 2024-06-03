@@ -17,7 +17,7 @@ class BackupScheduleTablesFactory extends Factory
                 ->select('table_name')
                 ->where('table_schema', config('database.connections.mysql.database'))
                 ->inRandomOrder()
-                ->first()->table_name,
+                ->first()->TABLE_NAME,
         ];
     }
 }
