@@ -8,10 +8,9 @@
             @foreach ($berita as $item)
                 <div class="col">
                     <div class="card shadow-sm p-2 border border-1 border-light-subtle">
-                        <img class="bd-placeholder-img card-img-top rounded"
-                            src="{{ asset('landing/images/berita_sapi.png') }}" alt="">
+                        <img src="{{ url('storage/' . $item->image) }}" class="bd-placeholder-img card-img-top rounded">
                         <div class="card-body p-2">
-                            <p class="card-text fs-4 text-start">{{ $item->decription }}</p>
+                            <p class="card-text fs-4 text-start">{{ $item->description }}</p>
                         </div>
                     </div>
                 </div>
