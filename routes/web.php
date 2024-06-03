@@ -4,22 +4,9 @@ use App\Http\Controllers\Cms\NewsController;
 use App\Http\Controllers\Guest\NewsGuestController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MapController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\YearController;
 use App\Http\Controllers\PlaceController;
-
-use App\Http\Controllers\PanduanController;
-use App\Http\Controllers\User\RoleController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\QurbanDataController;
-use App\Http\Controllers\ImpersonateController;
-use App\Http\Controllers\QurbanData2Controller;
-use App\Http\Controllers\QurbanData3Controller;
-use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\PetugasPemantauanController;
-use App\Http\Controllers\SlaughteringPlaceController;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImpersonateController;
@@ -52,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
     // PANDUAN
     Route::resource('/admin/data-pokok/panduan', PanduanController::class)->names('admin.data-pokok.panduan');
-    
+
     // TEMPAT PEMOTONGAN
     Route::resource('/admin/data-pokok/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.data-pokok.tempat-pemotongan');
     Route::get('/admin/data-pokok/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
@@ -72,7 +59,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
     Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
     Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
-    Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
     Route::resource('/role', RoleController::class);
@@ -113,4 +99,3 @@ Route::resource('tahun', YearController::class)->names('tahun');
 //     return view('pages.guest.news');
 // });
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
-
