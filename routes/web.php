@@ -8,7 +8,7 @@ use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\QurbanData2Controller;
-use App\Http\Controllers\QurbanData3Controller;
+use App\Http\Controllers\JenisHewanController;
 use App\Http\Controllers\SlaughteringPlaceController;
 use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\User\RoleController;
@@ -32,9 +32,9 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
-Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
-Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
+    Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
+    Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
+    Route::resource('/laporan-statistik-jenishewan', JenisHewanController::class)->names('laporan-statistik-jenishewan');
     Route::resource('/role', RoleController::class);
     Route::put('/role/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('role.permissions');
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
