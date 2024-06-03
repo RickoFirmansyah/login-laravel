@@ -9,7 +9,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class QurbanData3DataTable extends DataTable
+class JenisHewanDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
