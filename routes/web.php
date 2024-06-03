@@ -67,6 +67,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/daftar-lokasi-pemantauan', MonitoringLocationsController::class)->names('daftar-lokasi-pemantauan');
 
 
+Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
+Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
+Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
     Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
     Route::resource('/laporan-statistik-penyakit', QurbanDataController::class)->names('laporan-statistik-penyakit');
     Route::resource('/laporan-statistik-jenishewan', QurbanData3Controller::class)->names('laporan-statistik-jenishewan');
