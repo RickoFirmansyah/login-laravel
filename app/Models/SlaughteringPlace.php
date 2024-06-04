@@ -46,6 +46,7 @@ class SlaughteringPlace extends Model
     public function qurbanReport()
     {
         return $this->hasMany(QurbanReport::class, 'slaughtering_place_id', 'id');
+    }
     public function createdByUser()
     {
         return $this->belongsTo(User::class, 'created_by');

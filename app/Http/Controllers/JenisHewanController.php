@@ -30,18 +30,19 @@ class JenisHewanController extends Controller
 
     private function formatData($qurbanDataCard)
 {
-    // Inisialisasi array untuk menyimpan data hasil format
     $years = $qurbanDataCard->pluck('year')->unique();
-    $animalTypes = $qurbanDataCard->pluck('type_of_animal')->unique();
-    $formattedData = [];
+    $animals = ['Kambing', 'Sapi', 'Unta', 'Kerbau', 'Domba']; // Jenis hewan yang ingin Anda kelompokkan
 
-    // Proses data untuk grafik
+    $formattedData = [];
     foreach ($years as $year) {
-        $formattedData[$year] = [];
-        foreach ($animalTypes as $animalType) {
-            $count = $qurbanDataCard->where('year', $year)->where('type_of_animal', $animalType)->sum('count');
-            $formattedData[$year][$animalType] = $count;
+        $yearData = ['year' => $year];
+        foreach ($animals as $animal) {
+            $count = $qurbanDataCard->filter(function($item) use ($year, $animal) {
+                return $item->year == $year && $item->type_of_animal == $animal;
+            })->sum('count');
+            $yearData[$animal] = $count;
         }
+        $formattedData[] = $yearData;
     }
 
     return $formattedData;
