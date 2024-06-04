@@ -13,7 +13,7 @@ class Kelurahan extends Model
     protected $table = 'ref_kelurahan';
     protected $guarded = ['id'];
 
-    public function kabKota()
+    public function kecamatan()
     {
         return $this->belongsTo(Kecamatan::class, 'kecamatan_id', 'id');
     }

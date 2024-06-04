@@ -49,8 +49,20 @@ class SlaughteringPlaceDataTable extends DataTable
      */
     public function query(SlaughteringPlace $model): QueryBuilder
     {
-        return $model->newQuery();
+        $query = $model->newQuery()
+        ->with(['kelurahan', 'kecamatan']);
+
+        if ($this->request()->filled('kecamatan_id')) {
+            $query->where('kecamatan_id', $this->request()->kecamatan_id);
+        }
+
+        if ($this->request()->filled('kelurahan_id')) {
+            $query->where('kelurahan_id', $this->request()->kelurahan_id);
+        }
+
+        return $query;
     }
+
 
     /**
      * Optional method if you want to use the html builder.

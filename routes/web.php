@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImpersonateController;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\QurbanData2Controller;
@@ -28,8 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
 
-    Route::resource('/map-pemotongan', SlaughteringPlaceController::class)->names('map-pemotongan');
-
+    Route::resource('/map-pemotongan', MapController::class)->names('map-pemotongan');
+    Route::get('get-kelurahans', [MapController::class, 'getKelurahans'])->name('get-kelurahans');
+    
 
 
 Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
