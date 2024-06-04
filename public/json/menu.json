@@ -44,28 +44,6 @@
         "is_active": "1",
         "childrens": [
             {
-                "name": "Tempat Pemotongan",
-                "module": "pokok-tempat-pemotongan",
-                "slug": "pokok-tempat-pemotongan",
-                "icon": "fal fa-university",
-                "url": "/admin/data-pokok/tempat-pemotongan",
-                "parent_id": 2,
-                "order": "1",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Panduan/Unduhan",
-                "module": "pokok-panduan",
-                "slug": "pokok-panduan",
-                "icon": "fal fa-universityo",
-                "url": "/admin/data-pokok/panduan",
-                "parent_id": 2,
-                "order": "2",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
                 "name": "Petugas Pemantauan",
                 "module": "pokok-petugas-pemantauan",
                 "slug": "pokok-petugas-pemantauan",
@@ -100,7 +78,6 @@
         "is_active": "1",
         "childrens": []
     },
-
     {
         "name": "Laporan Statistik",
         "module": "laporan-statistik",
@@ -324,5 +301,27 @@
                 "childrens": []
             }
         ]
+    },
+    {
+        "name": "Tempat Pemotongan",
+        "module": "pokok-tempat-pemotongan",
+        "slug": "pokok-tempat-pemotongan",
+        "icon": "fal fa-university",
+        "url": "/admin/tempat-pemotongan",
+        "parent_id": null,
+        "order": "10",
+        "is_active": "1",
+        "childrens": []
+    },
+    {
+        "name": "Panduan/Unduhan",
+        "module": "pokok-panduan",
+        "slug": "pokok-panduan",
+        "icon": "fa fa-file-code-o",
+        "url": "/admin/panduan",
+        "parent_id": null,
+        "order": "11",
+        "is_active": "1",
+        "childrens": []
     }
 ]

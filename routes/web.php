@@ -38,13 +38,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/user-list', UserController::class)->names('user-list');
 
     // PANDUAN
-    Route::resource('/admin/data-pokok/panduan', PanduanController::class)->names('admin.data-pokok.panduan');
+    Route::resource('/admin/panduan', PanduanController::class)->names('admin.panduan');
     
     // TEMPAT PEMOTONGAN
-    Route::resource('/admin/data-pokok/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.data-pokok.tempat-pemotongan');
-    Route::get('/admin/data-pokok/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
-    Route::get('/admin/data-pokok/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
-    Route::get('/admin/data-pokok/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');
+    Route::resource('/admin/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.tempat-pemotongan');
+    Route::get('/admin/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
+    Route::get('/admin/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
+    Route::get('/admin/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');
     Route::resource('/map-pemotongan', MapController::class)->names('map-pemotongan');
 
     // PETUGAS PEMANTAUAN
