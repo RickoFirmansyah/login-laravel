@@ -24,10 +24,10 @@ class SlaughteringPlaceDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', function(SlaughteringPlace $val) {
+            ->addColumn('action', function (SlaughteringPlace $val) {
                 // $id  = $va
                 // return $val->id;
-                return view('pages.admin.map-pemotongan.action',['tempatPemotongan' =>$val]);
+                return view('pages.admin.map-pemotongan.action', ['tempatPemotongan' => $val]);
             })
             ->editColumn('kelurahan_id', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->kelurahan->nama;
@@ -37,6 +37,7 @@ class SlaughteringPlaceDataTable extends DataTable
             })
             ->editColumn('created_by', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->createdByUser->name;
+            })
             ->editColumn('name', function (SlaughteringPlace $slaughteringPlace) {
                 return $slaughteringPlace->user->name;
             })
@@ -100,9 +101,9 @@ class SlaughteringPlaceDataTable extends DataTable
                 ->width(100)
                 ->addClass('text-center')
                 ->view('pages.admin.data-pokok.tempat-pemotongan.action'), // Ganti dengan view yang sesuai
-            Column::make('name')->title('Nama Petugas'),
+            // Column::make('name')->title('Nama Petugas'),
             // Column::make('user_id')->title('No Telepon'),
-            Column::make('user_id')->title('Email'),
+            // Column::make('user_id')->title('Email'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
         ];

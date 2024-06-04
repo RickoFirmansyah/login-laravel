@@ -34,8 +34,8 @@ class UserSeeder extends Seeder
 
         for ($i = 1; $i <= 10; $i++) {
             $camaba = User::create([
-                'name' => 'Camaba ' . $i,
-                'email' => 'camaba' . $i . '@arkatama.test',
+                'name' => 'Petugas ' . $i,
+                'email' => 'Petugas' . $i . '@arkatama.test',
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345'),
                 'remember_token' => Str::random(10),
