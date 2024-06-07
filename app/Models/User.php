@@ -51,4 +51,9 @@ class User extends Authenticatable
     public function getImpersonator(){
         return app(ImpersonateManager::class)->getImpersonator();
     }
+    public function monitoringOfficer()
+    {
+        return $this->hasOne(MonitoringOfficer::class);
+    }
+
 }
