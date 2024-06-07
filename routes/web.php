@@ -21,21 +21,8 @@ use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\PetugasPemantauanController;
 use App\Http\Controllers\SlaughteringPlaceController;
 use Illuminate\Support\Facades\View;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ImpersonateController;
-use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
-
-use App\Http\Controllers\QurbanDataController;
-use App\Http\Controllers\QurbanData2Controller;
-use App\Http\Controllers\QurbanData3Controller;
-use App\Http\Controllers\SlaughteringPlaceController;
-use App\Http\Controllers\TypeOfQurbanController;
-use App\Http\Controllers\User\RoleController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\YearController;
 use App\Http\Controllers\MonitoringLocationsController;
-use App\Http\Controllers\PanduanController;
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -52,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
     // PANDUAN
     Route::resource('/admin/data-pokok/panduan', PanduanController::class)->names('admin.data-pokok.panduan');
-    
+
     // TEMPAT PEMOTONGAN
     Route::resource('/admin/data-pokok/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.data-pokok.tempat-pemotongan');
     Route::get('/admin/data-pokok/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
@@ -113,4 +100,7 @@ Route::resource('tahun', YearController::class)->names('tahun');
 //     return view('pages.guest.news');
 // });
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
+// Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
+Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
+
 

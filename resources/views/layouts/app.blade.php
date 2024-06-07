@@ -18,6 +18,8 @@
     <link id="themeColors" rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" />
     {{-- <link rel="stylesheet" href="{{ asset('assets/libs/datatables/datatables.bundle.css') }}"/> --}}
     <!-- Add these lines in your layouts/app.blade.php in the <head> section -->
+    {{-- CKEditor CDN --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <!-- Make sure you put this AFTER Leaflet's CSS -->
@@ -293,6 +295,13 @@
         </div>
     </div>
 
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     {{-- <script src="{{ asset('assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script> --}}
     {{-- <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script> --}}

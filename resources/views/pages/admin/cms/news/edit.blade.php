@@ -4,7 +4,8 @@
     <div class="py-4">
         <div class="row">
             <div class="col-md-12">
-                <form method="POST" action="{{ route('admin.cms.news.update', $data->id) }}">
+                <form method="POST" action="{{ route('admin.cms.news.update', $data->id) }}" enctype="multipart/form-data"
+                    custom-action="true">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
@@ -21,14 +22,12 @@
                         <textarea id="description" name="description" class="form-control" placeholder="Input Deskripsi Berita" rows="6"
                             required>{{ $data->description }}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="savedata">Save</button>
-                    <a href="{{ route('admin.cms.news.index') }}" class="btn btn-secondary ms-2">Back</a>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>
         </div>
     </div>
 @endsection
-
 @push('scripts')
     <script>
         $(document).ready(function() {});
