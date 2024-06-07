@@ -21,10 +21,10 @@ return new class extends Migration
             $table->foreignId('kelurahan_id')->constrained('ref_kelurahan');
             $table->string('cutting_place')->nullable();
             $table->string('address')->nullable();
-            $table->decimal('latitude', 10, 8); 
+            $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-            $table->char('created_by',36);
-            $table->char('update_by',36);
+            $table->char('created_by', 36);
+            $table->char('update_by', 36);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

@@ -12,6 +12,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $admin = User::create([
+            'id' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
             'name' => 'Admin',
             'email' => 'admin@arkatama.test',
             'email_verified_at' => now(),
@@ -19,7 +20,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        $admin->assignRole('admin');
+        $admin->assignRole('admin-desa');
 
         $operator = User::create([
             'name' => 'Operator',
@@ -29,7 +30,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        $operator->assignRole('admin-prodi');
+        $operator->assignRole('admin-kabupaten');
 
         for ($i = 1; $i <= 10; $i++) {
             $camaba = User::create([
@@ -40,7 +41,7 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
 
-            $camaba->assignRole('camaba');
+            $camaba->assignRole('admin-petugas-lapangan');
         }
     }
 }

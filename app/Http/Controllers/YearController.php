@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Master\YearDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Year;
 use Illuminate\Http\Request;
+use ResponseFormatter;
 
 class YearController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(YearDataTable $yearDataTable)
     {
-        //
+        return $yearDataTable->render('pages.admin.master.tahun.index');
     }
 
     /**
@@ -20,7 +23,7 @@ class YearController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.master.tahun.create');
     }
 
     /**
@@ -28,7 +31,37 @@ class YearController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tahun' => 'required'
+        ]);
+
+        if ($request->id != null) {
+            $data = Year::findOrFail($request->id);
+            $data->update(
+                array_merge(
+                    ['tahun' => $request->tahun],
+                    ['status' => $request->status],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return response()->json(['success' => 'Updated successfully']);
+        } else {
+            Year::create(
+                array_merge(
+                    ['tahun' => $request->tahun],
+                    ['status' => 'Aktif'],
+                    ['created_by' => auth()->user()->id],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            Year::where('tahun', '!=', $request->tahun)
+                ->update(['status' => 'Non Aktif']);
+
+            return
+                redirect()->route('tahun.index')->with('success', 'Created successfully');
+        }
     }
 
     /**
@@ -44,7 +77,8 @@ class YearController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = Year::findOrFail($id);
+        return view('pages.admin.master.tahun.edit', compact('user'));
     }
 
     /**
@@ -52,7 +86,15 @@ class YearController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Year::findOrFail($id);
+        $user->tahun = $request->tahun;
+        $user->status = $request->status;
+        $user->save();
+
+        if ($request->status == 'Aktif') Year::where('tahun', '!=', $request->tahun)
+            ->update(['status' => 'Non Aktif']);
+
+        return redirect()->route('tahun.index')->with('success', 'Berhasil Updated successfully');
     }
 
     /**
@@ -60,6 +102,8 @@ class YearController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $provinsi = Year::find($id);
+        $provinsi->delete();
+        return ResponseFormatter::success('Deleted successfully');
     }
 }

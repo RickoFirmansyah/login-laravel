@@ -1,0 +1,35 @@
+.wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+button {
+    cursor: pointer;
+}
+
+button.button {
+    background: #fff;
+    color: #333;
+}
+
+button.button:hover {
+    background: #f1f1f1;
+}
+
+button.btn-primary {
+    background: #007bff;
+    border-color: #007bff;
+}
+
+button.btn-primary:hover {
+    background: #0056b3;
+    border-color: #004085;
+}

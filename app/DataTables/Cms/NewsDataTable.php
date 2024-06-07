@@ -31,10 +31,16 @@ class NewsDataTable extends DataTable
                 return User::find($news->updated_by)->name;
             })
             ->editColumn('created_at', function (News $news) {
-                return $news->created_at->format('d, M Y H:i');
+                return view('components.table-timestamp', [
+                    'date' => formatDateFromDatabase($news->created_at),
+                    'user' => $news->createddBy
+                ]);
             })
             ->editColumn('updated_at', function (News $news) {
-                return $news->updated_at->format('d, M Y H:i');
+                return view('components.table-timestamp', [
+                    'date' => formatDateFromDatabase($news->updated_at),
+                    'user' => $news->updatedBy
+                ]);
             })
             ->rawColumns(['action'])
             ->setRowId('id');
@@ -73,7 +79,7 @@ class NewsDataTable extends DataTable
                 ->width(60)
                 ->addClass('text-center'),
             Column::make('title')->title('Judul Berita'),
-            Column::make('description')->title('Deskripsi'),
+            // Column::make('description')->title('Deskripsi'),
             Column::make('created_at')->title('Dibuat pada'),
             Column::make('updated_at')->title('Diedit pada'),
             Column::make('created_by')->title('Dibuat oleh'),

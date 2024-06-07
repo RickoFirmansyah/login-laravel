@@ -28,7 +28,7 @@ class UserListDataTable extends DataTable
 
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('name');
     }
 
     public function html(): HtmlBuilder
@@ -55,14 +55,14 @@ class UserListDataTable extends DataTable
             Column::computed('DT_RowIndex')
                 ->title('No.')
                 ->width(20),
-            Column::computed('action')
+            Column::computed('action')->title('aksi')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('name'),
-            Column::make('email'),
-            Column::make('email_verified_at'),
+            Column::make('name')->title('nama')->addClass('text-capitalize'),
+            Column::make('email')->addClass('text-capitalize'),
+            Column::make('email_verified_at')->title('tanggal verifikasi')->addClass('text-capitalize'),
         ];
     }
 
