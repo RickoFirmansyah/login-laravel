@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <form 
-                    action="{{ route('admin.data-pokok.tempat-pemotongan.update', $slaughteringPlace->id) }}">
+                    action="{{ route('admin.tempat-pemotongan.update', $slaughteringPlace->id) }}">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
@@ -81,7 +81,7 @@
                         required>
 
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ route('admin.data-pokok.tempat-pemotongan.index') }}"
+                    <a href="{{ route('admin.tempat-pemotongan.index') }}"
                         class="btn btn-secondary ms-2">Back</a>
                 </form>
             </div>

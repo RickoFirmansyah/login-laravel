@@ -75,6 +75,17 @@
                 "order": "3",
                 "is_active": "1",
                 "childrens": []
+            },
+            {
+                "name": "Tempat Pemotongan",
+                "module": "pokok-tempat-pemotongan",
+                "slug": "pokok-tempat-pemotongan",
+                "icon": "fal fa-university",
+                "url": "/admin/tempat-pemotongan",
+                "parent_id": 2,
+                "order": "5",
+                "is_active": "1",
+                "childrens": []
             }
         ]
     },
@@ -89,7 +100,6 @@
         "is_active": "1",
         "childrens": []
     },
-
     {
         "name": "Laporan Statistik",
         "module": "laporan-statistik",
@@ -208,6 +218,17 @@
                 "url": "/admin/cms/document",
                 "parent_id": 11,
                 "order": "3",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "name": "Panduan/Unduhan",
+                "module": "pokok-panduan",
+                "slug": "pokok-panduan",
+                "icon": "fa fa-file-code-o",
+                "url": "/admin/panduan",
+                "parent_id": 11,
+                "order": "4",
                 "is_active": "1",
                 "childrens": []
             }

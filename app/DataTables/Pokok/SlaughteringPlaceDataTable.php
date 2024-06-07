@@ -24,6 +24,8 @@ class SlaughteringPlaceDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
+            ->addColumn('action', 'map-pemotongan.action')
+            ->addColumn('action', function(SlaughteringPlace $val) {
             ->addColumn('action', function (SlaughteringPlace $val) {
                 // $id  = $va
                 // return $val->id;
@@ -61,22 +63,36 @@ class SlaughteringPlaceDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
-        return $this->builder()
+        // return $this->builder()
 
+        //     ->setTableId('slaughteringplace-table')
+        //     ->columns($this->getColumns())
+        //     ->minifiedAjax(script: "
+        //                         data._token = '" . csrf_token() . "';
+        //                         data._p = 'POST';
+        //                     ")
+        //     ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
+        //     ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
+        //     ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
+        //     ->language(url('json/lang.json'))
+        //     ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
+        //     ->orderBy(0)
+        //     ->select(false)
+        //     ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
+        //     ->buttons([]);
+        return $this->builder()
             ->setTableId('slaughteringplace-table')
             ->columns($this->getColumns())
             ->minifiedAjax(script: "
-                                data._token = '" . csrf_token() . "';
-                                data._p = 'POST';
-                            ")
-            ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
+                        data._token = '".csrf_token()."';
+                        data._p = 'POST';
+                    ")
             ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
-            ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
+            ->setTableHeadClass('text-start text-muted fw-bold text-uppercase gs-0')
             ->language(url('json/lang.json'))
-            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
             ->orderBy(0)
             ->select(false)
-            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
+            ->drawCallbackWithLivewire(file_get_contents(public_path('assets/js/dataTables/drawCallback.js')))
             ->buttons([]);
     }
 
@@ -99,6 +115,7 @@ class SlaughteringPlaceDataTable extends DataTable
                 ->exportable(false)
                 ->printable(false)
                 ->width(100)
+                ->addClass('text-center'), // Ganti dengan view yang sesuai
                 ->addClass('text-center')
                 ->view('pages.admin.data-pokok.tempat-pemotongan.action'), // Ganti dengan view yang sesuai
             // Column::make('name')->title('Nama Petugas'),
