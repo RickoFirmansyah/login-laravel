@@ -15,6 +15,7 @@ use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\YearController;
+use App\Http\Controllers\AssignmentController;
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -69,3 +70,8 @@ Route::get('/auth/passwords/confirm', function () {
 
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
 Route::resource('tahun', YearController::class)->names('tahun');
+
+Route::resource('penugasan', AssignmentController::class);
+
+Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
+Route::post('/penugasan', [AssignmentController::class, 'store'])->name('penugasan.store');
