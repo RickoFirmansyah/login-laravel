@@ -42,9 +42,11 @@ class NewsController extends Controller
             $data['image'] = $imagePath;
         }
 
-        News::create($data);
-
-        return response()->json(['success' => 'News added successfully']);
+        if(News::create($data)){
+            return redirect()->route('admin.cms.news.index')->with('success', 'Berita Berhasil Ditambahkan');
+        } else {
+            return redirect()->route('admin.cms.news.index')->with('error', 'Gagal Menambahkan Berita');
+        }
     }
 
     public function edit($id)
@@ -77,9 +79,13 @@ class NewsController extends Controller
             $data['image'] = $imagePath;
         }
 
-        $news->update($data);
+        if($news->update($data)){
+            return redirect()->route('admin.cms.news.index')->with('success', 'Berita Berhasil Diubah');
+        }else{
+            return redirect()->route('admin.cms.news.index')->with('error', 'Gagal Mengubah Berita');
+        }
 
-        return redirect()->route('admin.cms.news.index')->with('success', 'News updated successfully');
+        // return redirect()->route('admin.cms.news.index')->with('success', 'News updated successfully');
     }
 
     public function destroy($id)
@@ -93,7 +99,7 @@ class NewsController extends Controller
             }
             $news->delete();
 
-            return redirect()->route('admin.cms.news.index')->with('success', 'News deleted successfully');
+            return redirect()->route('admin.cms.news.index')->with('success', 'Berita Berhasil Dihapus');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to delete news: ' . $e->getMessage());
         }

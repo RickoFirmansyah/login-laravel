@@ -98,3 +98,7 @@ Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasa
 //     return view('pages.guest.news');
 // });
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
+// Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
+Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
+
+
