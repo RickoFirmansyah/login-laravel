@@ -20,9 +20,13 @@
                 </div>
             </div>
             <div class="row py-2">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label for="officer_name">Nama Petugas</label>
                     <input type="text" class="bg-light form-control" id="officer_name" value='{{ $user->monitoringOfficer->name }}' readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="address">Alamat</label>
+                    <input type="text" class="bg-light form-control" id="address" value='{{ $user->monitoringOfficer->address }}' readonly>
                 </div>
             </div>
             <div class="row py-2">
@@ -33,12 +37,6 @@
                 <div class="col-md-6">
                     <label for="phone_number">Nomor Telepon</label>
                     <input type="text" class="bg-light form-control" id="phone_number" value='{{ $user->monitoringOfficer->phone_number }}' readonly>
-                </div>
-            </div>
-            <div class="row py-2">
-                <div class="col-md-12">
-                    <label for="address">Alamat</label>
-                    <input type="text" class="bg-light form-control" id="address" value='{{ $user->monitoringOfficer->address }}' readonly>
                 </div>
             </div>
         </form>
