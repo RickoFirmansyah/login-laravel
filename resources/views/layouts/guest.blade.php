@@ -181,75 +181,48 @@
             <div class="d-flex flex-column justify-content-center align-items-center">
                 <h1 class="pt-5 fw-bolder fs-12 mb-5" data-aos="fade-up" data-aos-duration="1000">Berita</h1>
             </div>
-            <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" data-aos="fade-up" data-aos-duration="1000">
-                <div class="col">
-                    <div class="card shadow-sm p-2 border border-1 border-light-subtle">
-                        <img class="bd-placeholder-img card-img-top rounded"
-                            src="{{ asset('landing/images/berita_sapi.png') }}" alt="">
-                        <div class="card-body p-2">
-                            <p class="card-text fs-4 text-start">Antusiasme Warga Menjelang Idul Adha dimana ramai
-                                pasar sapi
-                                berkembang dengan berbagai macam pilihan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm p-2 border border-1 border-light-subtle">
-                        <img class="bd-placeholder-img card-img-top rounded"
-                            src="{{ asset('landing/images/berita_sapi.png') }}" alt="">
-                        <div class="card-body p-2">
-                            <p class="card-text fs-4 text-start">Antusiasme Warga Menjelang Idul Adha dimana ramai
-                                pasar sapi
-                                berkembang dengan berbagai macam pilihan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm p-2 border border-1 border-light-subtle">
-                        <img class="bd-placeholder-img card-img-top rounded"
-                            src="{{ asset('landing/images/berita_sapi.png') }}" alt="">
-                        <div class="card-body p-2">
-                            <p class="card-text fs-4 text-start">Antusiasme Warga Menjelang Idul Adha dimana ramai
-                                pasar sapi
-                                berkembang dengan berbagai macam pilihan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm p-2 border border-1 border-light-subtle">
-                        <img class="bd-placeholder-img card-img-top rounded"
-                            src="{{ asset('landing/images/berita_sapi.png') }}" alt="">
-                        <div class="card-body p-2">
-                            <p class="card-text fs-4 text-start">Antusiasme Warga Menjelang Idul Adha dimana ramai
-                                pasar sapi
-                                berkembang dengan berbagai macam pilihan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm p-2 border border-1 border-light-subtle">
-                        <img class="bd-placeholder-img card-img-top rounded"
-                            src="{{ asset('landing/images/berita_sapi.png') }}" alt="">
-                        <div class="card-body p-2">
-                            <p class="card-text fs-4 text-start">Antusiasme Warga Menjelang Idul Adha dimana ramai
-                                pasar sapi
-                                berkembang dengan berbagai macam pilihan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm p-2 border border-1 border-light-subtle">
-                        <img class="bd-placeholder-img card-img-top rounded"
-                            src="{{ asset('landing/images/berita_sapi.png') }}" alt="">
-                        <div class="card-body p-2">
-                            <p class="card-text fs-4 text-start">Antusiasme Warga Menjelang Idul Adha dimana ramai
-                                pasar sapi
-                                berkembang dengan berbagai macam pilihan</p>
-                        </div>
+            <div class="album py-5">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" data-aos="fade-up"
+                        data-aos-duration="1000">
+                        @foreach ($news as $item)
+                            <div class="col">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-img-top rounded" style="height: 200px; overflow: hidden;">
+                                        <img src="{{ url('storage/' . $item->image) }}"
+                                            class="w-100 h-100 object-cover" alt="...">
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <h1 class="card-title fs-5">
+                                            <a class="a-news" href="{{ route('guest.detail', $item->id) }}">
+                                                {{ Str::limit($item->title, 50) }}
+                                            </a>
+                                        </h1>
+                                        <p class="card-text flex-grow-1">
+                                            {{ Str::limit(strip_tags($item->description), 100) }}
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                                            <div class="btn-group">
+                                                <a href="{{ route('guest.detail', $item->id) }}">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary">Baca
+                                                        selengkapnya</button>
+                                                </a>
+                                            </div>
+                                            <small>
+                                                <i style="font-size: 18px;" class="ti ti-calendar-time px-2"></i>
+                                                {{ $item->created_at->format('Y-m-d') }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </section>
+
         {{-- Berita Section End --}}
     </div>
     <div class="offcanvas offcanvas-start modernize-lp-offcanvas bg-dark" tabindex="-1" id="offcanvasNavbar"

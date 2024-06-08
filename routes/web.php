@@ -12,6 +12,7 @@ use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\ImpersonateController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\QurbanData2Controller;
 use App\Http\Controllers\QurbanData3Controller;
 use App\Http\Controllers\TypeOfQurbanController;
@@ -40,6 +41,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\MonitoringLocationsController;
 use App\Http\Controllers\Setting\SystemSettingController;
+
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -100,9 +102,11 @@ Route::middleware("auth")->prefix("user")->name("user.")->group(function () {
     Route::view('/dashboard', "pages.admin.dashboard")->name("dashboard");
 });
 
-Route::get('/', function () {
-    return view('pages.landing.index');
-});
+// Route::get('/', function () {
+//     return view('pages.landing.index');
+// });
+
+Route::get('/', [LandingController::class, 'index']);
 
 Route::get('/defaults', function () {
     return View::make('pages.admin.dashboard.defaults');
@@ -124,6 +128,13 @@ Route::get('/auth/passwords/confirm', function () {
 
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
 Route::resource('tahun', YearController::class)->names('tahun');
+
+
+// DETAIL BERITA
+Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
+// Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
+// Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
+
 
 Route::resource('penugasan', AssignmentController::class);
 
