@@ -15,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, Impersonate, HasUuids;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Impersonate;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'nomor_hp',
         'password',
     ];
 
@@ -48,7 +49,8 @@ class User extends Authenticatable
     ];
 
 
-    public function getImpersonator(){
+    public function getImpersonator()
+    {
         return app(ImpersonateManager::class)->getImpersonator();
     }
     public function monitoringOfficer()
