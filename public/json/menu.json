@@ -21,11 +21,22 @@
                 "childrens": []
             },
             {
-                "name": "tahun",
+                "name": "Tahun",
                 "module": "tahun",
                 "slug": "tahun",
                 "icon": "fal fa-user-tie",
                 "url": "/tahun",
+                "parent_id": 1,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "name": "Jenis Tempat Pemotongan",
+                "module": "jenis-tempat",
+                "slug": "jenis-tempat",
+                "icon": "fal fa-user-tie",
+                "url": "/jenis-tempat",
                 "parent_id": 1,
                 "order": "2",
                 "is_active": "1",
@@ -55,24 +66,13 @@
                 "childrens": []
             },
             {
-                "name": "Panduan/Unduhan",
-                "module": "pokok-panduan",
-                "slug": "pokok-panduan",
-                "icon": "fal fa-universityo",
-                "url": "/admin/data-pokok/panduan",
-                "parent_id": 2,
-                "order": "2",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
                 "name": "Petugas Pemantauan",
                 "module": "pokok-petugas-pemantauan",
                 "slug": "pokok-petugas-pemantauan",
                 "icon": "fal fa-user-tie",
                 "url": "/admin/data-pokok/petugas-pemantauan",
                 "parent_id": 2,
-                "order": "3",
+                "order": "2",
                 "is_active": "1",
                 "childrens": []
             },
@@ -83,7 +83,7 @@
                 "icon": "fal fa-chalkboard-teacher",
                 "url": "/admin/data-pokok/penugasan",
                 "parent_id": 2,
-                "order": "4",
+                "order": "3",
                 "is_active": "1",
                 "childrens": []
             }
@@ -100,7 +100,6 @@
         "is_active": "1",
         "childrens": []
     },
-
     {
         "name": "Laporan Statistik",
         "module": "laporan-statistik",
@@ -116,7 +115,7 @@
                 "module": "laporan-jenis-hewan",
                 "slug": "laporan-jenis-hewan",
                 "icon": "fal fa-chart-bar",
-                "url": "/admin/laporan/jenis-hewan",
+                "url": "/laporan-statistik-jenishewan",
                 "parent_id": 15,
                 "order": "1",
                 "is_active": "1",
@@ -138,7 +137,7 @@
                 "module": "laporan-penyakit-hewan",
                 "slug": "laporan-penyakit-hewan",
                 "icon": "fal fa-chart-bar",
-                "url": "/admin/laporan/penyakit",
+                "url": "/laporan-statistik-penyakit",
                 "parent_id": 15,
                 "order": "3",
                 "is_active": "1",
@@ -201,7 +200,7 @@
                 "childrens": []
             },
             {
-                "name": "News",
+                "name": "Berita",
                 "module": "cms-news",
                 "slug": "cms-news",
                 "icon": "fal fa-newspaper",
@@ -219,6 +218,17 @@
                 "url": "/admin/cms/document",
                 "parent_id": 11,
                 "order": "3",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "name": "Panduan/Unduhan",
+                "module": "pokok-panduan",
+                "slug": "pokok-panduan",
+                "icon": "fa fa-file-code-o",
+                "url": "/admin/panduan",
+                "parent_id": 11,
+                "order": "4",
                 "is_active": "1",
                 "childrens": []
             }

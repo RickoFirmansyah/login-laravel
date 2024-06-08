@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('file_management', function (Blueprint $table) {
             $table->id();
-            
-            $table->foreignUuid('user_id')->references('id')->on('users')->cascadeOnDelete();
+
+            // Change foreignUuid to unsignedBigInteger for user_id
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+
             $table->string('keterangan', 255);
             $table->text('file');
             $table->tinyInteger('status')->default(1);
