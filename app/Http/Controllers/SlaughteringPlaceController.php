@@ -104,10 +104,13 @@ class SlaughteringPlaceController extends Controller
 
         $requestData['created_by'] = auth()->user()->id;
         $requestData['update_by'] = auth()->user()->id;
+        $slaughteringPlace = SlaughteringPlace::findOrFail($request->id);
+        if ($slaughteringPlace->update($requestData)) {
+            return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan berhasil diubah');
+        } else{
+            return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan gagal diubah');
+        }
 
-        $slaughteringPlace->update($requestData);
-
-        return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan berhasil diubah');
     }
 
     /**
