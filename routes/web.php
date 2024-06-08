@@ -8,6 +8,7 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\Cms\AnnouncementController;
 
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\User\RoleController;
@@ -103,7 +104,3 @@ Route::resource('tahun', YearController::class)->names('tahun');
 
 // DETAIL BERITA
 Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
-// Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
-// Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
-
-

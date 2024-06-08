@@ -5,7 +5,7 @@
             <div class="px-3 col-lg-8">
                 <div class="container">
                     <h2 class ="mt-5 fs-8 ">
-                        <a href ="{{ route('guest.berita') }}" style="background-color:#e02251; "
+                        <a href ="/" style="background-color:#e02251; "
                             class="rounded-circle text-white px-2 m-0 py-2 ti ti-chevron-left px-1"></a>
                     </h2>
                     <h2 class ="mt-2">{{ $detailNews->title }}</h2>

@@ -190,11 +190,11 @@
         "is_active": "1",
         "childrens": [
             {
-                "name": "Slide show",
-                "module": "csm-slide-show",
-                "slug": "cms-slide-show",
-                "icon": "fal fa-images",
-                "url": "/admin/cms/slideshow",
+                "name": "Announcement",
+                "module": "csm-announcement",
+                "slug": "cms-announcement",
+                "icon": "fal fa-megaphone",
+                "url": "/admin/cms/pengumuman",
                 "parent_id": 11,
                 "order": "1",
                 "is_active": "1",

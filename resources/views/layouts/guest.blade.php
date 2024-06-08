@@ -152,18 +152,11 @@
                         data-aos="fade-right" data-aos-duration="1000">
                         <div class='content-pengumuman  '>
                             <h1 class="fw-semibold fs-12 text-white mb-3">Pengumuman</h1>
-                            <div class="border border-2 border-light-subtle rounded p-3 mb-3 text-white">
-                                <p>Pendaftaran Pemeriksaan Kesehatan hewan kurban di Kabupaten Blitar</p>
-                            </div>
-                            <div class="border border-2 border-light-subtle rounded p-3 mb-3 text-white">
-                                <p>Pendaftaran Pemeriksaan Kesehatan hewan kurban di Kabupaten Blitar</p>
-                            </div>
-                            <div class="border border-2 border-light-subtle rounded p-3 mb-3 text-white">
-                                <p>Pendaftaran Pemeriksaan Kesehatan hewan kurban di Kabupaten Blitar</p>
-                            </div>
-                            <div class="border border-2 border-light-subtle rounded p-3 mb-3 text-white">
-                                <p>Pendaftaran Pemeriksaan Kesehatan hewan kurban di Kabupaten Blitar</p>
-                            </div>
+                            @foreach ($pengumuman as $p)
+                                <div class="border border-2 border-light-subtle rounded p-3 mb-3 text-white">
+                                    <p>{{ strip_tags($p->description) }}</p>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="d-flex flex-column gap-2 col-md-6 mx-5  mx-md-0 border border-2 border-light-subtle rounded p-3"
