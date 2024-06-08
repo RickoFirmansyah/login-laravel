@@ -21,11 +21,22 @@
                 "childrens": []
             },
             {
-                "name": "tahun",
+                "name": "Tahun",
                 "module": "tahun",
                 "slug": "tahun",
                 "icon": "fal fa-user-tie",
                 "url": "/tahun",
+                "parent_id": 1,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "name": "Jenis Tempat Pemotongan",
+                "module": "jenis-tempat",
+                "slug": "jenis-tempat",
+                "icon": "fal fa-user-tie",
+                "url": "/jenis-tempat",
                 "parent_id": 1,
                 "order": "2",
                 "is_active": "1",
@@ -73,17 +84,6 @@
                 "url": "/admin/data-pokok/penugasan",
                 "parent_id": 2,
                 "order": "3",
-                "is_active": "1",
-                "childrens": []
-            },
-            {
-                "name": "Tempat Pemotongan",
-                "module": "pokok-tempat-pemotongan",
-                "slug": "pokok-tempat-pemotongan",
-                "icon": "fal fa-university",
-                "url": "/admin/tempat-pemotongan",
-                "parent_id": 2,
-                "order": "5",
                 "is_active": "1",
                 "childrens": []
             }
@@ -189,18 +189,18 @@
         "is_active": "1",
         "childrens": [
             {
-                "name": "Slide show",
-                "module": "csm-slide-show",
-                "slug": "cms-slide-show",
-                "icon": "fal fa-images",
-                "url": "/admin/cms/slideshow",
+                "name": "Pengumuman",
+                "module": "cms-pengumuman",
+                "slug": "cms-pengumuman",
+                "icon": "fal fa-bullhorn",
+                "url": "/admin/cms/pengumuman",
                 "parent_id": 11,
                 "order": "1",
                 "is_active": "1",
                 "childrens": []
             },
             {
-                "name": "News",
+                "name": "Berita",
                 "module": "cms-news",
                 "slug": "cms-news",
                 "icon": "fal fa-newspaper",

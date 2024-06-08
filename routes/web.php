@@ -10,6 +10,11 @@ use App\Http\Controllers\PetugasPemantauanController;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\ImpersonateController;
+use App\Http\Controllers\MapController;
+
 
 use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\QurbanData2Controller;
@@ -44,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/data-pokok/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');
     Route::resource('/admin/lokasi-pemotongan', MapController::class)->names('map-pemotongan');
     Route::resource('/admin/panduan', PanduanController::class)->names('admin.panduan');
-    
+
     // TEMPAT PEMOTONGAN
     Route::resource('/admin/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.tempat-pemotongan');
     Route::get('/admin/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
@@ -59,9 +64,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/daftar-lokasi-pemantauan', MonitoringLocationsController::class)->names('daftar-lokasi-pemantauan');
 
 
-Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
-Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
-Route::resource('/laporan-statistik-jenishewan', JenisHewanController::class)->names('laporan-statistik-jenishewan');
+    Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
+    Route::resource('/laporan-statistik-penyakit', QurbanData2Controller::class)->names('laporan-statistik-penyakit');
+    Route::resource('/laporan-statistik-jenishewan', JenisHewanController::class)->names('laporan-statistik-jenishewan');
     Route::resource('/laporan-statistik-jeniskelamin', QurbanDataController::class)->names('laporan-statistik-jeniskelamin');
     Route::resource('/laporan-statistik-penyakit', QurbanDataController::class)->names('laporan-statistik-penyakit');
     Route::resource('/laporan-statistik-jenishewan', JenisHewanController::class)->names('laporan-statistik-jenishewan');
@@ -112,5 +117,3 @@ Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasa
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
 // Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
 Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
-
-
