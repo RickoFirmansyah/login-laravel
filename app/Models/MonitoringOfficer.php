@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class MonitoringOfficer extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
     protected $table = 'monitoring_officers';
     protected $guards = [];
-    protected $fillable=['name','gender','address','phone_number'];
+    protected $fillable = ['name', 'gender', 'address', 'phone_number'];
 
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
     public function qurban_report()

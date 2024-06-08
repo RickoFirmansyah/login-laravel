@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('slaughtering_places', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->constrained('users');
+            $table->unsignedBigInteger('user_id')->constrained('users');
             $table->foreignId('type_of_place_id')->constrained('type_of_places');
             $table->foreignId('provinsi_id')->constrained('ref_provinsi');
             $table->foreignId('kabupaten_id')->constrained('ref_kabupaten_kota');

@@ -60,7 +60,7 @@ class FileManagement extends Model
      */
     public function setFileAttribute($value): void
     {
-        if(gettype($value) == 'string'){
+        if (gettype($value) == 'string') {
             return;
         }
         $oldValue = $this->getOriginal('file');
@@ -78,7 +78,7 @@ class FileManagement extends Model
     public function download()
     {
         if ($this->attributes['file'] !== null) {
-            return Storage::download( $this->attributes['file']);
+            return Storage::download($this->attributes['file']);
         } else {
             return abort(404, 'File not found');
         }

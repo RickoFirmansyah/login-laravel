@@ -18,20 +18,19 @@ class TypeOfPlacesSeeder extends Seeder
         $data = [
             [
                 'type_of_place' => 'Rumah',
-                'created_by' => Str::uuid(),
-                'update_by' => Str::uuid(),
+                'created_by' => 1,
+                'update_by' => 1,
             ],
             [
                 'type_of_place' => 'Masjid',
-                'created_by' => Str::uuid(),
-                'update_by' => Str::uuid(),
+                'created_by' => 2,
+                'update_by' => 2,
             ],
             [
                 'type_of_place' => 'Lapangan',
-                'created_by' => Str::uuid(),
-                'update_by' => Str::uuid(),
+                'created_by' => 3,
+                'update_by' => 3,
             ],
-            // Tambahkan data lain sesuai kebutuhan
         ];
 
         DB::table('type_of_places')->insert($data);
