@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/admin/panduan', PanduanController::class)->names('admin.panduan');
 
     // TEMPAT PEMOTONGAN
-    // Route::resource('/admin/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.tempat-pemotongan');
+    Route::resource('/admin/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.tempat-pemotongan');
     // Route::get('/admin/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
     // Route::get('/admin/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
     // Route::get('/admin/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');

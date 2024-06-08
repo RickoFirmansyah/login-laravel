@@ -17,7 +17,7 @@ class PetugasPemantauanDataTable extends DataTable
             ->addColumn('action', 'petugas-pemantauan.action')
             ->addIndexColumn()
             ->addColumn('action', function (PetugasPemantauan $val) {
-                return view('pages.admin.petugas-pemantauan.action',['petugas' => $val]);
+                return view('pages.admin.petugas-pemantauan.action', ['petugas' => $val]);
             })
             ->rawColumns(['action'])
             ->setRowId('id');
@@ -34,7 +34,7 @@ class PetugasPemantauanDataTable extends DataTable
             ->setTableId('PetugasPemantauan-table')
             ->columns($this->getColumns())
             ->minifiedAjax(script: "
-                        data._token = '".csrf_token()."';
+                        data._token = '" . csrf_token() . "';
                         data._p = 'POST';
                     ")
             ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
@@ -55,17 +55,17 @@ class PetugasPemantauanDataTable extends DataTable
             Column::make('name')->title('nama'),
             Column::make('gender')->title('jenis kelamin'),
             Column::make('phone_number')->title('nomer telpon'),
-            Column::make('address')->title('alamat'),
+            Column::make('agency')->title('Asal Instansi'),
             Column::computed('action')->title('aksi')
-            ->exportable(false)
-            ->printable(false)
-            ->width(60)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
     protected function filename(): string
     {
-        return 'PetugasPemantauan_'.date('YmdHis');
+        return 'PetugasPemantauan_' . date('YmdHis');
     }
 }

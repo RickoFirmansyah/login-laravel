@@ -21,14 +21,14 @@
                             <form method="POST" action="{{ URL::to('login') }}" custom-action>
                                 @csrf
                                 <div class="mb-3">
-                                    <x-atoms.form-label for="email_field">Email</x-atoms.form-label>
-                                    <x-atoms.input type="email" name="email" id="email_field"
-                                        placeholder="Enter Email Address" ssr />
+                                    <x-atoms.form-label for="email_field">Email / Nomor Handphone</x-atoms.form-label>
+                                    <x-atoms.input type="text" name="email" id="email_field"
+                                        placeholder="Masukkan Email / Nomor Handphone" ssr />
                                 </div>
                                 <div class="mb-4">
                                     <x-atoms.form-label for="password_field">Password</x-atoms.form-label>
                                     <x-atoms.input type="password" name="password" id="password_field"
-                                        placeholder="Enter Password" ssr />
+                                        placeholder="Masukkan Password" ssr />
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="form-check">

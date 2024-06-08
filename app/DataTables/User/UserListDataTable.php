@@ -19,9 +19,6 @@ class UserListDataTable extends DataTable
             ->addColumn('action', function (User $val) {
                 return view('pages.admin.user.user-list.action', ['user' => $val]);
             })
-            ->editColumn('email_verified_at', function (User $val) {
-                return $val->email_verified_at->format('d, M Y H:i');
-            })
             ->rawColumns(['action'])
             ->setRowId('id');
     }
@@ -37,7 +34,7 @@ class UserListDataTable extends DataTable
             ->setTableId('userlist-table')
             ->columns($this->getColumns())
             ->minifiedAjax(script: "
-                        data._token = '".csrf_token()."';
+                        data._token = '" . csrf_token() . "';
                         data._p = 'POST';
                     ")
             ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
@@ -61,6 +58,7 @@ class UserListDataTable extends DataTable
                 ->width(60)
                 ->addClass('text-center'),
             Column::make('name')->title('nama')->addClass('text-capitalize'),
+            Column::make('phone_number')->title('nomor telpon')->addClass('text-capitalize'),
             Column::make('email')->addClass('text-capitalize'),
             Column::make('email_verified_at')->title('tanggal verifikasi')->addClass('text-capitalize'),
         ];
@@ -68,6 +66,6 @@ class UserListDataTable extends DataTable
 
     protected function filename(): string
     {
-        return 'UserList_'.date('YmdHis');
+        return 'UserList_' . date('YmdHis');
     }
 }
