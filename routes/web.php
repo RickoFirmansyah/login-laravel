@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Cms\NewsController;
-use App\Http\Controllers\Guest\NewsGuestController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\PlaceController;
-
 use App\Http\Controllers\PanduanController;
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Cms\NewsController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\QurbanDataController;
@@ -17,12 +18,12 @@ use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\QurbanData2Controller;
 use App\Http\Controllers\QurbanData3Controller;
 use App\Http\Controllers\TypeOfQurbanController;
+use App\Http\Controllers\Guest\NewsGuestController;
 use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\PetugasPemantauanController;
 use App\Http\Controllers\SlaughteringPlaceController;
-use Illuminate\Support\Facades\View;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MonitoringLocationsController;
+use App\Http\Controllers\Setting\SystemSettingController;
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -65,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/role', RoleController::class);
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
+
+    Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
 });
 
 Route::middleware("auth")->prefix("user")->name("user.")->group(function () {
