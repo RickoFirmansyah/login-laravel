@@ -8,15 +8,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\PanduanController;
-
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Cms\NewsController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\QurbanData2Controller;
 use App\Http\Controllers\QurbanData3Controller;
+use App\Http\Controllers\Setting\MenusController;
 use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\Guest\NewsGuestController;
 use App\Http\Controllers\Master\ProvinsiController;
@@ -38,9 +36,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
 
+    
+    Route::get('admin/setting/menu/icons/ref', [MenusController::class, 'iconsRef'])->name('icons.ref');
+    // Route::post('/menu', [MenusController::class, 'store'])->name('menus.store');
+    
     // PANDUAN
     Route::resource('/admin/panduan', PanduanController::class)->names('admin.panduan');
     
+    // MENU
+     Route::resource('/admin/setting/menu',MenusController::class)->names('menus');
+
     // TEMPAT PEMOTONGAN
     Route::resource('/admin/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.tempat-pemotongan');
     Route::get('/admin/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
@@ -104,3 +109,10 @@ Route::resource('tahun', YearController::class)->names('tahun');
 // });
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
 
+
+ // Your new content here
+ // Your new content here
+Route::get('/pengaturan', function () { return view('pages.admin.pengaturan.index'); });
+ // Your new content here
+ // Your new content here
+Route::get('/admin/setting/test', function () { return view('pages.admin.test.index'); });
