@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('documentations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('qurban_report_id')->constrained('qurban_reports');
+            $table->foreignId('qurban_report_id');
+            // $table->foreignId('qurban_report_id')->constrained('qurban_reports');
             $table->string('photo')->nullable();
             $table->string('caption')->nullable();
-            $table->char('created_by',36);
-            $table->char('update_by',36);
+            $table->char('created_by', 36);
+            $table->char('update_by', 36);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
