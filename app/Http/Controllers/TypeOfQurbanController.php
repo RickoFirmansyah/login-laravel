@@ -24,6 +24,35 @@ class TypeOfQurbanController extends Controller
         return $jenisKurbanDataTable->render('pages.admin.master.jenis_kurbanv2.index');
     }
 
+    public function export()
+    {
+        $data = $this->model->all();
+        $position = 2;
+        $spreadsheet = new Spreadsheet();
+        $activeWorksheet = $spreadsheet->getActiveSheet();
+
+        $activeWorksheet->setCellValue('A1', 'ID');
+        $activeWorksheet->setCellValue('B1', 'NAME');
+
+        foreach ($data as $isi) {
+            $activeWorksheet->setCellValue('A' . $position, $isi['id']);
+            $activeWorksheet->setCellValue('B' . $position, $isi['type_of_animal']);
+            $position++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('file/world.xlsx');
+        return redirect('file/world.xlsx');
+    }
+
+    public function import()
+    {
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $reader->setLoadSheetsOnly(["Sheet 1", "My special sheet"]);
+        $spreadsheet = $reader->load("files/world.xlsx");
+    }
+
     /**
      * Show the form for creating a new resource.
      */
