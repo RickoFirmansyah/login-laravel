@@ -32,17 +32,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($assignments as $assignment)
+                        @foreach($monitoringOfficers as $officer)
                         <tr>
                             <td>
-                                <a href="#" class="btn btn-primary btn-sm">Tambah</a>
+                                <a href="{{ url('add-penugasan') }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-user-plus"></i></a>
                             </td>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $assignment->monitoringOfficer->name }}</td>
-                            <td>{{ $assignment->monitoringOfficer->gender }}</td>
-                            <td>{{ $assignment->monitoringOfficer->phone_number }}</td>
-                            <td>{{ $assignment->monitoringOfficer->address }}</td>
-                            <td>{{ $assignment->jumlah_penugasan }}</td>
+                            <td>{{ $officer->name }}</td>
+                            <td>{{ $officer->gender }}</td>
+                            <td>{{ $officer->phone_number }}</td>
+                            <td>{{ $officer->address }}</td>
+                            <td>{{ $officer->assignments_count ?? '0' }}</td>
                         </tr>
                         @endforeach
                     </tbody>

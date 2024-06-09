@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\MonitoringLocationsController;
+use App\Http\Controllers\MonitoringOfficerController; // Added this line
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -97,11 +98,12 @@ Route::get('/auth/passwords/confirm', function () {
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
 Route::resource('tahun', YearController::class)->names('tahun');
 
-Route::resource('penugasan', AssignmentController::class);
-
-Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
 // Route::get('/berita', function(){
 //     return view('pages.guest.news');
 // });
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
 
+Route::get('/admin/data-pokok/penugasan', [MonitoringOfficerController::class, 'index']); // Added this line
+
+Route::get('/add-penugasan', [SlaughteringPlaceController::class, 'index']);
+Route::delete('/delete-add-penugasan/{id}', [SlaughteringPlaceController::class, 'destroy']);
