@@ -41,6 +41,18 @@
                 "order": "2",
                 "is_active": "1",
                 "childrens": []
+            },
+            {
+                "name": "Jenis Penyakit",
+                "module": "jenis-penyakit",
+                "slug": "jenis-penyakit",
+                "icon": "fal fa-user-tie",
+                "url": "/jenis-penyakit",
+                "parent_id": 1,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            },
             }
         ]
     },
