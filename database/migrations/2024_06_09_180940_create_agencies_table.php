@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('agencies', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name_agencies');
+            $table->char('created_by', 36);
+            $table->char('update_by', 36);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 
