@@ -2,12 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\Agency;
+use App\Models\Master\Agency;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -22,7 +20,9 @@ class AgencyDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'agency.action')
+            ->addColumn('action', function (Agency $row) {
+                return view('pages.admin.master.agency.action', ['agency' => $row]);
+            })
             ->setRowId('id');
     }
 
@@ -40,20 +40,20 @@ class AgencyDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('agency-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('agency-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax(script: "
+                        data._token = '" . csrf_token() . "';
+                        data._p = 'POST';
+                    ")
+            ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
+            ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
+            ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
+            ->language(url('json/lang.json'))
+            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
+            ->orderBy(2)
+            ->select(false)
+            ->buttons([]);
     }
 
     /**
@@ -63,12 +63,12 @@ class AgencyDataTable extends DataTable
     {
         return [
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('name_agencies'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];
