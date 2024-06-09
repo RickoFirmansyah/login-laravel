@@ -12,9 +12,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         $admin = User::create([
-            'id' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
             'name' => 'Admin',
             'email' => 'admin@arkatama.test',
+            'nomor_hp' => '081234567890',
             'email_verified_at' => now(),
             'password' => Hash::make('12345'),
             'remember_token' => Str::random(10),
@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
         $operator = User::create([
             'name' => 'Operator',
             'email' => 'operator@arkatama.test',
+            'nomor_hp' => '081234577890',
             'email_verified_at' => now(),
             'password' => Hash::make('12345'),
             'remember_token' => Str::random(10),
@@ -34,8 +35,9 @@ class UserSeeder extends Seeder
 
         for ($i = 1; $i <= 10; $i++) {
             $camaba = User::create([
-                'name' => 'Camaba ' . $i,
-                'email' => 'camaba' . $i . '@arkatama.test',
+                'name' => 'Petugas ' . $i,
+                'email' => 'Petugas' . $i . '@arkatama.test',
+                'nomor_hp' => '0812344' . $i . '890',
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345'),
                 'remember_token' => Str::random(10),

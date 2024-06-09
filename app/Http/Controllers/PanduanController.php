@@ -53,8 +53,8 @@ class PanduanController extends Controller
         $StoreTempatPemotonganRequest->update_by = Auth::id();
         $StoreTempatPemotonganRequest->save();
 
-        // return response()->json(['url' => route('admin.data-pokok.panduan.index'),'pesan' => 'Tempat Pemotongan berhasil dibuat.' ]);
-        return redirect()->route('admin.data-pokok.panduan.index')->with('success', 'Panduan '. 'created successfully');
+        // return response()->json(['url' => route('admin.panduan.index'),'pesan' => 'Tempat Pemotongan berhasil dibuat.' ]);
+        return redirect()->route('admin.panduan.index')->with('success', 'Panduan '. 'created successfully');
     
     }
 
@@ -90,7 +90,7 @@ class PanduanController extends Controller
         $panduan->update_by = Auth::id();
         $panduan->save();
 
-        return redirect()->route('admin.data-pokok.panduan.index')->with('success', 'Panduan '. 'updated successfully');
+        return redirect()->route('admin.panduan.index')->with('success', 'Panduan '. 'updated successfully');
     }
 
     /**
@@ -98,32 +98,11 @@ class PanduanController extends Controller
      */
     public function destroy(string $id)
     {
-        $tempatPemotongan = Panduan::find($id);
-        Panduan::destroy($tempatPemotongan->id);
-
-        return ResponseFormatter::success('Panduan berhasil dihapus');
-        // return redirect()->route('admin.data-pokok.panduan.index')->with('success', 'Panduan '. 'delete successfully');
-    }
-
-
-    public function getKabupaten($provinsi)
-    {
-        $getProvinsi = Provinsi::find($provinsi);
-        $kabupaten = KabupatenKota::where('provinsi_id', $getProvinsi->kode)->get();
-        return response()->json($kabupaten);
-    }
-
-    public function getKecamatan($kabupaten)
-    {
-        $getKabupaten = KabupatenKota::find($kabupaten);
-        $kecamatan = Kecamatan::where('provinsi_id', $getKabupaten->provinsi_id)->orderBy('nama','asc')->get();
-        return response()->json($kecamatan);
-    }
-
-    public function getKelurahan($kecamatan)
-    {
-        $getKecamatan = Kecamatan::find($kecamatan);
-        $kelurahan = Kelurahan::where('kecamatan_id', $getKecamatan->kode)->orderBy('nama','asc')->get();
-        return response()->json($kelurahan);
+        $petugas = Panduan::findOrFail($id);
+        if ($petugas->delete()) {
+            return ResponseFormatter::created('Data berhasil dihapus');
+        } else {
+            return ResponseFormatter::created('Gagal menghapus data');    
+        }
     }
 }

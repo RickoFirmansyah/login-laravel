@@ -28,6 +28,9 @@ class DatabaseSeeder extends Seeder
             TypeOfPlacesSeeder::class,
             TahunSeeder::class,
             // SlaughteringPlacesSeeder::class,
+
+            SystemSettingSeeder::class,
+            SlaughteringPlacesSeeder::class,
         ]);
     }
 }

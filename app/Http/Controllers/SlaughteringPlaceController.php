@@ -60,7 +60,7 @@ class SlaughteringPlaceController extends Controller
         // Simpan data ke dalam database
         SlaughteringPlace::create($requestData);
 
-        return redirect('/admin/data-pokok/tempat-pemotongan')->with('success', 'Tempat pemotongan berhasil ditambahkan');
+        return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan berhasil ditambahkan');
     }
 
     /**
@@ -104,10 +104,13 @@ class SlaughteringPlaceController extends Controller
 
         $requestData['created_by'] = auth()->user()->id;
         $requestData['update_by'] = auth()->user()->id;
+        $slaughteringPlace = SlaughteringPlace::findOrFail($request->id);
+        if ($slaughteringPlace->update($requestData)) {
+            return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan berhasil diubah');
+        } else{
+            return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan gagal diubah');
+        }
 
-        $slaughteringPlace->update($requestData);
-
-        return redirect('/admin/data-pokok/tempat-pemotongan')->with('success', 'Tempat pemotongan berhasil diubah');
     }
 
     /**
@@ -115,12 +118,11 @@ class SlaughteringPlaceController extends Controller
      */
     public function destroy(SlaughteringPlace $slaughteringPlace, $id)
     {
-        try {
-            $slaughteringPlace::findOrFail($id)->delete();
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+        $slaughteringPlace = SlaughteringPlace::findOrFail($id);
+        if ($slaughteringPlace->delete()) {
+            return ResponseFormatter::created('Data berhasil dihapus');
+        } else {
+            return ResponseFormatter::created('Gagal menghapus data');    
         }
-
-        return ResponseFormatter::success('Tempat pemotongan berhasil dihapus');
     }
 }

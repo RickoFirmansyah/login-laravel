@@ -21,6 +21,9 @@ class NewsDataTable extends DataTable
             ->addColumn('action', function (News $row) {
                 return view('pages.admin.cms.news.action', ['news' => $row]);
             })
+            ->editColumn('title', function (News $news) {
+                return substr($news->title, 0, 30) . '...';
+            })
             ->editColumn('description', function (News $news) {
                 return substr($news->description, 0, 50) . '...';
             })

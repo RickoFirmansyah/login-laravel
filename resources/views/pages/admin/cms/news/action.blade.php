@@ -3,17 +3,35 @@
     <a href="{{ route('admin.cms.news.edit', $news->id) }}" class="btn btn-warning">
         <i class="fas fa-pen fs-3"></i>
     </a>
-    <a href="" class="btn btn-info">
-        <i class="fas fa-eye fs-3"></i>
-    </a>
-    <form action="{{ route('admin.cms.news.destroy', $news->id) }}" method="POST" style="display: inline-block;">
+    <form id="deleteForm" action="{{ route('admin.cms.news.destroy', $news->id) }}" method="POST">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-danger"
-            onclick="return confirm('Are you sure you want to delete this news?');">
+        <button type="submit" class="btn btn-danger confirm-button">
             <i class="fas fa-trash fs-3"></i>
         </button>
     </form>
 
-
 </div>
+<!-- Sweetalert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    document.querySelector('.confirm-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        var form = document.getElementById('deleteForm');
+
+        Swal.fire({
+            title: "Apakah Anda Yakin?",
+            text: "Berita Akan Dihapus Permanen!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya!",
+            cancelButtonText: "Batal!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+</script>
