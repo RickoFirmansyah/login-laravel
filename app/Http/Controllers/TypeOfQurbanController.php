@@ -11,6 +11,11 @@ use ResponseFormatter;
 
 class TypeOfQurbanController extends Controller
 {
+    function __construct()
+    {
+        $this->model = new TypeOfQurban();
+    }
+
     /**
      * Display a listing of the resource.
      */
