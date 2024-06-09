@@ -8,11 +8,11 @@
                     </h1>
                     <div class="">
                         <i class="fa-solid fa-location-dot text-white"></i>
-                        <p class="text-white">Jl. Raya Candi, Candi, Kec. Blitar, Kabupaten Blitar, Jawa Timur 66153</p>
+                        <p class="text-white">{{ \App\Helpers\SystemSettingHelper::get('alamat') }}</p>
                         <i class="fa-solid fa-phone text-white"></i>
-                        <p class="text-white">Telp. (031) 843 2203 | Email: 0fLbZ@example.com</p>
+                        <p class="text-white">Telp. {{ \App\Helpers\SystemSettingHelper::get('no_telp') }} | Email: {{ \App\Helpers\SystemSettingHelper::get('email') }}</p>
                         <i class="fa-brands fa-facebook text-white"></i>
-                        <p class="text-white">@disnakkanblitar</p>
+                        <p class="text-white">{{ \App\Helpers\SystemSettingHelper::get('footer') }}</p>
                     </div>
                 </div>
             </div>

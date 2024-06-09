@@ -23,7 +23,7 @@
                         <input type="text" data-table-id="slaughteringplace-table" id="searchBox" data-action="search"
                             class="form-control form-control-solid w-250px ps-13" placeholder="Cari Tempat Pemotongan" />
                     </div>
-                    <a href="{{ route('admin.data-pokok.tempat-pemotongan.create') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.tempat-pemotongan.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus fa-sm text-white-50"></i>
                         <span class="ms-2">
                             Tambah Tempat Pemotongan

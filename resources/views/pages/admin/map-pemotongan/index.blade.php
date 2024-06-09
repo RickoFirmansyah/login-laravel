@@ -74,7 +74,7 @@
         @endif
         <div class="containter">
             <div class="d-flex align-items-center justify-content-between position-relative mb-3">
-                <a href="{{ route('admin.data-pokok.tempat-pemotongan.create') }}" class="btn btn-primary">
+                <a href="{{ route('admin.tempat-pemotongan.create') }}" class="btn btn-primary">
                     <i class="fas fa-plus fa-sm text-white-50"></i>
                     <span class="ms-2">
                         Add Tempat Pemotongan

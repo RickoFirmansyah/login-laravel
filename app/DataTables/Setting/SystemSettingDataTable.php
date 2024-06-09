@@ -58,17 +58,17 @@ class SystemSettingDataTable extends DataTable
             Column::computed('DT_RowIndex')
                 ->title('No.')
                 ->width(20),
-            Column::computed('action')
+            Column::computed('action')->title('Aksi')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('name'),
+            Column::make('name')->title('Nama'),
             Column::make('is_active')
                 ->title('Status'),
-            Column::make('type'),
-            Column::make('value'),
-            Column::make('description'),
+            Column::make('type')->title('tipe'),
+            Column::make('value')->title('isi'),
+            Column::make('description')->title('deskripsi'),
         ];
     }
 

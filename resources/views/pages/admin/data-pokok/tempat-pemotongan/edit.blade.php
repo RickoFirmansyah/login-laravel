@@ -4,11 +4,11 @@
     <div class="py-4">
         <div class="row">
             <div class="col-md-12">
-                <form 
-                    action="{{ route('admin.data-pokok.tempat-pemotongan.update', $slaughteringPlace->id) }}">
+                <form method="POST" action="{{ route('admin.tempat-pemotongan.update', $slaughteringPlace->id) }}" custom-action="true">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    <input type="hidden" name="id" value="{{ $slaughteringPlace->id }}">
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama</label>
@@ -81,7 +81,7 @@
                         required>
 
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ route('admin.data-pokok.tempat-pemotongan.index') }}"
+                    <a href="{{ route('admin.tempat-pemotongan.index') }}"
                         class="btn btn-secondary ms-2">Back</a>
                 </form>
             </div>

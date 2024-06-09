@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Faker\Factory as Faker;
 
 class SlaughteringPlacesSeeder extends Seeder
 {
@@ -13,52 +13,50 @@ class SlaughteringPlacesSeeder extends Seeder
      */
     public function run()
     {
-        // Data contoh untuk Kabupaten Blitar
-        $data = [
-            [
-                'user_id' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-                'type_of_place_id' => 1,
-                'provinsi_id' => 15, // Sesuaikan dengan id Provinsi Jawa Timur di tabel ref_provinsi
-                'kabupaten_id' => 1, // Sesuaikan dengan id Kabupaten Blitar di tabel ref_kabupaten_kota
-                'kecamatan_id' => 1, // Sesuaikan dengan id kecamatan di Kabupaten Blitar di tabel ref_kecamatan
-                'kelurahan_id' => 1, // Sesuaikan dengan id kelurahan di Kecamatan Blitar di tabel ref_kelurahan
-                'cutting_place' => 'Masjid Al-Hidayah ',
-                'address' => 'Jalan Raya Blitar No. 1',
-                'latitude' => -8.095236, // Koordinat di Kabupaten Blitar
-                'longitude' => 112.162762, // Koordinat di Kabupaten Blitar
-                'created_by' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-                'update_by' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-            ],
-            [
-                'user_id' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-                'type_of_place_id' => 1,
-                'provinsi_id' => 15, // Sesuaikan dengan id Provinsi Jawa Timur di tabel ref_provinsi
-                'kabupaten_id' => 2, // Sesuaikan dengan id Kabupaten Blitar di tabel ref_kabupaten_kota
-                'kecamatan_id' => 2, // Sesuaikan dengan id kecamatan di Kabupaten Blitar di tabel ref_kecamatan
-                'kelurahan_id' => 2, // Sesuaikan dengan id kelurahan di Kecamatan Blitar di tabel ref_kelurahan
-                'cutting_place' => 'Lapangan Merdeka 1',
-                'address' => 'Jalan Raya Blitar No. 2',
-                'latitude' => -8.109080, // Koordinat di Kabupaten Blitar
-                'longitude' => 112.177060, // Koordinat di Kabupaten Blitar
-                'created_by' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-                'update_by' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-            ],
-            [
-                'user_id' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-                'type_of_place_id' => 1,
-                'provinsi_id' => 15, // Sesuaikan dengan id Provinsi Jawa Timur di tabel ref_provinsi
-                'kabupaten_id' => 3, // Sesuaikan dengan id Kabupaten Blitar di tabel ref_kabupaten_kota
-                'kecamatan_id' => 3, // Sesuaikan dengan id kecamatan di Kabupaten Blitar di tabel ref_kecamatan
-                'kelurahan_id' => 3, // Sesuaikan dengan id kelurahan di Kecamatan Blitar di tabel ref_kelurahan
-                'cutting_place' => 'Rumah Bapak Iqbal',
-                'address' => 'Jalan Raya Blitar No. 3',
-                'latitude' => -8.095236, // Koordinat di Kabupaten Blitar
-                'longitude' => 112.162762, // Koordinat di Kabupaten Blitar
-                'created_by' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-                'update_by' => '9c21c387-4488-44a1-8bb5-1606f442f96e',
-            ]
-            // Tambahkan data lain sesuai kebutuhan
+        $faker = Faker::create();
+
+        // Define the base data
+        $baseData = [
+            'type_of_place_id' => 1,
+            'provinsi_id' => 15,
+            'kabupaten_id' => 5,
+            'created_by' => 1,
+            'update_by' => 1,
         ];
+
+        $cuttingPlaces = [
+            'Masjid Al-Hidayah', 'Lapangan Merdeka', 'Rumah Bapak Iqbal',
+            'Masjid Al-Ikhlas', 'Balai Desa Sukamaju', 'Lapangan Sepakbola',
+            'Rumah Pak RT', 'Masjid Raya', 'Lapangan Upacara', 'Pondok Pesantren'
+        ];
+
+        $addresses = [
+            'Jalan Patimura No. 1', 'Jalan Raya Senopati No. 2', 'Jalan Sudirman No. 3',
+            'Jalan Dinomas No. 4', 'Jalan Fatih No. 5', 'Jalan Mahakam No. 6',
+            'Jalan Lampung No. 7', 'Jalan Karsa No. 8', 'Jalan Pinang No. 9',
+            'Jalan Pulau No. 10'
+        ];
+
+        // Rentang latitude dan longitude untuk Kabupaten Blitar
+        $latitudeMin = -8.2100;
+        $latitudeMax = -7.9000;
+        $longitudeMin = 111.9000;
+        $longitudeMax = 112.3000;
+
+        $data = [];
+        for ($i = 0; $i < 10; $i++) {
+            $data[] = array_merge($baseData, [
+                'user_id' => $i + 1,
+                'kecamatan_id' => ($i % 3) + 1,
+                'kelurahan_id' => ($i % 3) + 1,
+                'cutting_place' => $cuttingPlaces[$i],
+                'address' => $addresses[$i],
+                'latitude' => $faker->latitude($latitudeMin, $latitudeMax),
+                'longitude' => $faker->longitude($longitudeMin, $longitudeMax),
+                'created_by' => $i + 1,
+                'update_by' => $i + 1,
+            ]);
+        }
 
         DB::table('slaughtering_places')->insert($data);
     }
