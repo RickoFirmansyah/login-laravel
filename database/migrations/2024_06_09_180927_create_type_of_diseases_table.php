@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('type_of_diseases', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('type_of_diseases');
+            $table->char('created_by', 36);
+            $table->char('update_by', 36);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 
