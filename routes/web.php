@@ -111,6 +111,9 @@ Route::get('/auth/passwords/confirm', function () {
 
 
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
+Route::get('/export-jenis-kurban', [TypeOfQurbanController::class, 'export']);
+Route::post('/import-jenis-kurban', [TypeOfQurbanController::class, 'import']);
+
 Route::resource('tahun', YearController::class)->names('tahun');
 
 
