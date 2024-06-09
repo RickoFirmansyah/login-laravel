@@ -91,14 +91,10 @@ class AnnouncementController extends Controller
      */
     public function destroy($id)
     {
+        $pengumuman = Announcement::findOrFail($id);
+        $pengumuman->delete();
 
-        try {
-            $pengumuman = Announcement::findOrFail($id);
-            $pengumuman->delete();
-
-            return redirect()->route('admin.cms.pengumuman.index')->with('success', 'Pengumuman Berhasil Dihapus');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to delete Announcement: ' . $e->getMessage());
-        }
+        return ResponseFormatter::created('Data berhasil dihapus');
+        return ResponseFormatter::success('Pengumuman deleted successfully');
     }
 }

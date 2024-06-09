@@ -8,6 +8,8 @@ use App\Models\Cms\News;
 use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use ResponseFormatter;
+
 
 class NewsController extends Controller
 {
@@ -15,11 +17,6 @@ class NewsController extends Controller
     {
         return $dataTable->render('pages.admin.cms.news.index');
     }
-
-    // public function show(){
-    //     $beritas = News::all();
-    //     return view('layouts.guest', compact('berita'));
-    // }
 
     public function create(){
         return view('pages.admin.cms.news.create');
@@ -69,12 +66,12 @@ class NewsController extends Controller
         $data['updated_by'] = auth()->user()->id;
 
         if ($request->hasFile('image')) {
-            // Hapus gambar lama
+            // hapus gambar lama
             if ($news->image) {
                 Storage::disk('public')->delete($news->image);
             }
 
-            // Simpan gambar baru
+            // simpan gambar baru
             $imagePath = $request->file('image')->store('images', 'public');
             $data['image'] = $imagePath;
         }
@@ -85,7 +82,6 @@ class NewsController extends Controller
             return redirect()->route('admin.cms.news.index')->with('error', 'Gagal Mengubah Berita');
         }
 
-        // return redirect()->route('admin.cms.news.index')->with('success', 'News updated successfully');
     }
 
     public function destroy($id)
@@ -93,15 +89,14 @@ class NewsController extends Controller
         try {
             $news = News::findOrFail($id);
 
-            // Hapus gambar
             if ($news->image) {
                 Storage::disk('public')->delete($news->image);
             }
             $news->delete();
 
-            return redirect()->route('admin.cms.news.index')->with('success', 'Berita Berhasil Dihapus');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to delete news: ' . $e->getMessage());
+            return ResponseFormatter::created('Data berhasil dihapus');
+        } catch (\Exception) {
+            return ResponseFormatter::success('News deleted successfully');
         }
     }
 }

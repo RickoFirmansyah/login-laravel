@@ -74,6 +74,7 @@ class AnnouncementDataTable extends DataTable
         ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
         ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
         ->language(url('json/lang.json'))
+        ->drawCallbackWithLivewire(file_get_contents(public_path('assets/js/dataTables/drawCallback.js')))
         ->orderBy(2)
         ->select(false)
         ->buttons([]);
@@ -85,11 +86,11 @@ class AnnouncementDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+            Column::computed('action')->title('aksi')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             Column::make('title')->title('pengumuman'),
             // Column::make('description')->title('Deskripsi'),
             Column::make('created_at')->title('Dibuat pada'),
