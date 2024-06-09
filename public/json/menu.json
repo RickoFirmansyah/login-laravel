@@ -53,6 +53,16 @@
                 "is_active": "1",
                 "childrens": []
             },
+            {
+                "name": "Instansi",
+                "module": "instansi",
+                "slug": "instansi",
+                "icon": "fal fa-user-tie",
+                "url": "/instansi",
+                "parent_id": 1,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
             }
         ]
     },
