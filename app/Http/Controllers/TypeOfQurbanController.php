@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\DataTables\Master\JenisKurbanDataTable;
 use App\Models\TypeOfQurban;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use ResponseFormatter;
 
 class TypeOfQurbanController extends Controller
