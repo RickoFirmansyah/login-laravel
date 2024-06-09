@@ -10,6 +10,7 @@ use App\Http\Controllers\PetugasPemantauanController;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\ImpersonateController;
@@ -78,7 +79,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/role', RoleController::class);
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
-
+    Route::get('/dokumentasi', [DocumentationController::class, 'index'])->name('dokumentasi.index');
+    Route::post('/dokumentasi', [DocumentationController::class, 'store'])->name('dokumentasi.store');
     Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
 });
 
