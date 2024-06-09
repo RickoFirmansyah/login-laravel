@@ -27,8 +27,7 @@ class DatabaseSeeder extends Seeder
             JenisKurban::class,
             TypeOfPlacesSeeder::class,
             TahunSeeder::class,
-            // SlaughteringPlacesSeeder::class,
-
+            MonitoringOfficersSeeder::class,
             SystemSettingSeeder::class,
             SlaughteringPlacesSeeder::class,
         ]);
