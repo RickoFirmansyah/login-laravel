@@ -26,7 +26,7 @@
                         <a class="nav-link text-white" href="#pengumuman">Pengumuman</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#berita">Berita</a>
+                        <a class="nav-link text-white" href="{{ route('guest.berita') }}">Berita</a>
                     </li>
                 </ul>
             </div>

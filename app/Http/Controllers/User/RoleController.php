@@ -62,10 +62,10 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        $role = ModelsRole::findOrFail($id);
+        $role = ModelsRole::find($id);
         $role->delete();
 
-        return redirect()->route('role.index')->with('error', 'User deleted successfully');
+        return ResponseFormatter::success('Role deleted successfully');
     }
 
     public function updatePermissions(Request $request, ModelsRole $role)

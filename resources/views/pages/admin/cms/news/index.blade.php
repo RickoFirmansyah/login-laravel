@@ -1,19 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card-body py-4">
+    <div class="card-body py-1">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center position-relative my-1">
-                <span class="ki-outline ki-magnifier fs-3 position-absolute ms-5"></span>
-                <input type="text" data-kt-user-table-filter="search" data-table-id="news-table"
-                    class="form-control form-control-solid w-250px ps-13" placeholder="Search News" id="mySearchInput" />
+                <div class="search-box mb-3">
+                    <span class="ki-outline ki-magnifier fs-3 position-absolute ms-5"></span>
+                    <label class="position-absolute " for="searchBox">
+                        <i class="fal fa-search fs-3"></i>
+                    </label>
+                    <input type="text" data-kt-user-table-filter="search" data-table-id="news-table"
+                        class="form-control form-control-solid w-250px ps-13 " placeholder="Search News"
+                        id="mySearchInput" />
+                </div>
             </div>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-news_modal" id="createNewNews">
-               <i class="fal fa-plus fs-3"></i>
+            <a href="{{ route('admin.cms.news.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus fa-sm text-white-50"></i>
                 <span class="ms-2">
-                Add News
-               </span>
-            </button>
+                    Tambah Berita
+                </span>
+            </a>
         </div>
         <div class="table-responsive">
             {{ $dataTable->table() }}
@@ -21,7 +27,7 @@
     </div>
 
 
-    @include('pages.admin.cms.news.modal')
+    {{-- @include('pages.admin.cms.news.modal') --}}
 
     @push('scripts')
         {{ $dataTable->scripts() }}
