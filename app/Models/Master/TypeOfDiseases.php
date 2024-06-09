@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TypeOfDiseases extends Model
 {
     use HasFactory;
+    protected $fillable = ['type_of_diseases', 'created_by', 'update_by'];
 }
