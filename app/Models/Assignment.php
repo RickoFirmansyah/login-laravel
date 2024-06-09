@@ -19,4 +19,9 @@ class Assignment extends Model
     {
         return $this->belongsTo(MonitoringOfficer::class, 'monitoring_officer_id');
     }
+
+    public function slaughteringPlace()
+    {
+       return $this->belongsTo(SlaughteringPlace::class, 'slaughtering_place_id');
+    }
 }

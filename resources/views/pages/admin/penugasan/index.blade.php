@@ -35,14 +35,14 @@
                         @foreach($monitoringOfficers as $officer)
                         <tr>
                             <td>
-                                <a href="{{ url('add-penugasan') }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-user-plus"></i></a>
+                                <a href="{{ route('admin.penugasan.add', $officer->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-user-plus"></i></a>
                             </td>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $officer->name }}</td>
                             <td>{{ $officer->gender }}</td>
                             <td>{{ $officer->phone_number }}</td>
                             <td>{{ $officer->address }}</td>
-                            <td>{{ $officer->assignments_count ?? '0' }}</td>
+                            <td>{{ $officer->assignments_count }}</td>
                         </tr>
                         @endforeach
                     </tbody>

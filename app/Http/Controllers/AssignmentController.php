@@ -11,36 +11,31 @@ class AssignmentController extends Controller
 {
     public function index()
     {
-        $assignments = Assignment::with('monitoringOfficers')->get();
-        return view('pages.admin.penugasan.index', compact('assignments'));
+        $monitoringOfficers = MonitoringOfficer::withCount('assignments')->get();
+
+        return view('pages.admin.penugasan.index', compact('monitoringOfficers'));
     }
 
-    public function create()
+    public function addPenugasan($id)
     {
-        $monitoringOfficers = MonitoringOfficer::all();
+        $officer = MonitoringOfficer::findOrFail($id);
         $slaughteringPlaces = SlaughteringPlace::all();
-        return view('pages.admin.penugasan.create', compact('monitoringOfficers', 'slaughteringPlaces'));
+
+        return view('pages.admin.penugasan.add-penugasan', compact('officer', 'slaughteringPlaces'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'monitoring_officer_id' => 'required|exists:monitoring_officers,id',
             'slaughtering_place_id' => 'required|exists:slaughtering_places,id',
-            'jumlah_penugasan' => 'required|integer',
+            'officer_id' => 'required|exists:monitoring_officers,id',
+            'task_description' => 'nullable|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
         ]);
 
-        $assignment = new Assignment();
-        $assignment->monitoring_officer_id = $request->monitoring_officer_id;
-        $assignment->slaughtering_place_id = $request->slaughtering_place_id;
-        $assignment->jumlah_penugasan = $request->jumlah_penugasan;
-        $assignment->created_by = auth()->user()->id;
-        $assignment->update_by = auth()->user()->id;
+        Assignment::create($request->all());
 
-        if ($assignment->save()) {
-            return redirect()->route('penugasan.index')->with('success', 'Penugasan berhasil ditambahkan');
-        } else {
-            return redirect()->route('penugasan.index')->with('error', 'Gagal menambahkan penugasan');
-        }
+        return redirect()->route('admin.penugasan.index')->with('success', 'Penugasan berhasil ditambahkan');
     }
 }
