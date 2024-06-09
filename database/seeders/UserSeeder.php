@@ -32,18 +32,5 @@ class UserSeeder extends Seeder
         ]);
 
         $operator->assignRole('admin-kabupaten');
-
-        for ($i = 1; $i <= 10; $i++) {
-            $camaba = User::create([
-                'name' => 'Petugas ' . $i,
-                'email' => 'Petugas' . $i . '@arkatama.test',
-                'phone_number' => '0812344' . $i . '890',
-                'email_verified_at' => now(),
-                'password' => Hash::make('12345'),
-                'remember_token' => Str::random(10),
-            ]);
-
-            $camaba->assignRole('admin-petugas-lapangan');
-        }
     }
 }
