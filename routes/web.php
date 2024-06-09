@@ -41,15 +41,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
 
-     // PANDUAN
-     Route::resource('/admin/data-pokok/panduan', PanduanController::class)->names('admin.data-pokok.panduan');
+    // PANDUAN
+    Route::resource('/admin/data-pokok/panduan', PanduanController::class)->names('admin.data-pokok.panduan');
 
     // TEMPAT PEMOTONGAN
     Route::resource('/admin/data-pokok/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.data-pokok.tempat-pemotongan');
     Route::get('/admin/data-pokok/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
     Route::get('/admin/data-pokok/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
     Route::get('/admin/data-pokok/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');
-    Route::resource('/admin/lokasi-pemotongan', MapController::class)->names('map-pemotongan');
+    Route::resource('/admin/lokasi-pemotongan', MapController::class)->names('lokasi-pemotongan');
     Route::resource('/admin/panduan', PanduanController::class)->names('admin.panduan');
     Route::resource('/map-pemotongan', MapController::class)->names('map-pemotongan');
     Route::get('get-kelurahans', [MapController::class, 'getKelurahans'])->name('get-kelurahans');
@@ -74,8 +74,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/role', RoleController::class);
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
-    Route::get('/dokumentasi', [DocumentationController::class, 'index'])->name('dokumentasi.index');
-    Route::post('/dokumentasi', [DocumentationController::class, 'store'])->name('dokumentasi.store');
+    Route::resource('dokumentasi', DocumentationController::class)->names('dokumentasi');
     Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
 });
 
