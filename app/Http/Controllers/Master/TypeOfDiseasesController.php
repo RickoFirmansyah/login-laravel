@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Master;
 
+use App\DataTables\Master\TypeOfDiseasesDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Master\TypeOfDiseases;
 use Illuminate\Http\Request;
+use ResponseFormatter;
 
 class TypeOfDiseasesController extends Controller
 {
