@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->constrained('users');
             $table->string('name');
-            $table->enum('gender', ['Laki-laki', 'perempuan']);
+            $table->enum('gender', ['Laki-laki', 'Perempuan']);
             $table->string('address')->nullable();
             $table->string('phone_number', 20);
             $table->char('created_by', 36);

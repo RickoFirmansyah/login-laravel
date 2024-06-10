@@ -31,6 +31,10 @@ class DatabaseSeeder extends Seeder
 
             SystemSettingSeeder::class,
             SlaughteringPlacesSeeder::class,
+            MonitoringOfficersSeeder::class,
+            AssignmentsSeeder::class,
+            QurbanReportsSeeder::class,
+            QurbanDataSeeder::class,
         ]);
     }
 }

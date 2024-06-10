@@ -31,12 +31,6 @@ class JenisKurban extends Seeder
         ]);
 
         $jenis = TypeOfQurban::create([
-            'type_of_animal' => 'Unta',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-
-        $jenis = TypeOfQurban::create([
             'type_of_animal' => 'Kerbau',
             'created_by' => '1',
             'update_by' => '1'

@@ -1,4 +1,4 @@
-<x-mollecules.modal id="add-provinsi_modal" action="{{ route('admin.master.provinsi.store') }}" method="POST"
+{{-- <x-mollecules.modal id="add-provinsi_modal" action="{{ route('admin.master.provinsi.store') }}" method="POST"
     data-table-id="provinsi-table" tableId="provinsi-table" hasCloseBtn="true">
     <x-slot:title>Tambah Provinsi</x-slot:title>
     <x-slot:iconClose>
@@ -20,4 +20,4 @@
             <x-atoms.input id="nama" name="nama" type="text" class="form-control" />
         </div>
     </div>
-</x-mollecules.modal>
+</x-mollecules.modal> --}}
