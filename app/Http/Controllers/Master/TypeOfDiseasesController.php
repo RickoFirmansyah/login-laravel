@@ -72,7 +72,8 @@ class TypeOfDiseasesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $agency = TypeOfDiseases::findOrFail($id);
+        return view('pages.admin.master.jenis_penyakit.edit', compact('agency'));
     }
 
     /**
