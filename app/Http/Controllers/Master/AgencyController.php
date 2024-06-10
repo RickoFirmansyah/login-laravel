@@ -31,7 +31,32 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'jenis_kurban' => 'required',
+        ]);
+
+        if ($request->id != null) {
+            $data = Agency::findOrFail($request->id);
+            $data->update(
+                array_merge(
+                    ['name_agencies' => $request->jenis_kurban],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return response()->json(['success' => ' updated successfully']);
+        } else {
+            Agency::create(
+                array_merge(
+                    ['name_agencies' => $request->jenis_kurban],
+                    ['created_by' => auth()->user()->id],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return
+                redirect()->route('instansi.index')->with('success', 'created successfully');
+        }
     }
 
     /**
