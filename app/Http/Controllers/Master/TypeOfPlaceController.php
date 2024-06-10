@@ -23,7 +23,7 @@ class TypeOfPlaceController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.master.jenis_tempat_pemotongan.create');
     }
 
     /**
