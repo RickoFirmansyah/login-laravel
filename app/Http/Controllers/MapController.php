@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\Map\MapDataTable;
+use App\Models\TypeOfPlace;
+use Illuminate\Http\Request;
 use App\Models\Master\Kecamatan;
 use App\Models\Master\Kelurahan;
 use App\Models\SlaughteringPlace;
-use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use App\DataTables\Map\MapDataTable;
 
 class MapController extends Controller
 {
@@ -152,6 +154,74 @@ public function index(MapDataTable $dataTable, Request $request)
         $kelurahans = Kelurahan::where('kecamatan_id', $kecamatanId)->get();
         // Log::info('Fetched Kelurahans: ' . $kelurahans->toJson());
         return response()->json(['kelurahans' => $kelurahans]);
+    }
+
+    public function create()
+    {
+        $typeOfPlace = TypeOfPlace::all();
+        $kecamatan = Kecamatan::pluck('nama', 'id');
+        $kelurahan = Kelurahan::all();
+
+        return view('pages.admin.map-pemotongan.create', compact('typeOfPlace', 'kecamatan', 'kelurahan'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'type_of_place_id' => 'required',
+            'kecamatan_id' => 'required',
+            'kelurahan_id' => 'required',
+            'cutting_place' => 'required',
+        ]);
+
+        $requestData = $request->all();
+        $requestData['provinsi_id'] = 15;
+        $requestData['kabupaten_id'] = 5;
+
+        $requestData['created_by'] = auth()->user()->id;
+        $requestData['update_by'] = auth()->user()->id;
+
+        // Simpan data ke dalam database
+        SlaughteringPlace::create($requestData);
+
+        return redirect('/admin/map-pemotongan')->with('success', 'Tempat pemotongan berhasil ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $typeOfPlace = TypeOfPlace::all();
+        $kecamatan = Kecamatan::pluck('nama', 'id');
+        $kelurahan = Kelurahan::all();
+        $slaughteringPlace = SlaughteringPlace::findOrFail($id);
+        return view('pages.admin.map-pemotongan.edit', compact('typeOfPlace', 'kecamatan', 'kelurahan', 
+        'slaughteringPlace'));
+    }
+    
+    public function update(Request $request, SlaughteringPlace $slaughteringPlace)
+    {
+        $request->validate([
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'type_of_place_id' => 'required',
+            'kecamatan_id' => 'required',
+            'kelurahan_id' => 'required',
+            'cutting_place' => 'required',
+        ]);
+
+        $requestData = $request->all();
+        $requestData['provinsi_id'] = 15;
+        $requestData['kabupaten_id'] = 5;
+
+        $requestData['created_by'] = auth()->user()->id;
+        $requestData['update_by'] = auth()->user()->id;
+        $slaughteringPlace = SlaughteringPlace::findOrFail($request->id);
+        if ($slaughteringPlace->update($requestData)) {
+            return redirect('/admin/map-pemotongan')->with('success', 'Tempat pemotongan berhasil diubah');
+        } else{
+            return redirect('/admin/map-pemotongan')->with('success', 'Tempat pemotongan gagal diubah');
+        }
     }
 
 }

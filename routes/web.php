@@ -49,9 +49,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/data-pokok/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
     Route::get('/admin/data-pokok/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
     Route::get('/admin/data-pokok/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');
-    Route::resource('/admin/lokasi-pemotongan', MapController::class)->names('map-pemotongan');
     Route::resource('/admin/panduan', PanduanController::class)->names('admin.panduan');
-    Route::resource('/map-pemotongan', MapController::class)->names('map-pemotongan');
+    // Route::resource('/map-pemotongan', MapController::class)->names('map-pemotongan');
+    Route::resource('/admin/lokasi-pemotongan', MapController::class)->names('map-pemotongan');
     Route::get('get-kelurahans', [MapController::class, 'getKelurahans'])->name('get-kelurahans');
 
     // PETUGAS PEMANTAUAN
