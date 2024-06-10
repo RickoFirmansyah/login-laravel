@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Master;
 
-use App\Models\TypeOfPlace;
+use App\DataTables\Master\TypeOfPlaceDataTable;
+use App\Http\Controllers\Controller;
+use App\Models\Master\TypeOfPlace;
 use Illuminate\Http\Request;
+use ResponseFormatter;
 
 class TypeOfPlaceController extends Controller
 {
