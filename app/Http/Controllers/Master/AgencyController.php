@@ -81,7 +81,11 @@ class AgencyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Agency::findOrFail($id);
+        $user->name_agencies = $request->name;
+        $user->save();
+
+        return redirect()->route('instansi.index')->with('success', 'Data Instansi Berhasil updated successfully');
     }
 
     /**
