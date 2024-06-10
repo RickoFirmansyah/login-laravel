@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Master;
 
 use App\DataTables\Master\YearDataTable;
 use App\Http\Controllers\Controller;
-use App\Models\Year;
+use App\Models\Master\Year;
 use Illuminate\Http\Request;
 use ResponseFormatter;
 
