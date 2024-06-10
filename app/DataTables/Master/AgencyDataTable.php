@@ -1,9 +1,8 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Master;
 
 use App\Models\Master\Agency;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -51,7 +50,7 @@ class AgencyDataTable extends DataTable
             ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
             ->language(url('json/lang.json'))
             ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
-            ->orderBy(2)
+            // ->orderBy(2)
             ->select(false)
             ->buttons([]);
     }
