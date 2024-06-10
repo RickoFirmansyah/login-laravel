@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Master;
 
 use App\DataTables\Master\JenisKurbanDataTable;
-use App\Models\TypeOfQurban;
+use App\Http\Controllers\Controller;
+use App\Models\Master\TypeOfQurban;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -47,7 +48,6 @@ class TypeOfQurbanController extends Controller
 
     public function import()
     {
-
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setLoadSheetsOnly(["Sheet 1", "My special sheet"]);
         $spreadsheet = $reader->load("files/world.xlsx");
