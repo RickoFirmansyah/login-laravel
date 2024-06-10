@@ -91,8 +91,10 @@ class TypeOfPlaceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TypeOfPlace $typeOfPlace)
+    public function destroy(string $id)
     {
-        //
+        $provinsi = TypeOfPlace::find($id);
+        $provinsi->delete();
+        return ResponseFormatter::success('Deleted successfully');
     }
 }
