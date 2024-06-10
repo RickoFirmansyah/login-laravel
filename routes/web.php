@@ -22,7 +22,7 @@ use App\Http\Controllers\JenisHewanController;
 use App\Http\Controllers\SlaughteringPlaceController;
 use App\Http\Controllers\Master\TypeOfQurbanController;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\YearController;
+use App\Http\Controllers\Master\YearController;
 use App\Http\Controllers\MonitoringLocationsController;
 use App\Http\Controllers\Setting\SystemSettingController;
 use App\Http\Controllers\Master\TypeOfDiseasesController;
@@ -112,7 +112,7 @@ Route::get('/auth/passwords/confirm', function () {
 
 
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
-Route::resource('jenis-tempat-kurban', TypeOfPlaceController::class)->names('jenis-tempat-kurban');
+Route::resource('jenis-tempat', TypeOfPlaceController::class)->names('jenis-tempat');
 Route::resource('jenis-penyakit', TypeOfDiseasesController::class)->names('jenis-penyakit');
 Route::resource('instansi', AgencyController::class)->names('instansi');
 Route::get('/export-jenis-kurban', [TypeOfQurbanController::class, 'export']);
