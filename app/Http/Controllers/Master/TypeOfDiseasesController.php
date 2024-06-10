@@ -13,9 +13,9 @@ class TypeOfDiseasesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(TypeOfDiseasesDataTable $typeOfDiseasesDataTable)
     {
-        //
+        return $typeOfDiseasesDataTable->render('pages.admin.master.jenis_penyakit.index');
     }
 
     /**
