@@ -93,6 +93,8 @@ class AgencyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $provinsi = Agency::find($id);
+        $provinsi->delete();
+        return ResponseFormatter::success('Deleted successfully');
     }
 }
