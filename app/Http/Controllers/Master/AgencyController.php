@@ -23,7 +23,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.master.agency.create');
     }
 
     /**
