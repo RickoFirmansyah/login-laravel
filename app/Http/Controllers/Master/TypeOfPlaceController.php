@@ -31,7 +31,32 @@ class TypeOfPlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'jenis_kurban' => 'required',
+        ]);
+
+        if ($request->id != null) {
+            $data = TypeOfPlace::findOrFail($request->id);
+            $data->update(
+                array_merge(
+                    ['type_of_place' => $request->jenis_kurban],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return response()->json(['success' => ' updated successfully']);
+        } else {
+            TypeOfPlace::create(
+                array_merge(
+                    ['type_of_place' => $request->jenis_kurban],
+                    ['created_by' => auth()->user()->id],
+                    ['update_by' => auth()->user()->id]
+                )
+            );
+
+            return
+                redirect()->route('jenis-tempat.index')->with('success', 'created successfully');
+        }
     }
 
     /**
