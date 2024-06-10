@@ -13,9 +13,9 @@ class AgencyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(AgencyDataTable $agencyDataTable)
     {
-        //
+        return $agencyDataTable->render('pages.admin.master.agency.index');
     }
 
     /**
