@@ -93,6 +93,8 @@ class TypeOfDiseasesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $provinsi = TypeOfDiseases::find($id);
+        $provinsi->delete();
+        return ResponseFormatter::success('Deleted successfully');
     }
 }
