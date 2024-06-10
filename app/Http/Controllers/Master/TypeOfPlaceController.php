@@ -79,9 +79,13 @@ class TypeOfPlaceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TypeOfPlace $typeOfPlace)
+    public function update(Request $request, string $id)
     {
-        //
+        $user = TypeOfPlace::findOrFail($id);
+        $user->type_of_place = $request->name;
+        $user->save();
+
+        return redirect()->route('jenis-tempat.index')->with('success', 'Data Jenis Tempat Pemotongan Berhasil updated successfully');
     }
 
     /**
