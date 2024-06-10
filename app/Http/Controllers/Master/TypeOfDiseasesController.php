@@ -81,7 +81,11 @@ class TypeOfDiseasesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = TypeOfDiseases::findOrFail($id);
+        $user->type_of_diseases = $request->name;
+        $user->save();
+
+        return redirect()->route('jenis-penyakit.index')->with('success', 'Data Jenis Penyakit Berhasil updated successfully');
     }
 
     /**
