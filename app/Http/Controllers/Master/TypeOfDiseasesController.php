@@ -23,7 +23,7 @@ class TypeOfDiseasesController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.master.jenis_penyakit.create');
     }
 
     /**
