@@ -13,9 +13,9 @@ class TypeOfPlaceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(TypeOfPlaceDataTable $typeOfPlace)
     {
-        //
+        return $typeOfPlace->render('pages.admin.master.jenis_tempat_pemotongan.index');
     }
 
     /**
