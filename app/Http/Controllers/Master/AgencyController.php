@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Master;
 
+use App\DataTables\Master\AgencyDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Master\Agency;
 use Illuminate\Http\Request;
+use ResponseFormatter;
 
 class AgencyController extends Controller
 {
