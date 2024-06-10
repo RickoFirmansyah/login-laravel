@@ -70,9 +70,10 @@ class TypeOfPlaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TypeOfPlace $typeOfPlace)
+    public function edit(string $id)
     {
-        //
+        $agency = TypeOfPlace::findOrFail($id);
+        return view('pages.admin.master.jenis_tempat_pemotongan.edit', compact('agency'));
     }
 
     /**
