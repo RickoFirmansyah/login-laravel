@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Master\AgencyController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LandingController;
@@ -9,27 +11,30 @@ use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\Setting\MenusController;
 use App\Http\Controllers\Guest\NewsGuestController;
 use App\Http\Controllers\PetugasPemantauanController;
-use Illuminate\Support\Facades\View;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\JenisHewanController;
+use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\MapController;
 
-use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\QurbanData2Controller;
-use App\Http\Controllers\JenisHewanController;
+use App\Http\Controllers\TypeOfQurbanController;
+use App\Http\Controllers\LaporanPemantauanController;
 use App\Http\Controllers\SlaughteringPlaceController;
-use App\Http\Controllers\Master\TypeOfQurbanController;
-use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Master\YearController;
 use App\Http\Controllers\MonitoringLocationsController;
 use App\Http\Controllers\MonitoringOfficerController;
 use App\Http\Controllers\Setting\SystemSettingController;
 use App\Http\Controllers\Master\TypeOfDiseasesController;
 use App\Http\Controllers\Master\TypeOfPlaceController;
+use App\Http\Controllers\PelaporanPemantauanController;
+
+
 
 Auth::routes();
 Route::get('/end-impersonation', [ImpersonateController::class, 'leaveImpersonation'])->name('leaveImpersonation');
@@ -88,6 +93,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
     Route::resource('/admin/dokumentasi', DocumentationController::class)->names('dokumentasi');
     Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
+
+    Route::resource('/admin/laporan-pemantauan', PelaporanPemantauanController::class)->names('laporan-pemantauan');
+   
 });
 
 Route::middleware("auth")->prefix("user")->name("user.")->group(function () {
