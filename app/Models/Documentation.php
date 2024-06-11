@@ -11,10 +11,15 @@ class Documentation extends Model
 
     protected $table = 'documentations';
     protected $guards = [];
-    protected $fillable = ['qurban_report_id', 'photo', 'caption', 'created_by', 'update_by'];
+    protected $fillable = ['qurban_report_id', 'photo', 'caption', 'created_by', 'updated_by'];
 
 
     // public function qurban_report() {
     //     return $this->belongsTo(QurbanReport::class, 'qurban_report_id', 'id');
-    // }   
+    // } 
+    public function qurbanReport()
+{
+    return $this->belongsTo(QurbanReport::class, 'qurban_report_id', 'id');
+}
+  
 }

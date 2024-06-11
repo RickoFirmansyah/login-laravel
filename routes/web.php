@@ -74,6 +74,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
     Route::resource('/admin/dokumentasi', DocumentationController::class)->names('dokumentasi');
+    Route::get('/admin/dokumentasi/filter/desa/{kecamatanId}', [DocumentationController::class, 'filterDesa']);
+    Route::get('/admin/dokumentasi/filter/tempat/{kelurahanId}', [DocumentationController::class, 'filterTempat']);
+    Route::get('/admin/dokumentasi/filter/photos', [DocumentationController::class, 'filterPhotos']);
     Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
 });
 
