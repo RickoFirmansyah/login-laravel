@@ -18,15 +18,16 @@ class MonitoringOfficersSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i < 11; $i++) {
+            $email = 'Petugas' . $faker->unique()->randomNumber() . '@arkatama.test';
+            $number = $faker->unique()->numerify('0812344###890');
             $user = \App\Models\User::create([
-                'id' => $i + 2,
                 'name' => 'Petugas ' . $i,
-                'email' => 'Petugas' . $i . '@arkatama.test',
-                'phone_number' => '0812344' . $i . '890',
+                'email' => $email,
+                'phone_number' => $number,
                 'email_verified_at' => now(),
-                'password' => Hash::make('0812344' . $i . '890'),
-                'remember_token' => Str::random(10),
+                'password' => Hash::make($number),
+                'remember_token' => Str::random(10)
             ]);
 
             $user->assignRole('admin-petugas-lapangan');
@@ -35,105 +36,14 @@ class MonitoringOfficersSeeder extends Seeder
                 'user_id' => $user->id,
                 'name' => 'Petugas ' . $i,
                 'gender' => $faker->randomElement(['Laki-laki', 'perempuan']),
-                'email' => 'Petugas' . $i . '@arkatama.test',
-                'phone_number' => '0812344' . $i . '890',
-                'agency' => $faker->company,
+                'email' => $email,
+                'phone_number' => $number,
+                'agency' => "1",
                 'created_by' => 1,
                 'update_by' => 1,
                 'created_at' => now(),
-                'updated_at' => now(),
+                'updated_at' => now()
             ]);
         }
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '1',
-            'name' => 'Admin',
-            'gender' => 'Laki-laki',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '2',
-            'name' => 'Admin',
-            'gender' => 'Perempuan',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '3',
-            'name' => 'Admin',
-            'gender' => 'Perempuan',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '4',
-            'name' => 'Admin',
-            'gender' => 'Perempuan',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '5',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '5',
-            'name' => 'Admin',
-            'gender' => 'Perempuan',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '5',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '6',
-            'name' => 'Admin',
-            'gender' => 'Perempuan',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '7',
-            'name' => 'Admin',
-            'gender' => 'Perempuan',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '8',
-            'name' => 'Admin',
-            'gender' => 'Laki-laki',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '9',
-            'name' => 'Admin',
-            'gender' => 'Laki-laki',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-        $jenis = MonitoringOfficer::create([
-            'user_id' => '10',
-            'name' => 'Admin',
-            'gender' => 'Laki-laki',
-            'address' => 'Perum Griya Abadi',
-            'phone_number' => '081234567890',
-            'created_by' => '1',
-            'update_by' => '1'
-        ]);
-        
     }
 }
