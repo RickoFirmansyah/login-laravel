@@ -73,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/role', RoleController::class);
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
-    Route::resource('dokumentasi', DocumentationController::class)->names('dokumentasi');
+    Route::resource('/admin/dokumentasi', DocumentationController::class)->names('dokumentasi');
     Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
 });
 
