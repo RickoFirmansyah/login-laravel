@@ -39,21 +39,25 @@ class DataMaster extends Seeder
 
         $dataInstansi = [
             [
+                'id' => '1',
                 'name_agencies' => 'Dinas Peternakan',
                 'created_by' => '1',
                 'update_by' => '1'
             ],
             [
+                'id' => '2',
                 'name_agencies' => 'Dinas Perkebunan',
                 'created_by' => '1',
                 'update_by' => '1'
             ],
             [
+                'id' => '3',
                 'name_agencies' => 'Dinas Kelautan',
                 'created_by' => '1',
                 'update_by' => '1'
             ],
             [
+                'id' => '4',
                 'name_agencies' => 'Dinas Perikanan',
                 'created_by' => '1',
                 'update_by' => '1'
