@@ -211,10 +211,10 @@
         "is_active": "1",
         "childrens": [
             {
-                "name": "Pengumuman",
-                "module": "cms-pengumuman",
-                "slug": "cms-pengumuman",
-                "icon": "fal fa-bullhorn",
+                "name": "Announcement",
+                "module": "csm-announcement",
+                "slug": "cms-announcement",
+                "icon": "fal fa-megaphone",
                 "url": "/admin/cms/pengumuman",
                 "parent_id": 11,
                 "order": "1",

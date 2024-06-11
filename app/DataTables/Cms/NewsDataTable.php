@@ -34,16 +34,10 @@ class NewsDataTable extends DataTable
                 return User::find($news->updated_by)->name;
             })
             ->editColumn('created_at', function (News $news) {
-                return view('components.table-timestamp', [
-                    'date' => formatDateFromDatabase($news->created_at),
-                    'user' => $news->createddBy
-                ]);
+                return $news->created_at->format('d, M Y');
             })
             ->editColumn('updated_at', function (News $news) {
-                return view('components.table-timestamp', [
-                    'date' => formatDateFromDatabase($news->updated_at),
-                    'user' => $news->updatedBy
-                ]);
+                return $news->updated_at->format('d, M Y');
             })
             ->rawColumns(['action'])
             ->setRowId('id');
@@ -68,6 +62,7 @@ class NewsDataTable extends DataTable
             ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
             ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
             ->language(url('json/lang.json'))
+            ->drawCallbackWithLivewire(file_get_contents(public_path('assets/js/dataTables/drawCallback.js')))
             ->orderBy(2)
             ->select(false)
             ->buttons([]);

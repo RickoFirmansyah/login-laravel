@@ -3,6 +3,7 @@
 use App\Http\Controllers\Master\AgencyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Cms\AnnouncementController;
 
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\LandingController;
