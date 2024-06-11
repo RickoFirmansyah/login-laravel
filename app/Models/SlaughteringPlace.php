@@ -59,6 +59,6 @@ class SlaughteringPlace extends Model
 
     public function assignments()
     {
-        return $this->belongsTo(Assignment::class, 'slaughtering_place_id');
+        return $this->hasMany(Assignment::class, 'slaughtering_place_id');
     }
 }
