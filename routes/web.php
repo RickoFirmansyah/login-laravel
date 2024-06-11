@@ -3,23 +3,9 @@
 use App\Http\Controllers\Master\AgencyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Cms\AnnouncementController;
 
-use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\MapController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\YearController;
-use App\Http\Controllers\PlaceController;
-use App\Http\Controllers\PanduanController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\RoleController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\QurbanDataController;
-use App\Http\Controllers\ImpersonateController;
-use App\Http\Controllers\QurbanData2Controller;
-use App\Http\Controllers\QurbanData3Controller;
-use App\Http\Controllers\TypeOfQurbanController;
 use App\Http\Controllers\Setting\MenusController;
 use App\Http\Controllers\Guest\NewsGuestController;
 use App\Http\Controllers\PetugasPemantauanController;
@@ -40,7 +26,7 @@ use App\Http\Controllers\Master\TypeOfQurbanController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Master\YearController;
 use App\Http\Controllers\MonitoringLocationsController;
-use App\Http\Controllers\MonitoringOfficerController; // Added this line
+use App\Http\Controllers\MonitoringOfficerController;
 use App\Http\Controllers\Setting\SystemSettingController;
 use App\Http\Controllers\Master\TypeOfDiseasesController;
 use App\Http\Controllers\Master\TypeOfPlaceController;
@@ -58,10 +44,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
 
-    
+
     Route::get('admin/setting/menu/icons/ref', [MenusController::class, 'iconsRef'])->name('icons.ref');
     // Route::post('/menu', [MenusController::class, 'store'])->name('menus.store');
-    
+
     // PANDUAN
     Route::resource('/admin/data-pokok/panduan', PanduanController::class)->names('admin.data-pokok.panduan');
 
@@ -71,9 +57,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/data-pokok/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
     Route::get('/admin/data-pokok/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');
     Route::resource('/admin/panduan', PanduanController::class)->names('admin.panduan');
-    
+
     // MENU
-     Route::resource('/admin/setting/menu',MenusController::class)->names('menus');
+    Route::resource('/admin/setting/menu', MenusController::class)->names('menus');
 
     // TEMPAT PEMOTONGAN
     Route::resource('/admin/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.tempat-pemotongan');
@@ -149,11 +135,11 @@ Route::get('/admin/data-pokok/penugasan', [MonitoringOfficerController::class, '
 Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
 
 // Route::get('/berita', function(){
-    Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
-    //     return view('pages.guest.news');
-    // });
-    
-    
+Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
+//     return view('pages.guest.news');
+// });
+
+
 // Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
 Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
 
@@ -163,9 +149,13 @@ Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasa
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
 Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
 
- // Your new content here
- // Your new content here
-Route::get('/pengaturan', function () { return view('pages.admin.pengaturan.index'); });
- // Your new content here
- // Your new content here
-Route::get('/admin/setting/test', function () { return view('pages.admin.test.index'); });
+// Your new content here
+// Your new content here
+Route::get('/pengaturan', function () {
+    return view('pages.admin.pengaturan.index');
+});
+// Your new content here
+// Your new content here
+Route::get('/admin/setting/test', function () {
+    return view('pages.admin.test.index');
+});
