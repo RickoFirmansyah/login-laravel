@@ -12,7 +12,11 @@ class DocumentationController extends Controller
      */
     public function index()
     {
-        //
+        $items = Documentation::all();
+
+        return view('pages.admin.dokumentasi.index', [
+            'items' => $items
+        ]);
     }
 
     /**
@@ -28,7 +32,14 @@ class DocumentationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['qurban_report_id'] = "1";
+        $data['photo'] = $request->file('photo')->store('documentation', 'public');
+        $data['created_by'] = auth()->user()->id;
+        $data['update_by'] = auth()->user()->id;
+        Documentation::create($data);
+
+        return redirect()->back();
     }
 
     /**

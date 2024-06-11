@@ -3,11 +3,12 @@
 namespace App\DataTables\Map;
 
 use App\Models\SlaughteringPlace;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
+use Illuminate\Support\Facades\Log;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class MapDataTable extends DataTable
 {
@@ -17,31 +18,44 @@ class MapDataTable extends DataTable
      * @param QueryBuilder $query Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
-    {
-        return (new EloquentDataTable($query))
-            ->addIndexColumn()
-            ->editColumn('kelurahan_id', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->kelurahan->nama;
-            })
-            ->editColumn('kecamatan_id', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->kecamatan->nama;
-            })
-            ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->user->name;
-            })
-            ->editColumn('user_email', function (SlaughteringPlace $slaughteringPlace) {
-                return $slaughteringPlace->user->email;
-            })
-            ->setRowId('id');
-    }
+{
+    return (new EloquentDataTable($query))
+        ->addIndexColumn()
+        ->editColumn('kelurahan_id', function (SlaughteringPlace $slaughteringPlace) {
+            return $slaughteringPlace->kelurahan ? $slaughteringPlace->kelurahan->nama : 'N/A';
+        })
+        ->editColumn('kecamatan_id', function (SlaughteringPlace $slaughteringPlace) {
+            return $slaughteringPlace->kecamatan ? $slaughteringPlace->kecamatan->nama : 'N/A';
+        })
+        ->editColumn('user_id', function (SlaughteringPlace $slaughteringPlace) {
+            return $slaughteringPlace->user ? $slaughteringPlace->user->name : 'N/A';
+        })
+        ->editColumn('user_email', function (SlaughteringPlace $slaughteringPlace) {
+            return $slaughteringPlace->user ? $slaughteringPlace->user->email : 'N/A';
+        })
+        ->setRowId('id');
+}
+
 
     /**
      * Get the query source of dataTable.
      */
     public function query(SlaughteringPlace $model): QueryBuilder
     {
-        return $model->newQuery();
+        $query = $model->newQuery()->with(['kelurahan', 'kecamatan', 'user']);
+
+        if ($this->request()->filled('kecamatan_id')) {
+            $query->where('kecamatan_id', $this->request()->kecamatan_id);
+        }
+
+        if ($this->request()->filled('kelurahan_id')) {
+            $query->where('kelurahan_id', $this->request()->kelurahan_id);
+        }
+        Log::info('Query Results:', $query->get()->toArray());
+
+        return $query;
     }
+
 
     /**
      * Optional method if you want to use the html builder.
@@ -51,17 +65,12 @@ class MapDataTable extends DataTable
         return $this->builder()
             ->setTableId('map-table')
             ->columns($this->getColumns())
-            ->minifiedAjax(script: "
-                                data._token = '" . csrf_token() . "';
-                                data._p = 'POST';
-                            ")
-            ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
+            ->minifiedAjax()
+            ->dom('rt<"row"<"col-sm-12 col-md-5"l><"col-sm-12 col-md-7"p>>')
             ->addTableClass('table align-middle table-row-dashed gy-5 dataTable no-footer text-gray-600 fw-semibold')
             ->setTableHeadClass('text-start text-muted fw-bold text-uppercase gs-0')
             ->language(url('json/lang.json'))
-            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
             ->orderBy(0)
-            ->select(false)
             ->buttons([]);
     }
 
@@ -75,10 +84,10 @@ class MapDataTable extends DataTable
                 ->title('No.')
                 ->width(20),
             Column::make('cutting_place')->title('Tempat Pemotongan'),
-            Column::make('kelurahan_id')->title('Desa/Kelurahan'),
-            Column::make('kecamatan_id')->title('Kecamatan'),
-            Column::make('user_id')->title('Nama Petugas'),
-            Column::make('user_email')->title('Email')
+            Column::make('kelurahan.nama')->title('Desa/Kelurahan'),
+            Column::make('kecamatan.nama')->title('Kecamatan'),
+            Column::make('user.name')->title('Nama Petugas'),
+            Column::make('user.email')->title('Email')
         ];
     }
 
