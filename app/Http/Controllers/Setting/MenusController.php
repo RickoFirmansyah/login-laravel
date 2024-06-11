@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Http\Controller\Setting;
+namespace App\Http\Controllers\Setting;
 
-use App\DataTables\MenusDataTable;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Menu\StoreMenuRequest;
-use App\Models\Setting\Menus;
+use ResponseFormatter;
+use Illuminate\Support\Str;
 use App\Traits\HasReference;
 use Illuminate\Http\Request;
-use ResponseFormatter;
+use App\Models\Setting\Menus;
+use App\Models\Setting\Access;
+use App\Models\User\Permission;
+use App\Http\Controllers\Controller;
+use App\DataTables\Setting\MenusDataTable;
+use App\Http\Requests\Menu\StoreMenuRequest;
+use App\Http\Controllers\Setting\AutoRouteController;
 
 class MenusController extends Controller
 {
@@ -16,32 +20,32 @@ class MenusController extends Controller
 
     public function index(MenusDataTable $dataTable)
     {
-        return $dataTable->render('pages.admin.menus.index');
+        return $dataTable->render('pages.admin.setting.menus.index');
     }
 
-    public function create()
+    public function create(Menus $menu)
     {
-        $menus = Menus::all();
-        return view('pages.admin.menus.create', compact('menus'));
+        $parents = Menus::where('id', '!=', $menu->id)->get();
+        return view('pages.admin.setting.menus.create', compact('menu', 'parents'));
     }
 
     public function store(StoreMenuRequest $request)
     {
-        try {
 
-            $newMenu = Menus::create($request->validated());
-            // $rewriteRoute = new AutoRouteController();
-            // $rewriteRoute->rewriteRouteFile($newMenu->id);
+        $newMenu = Menus::create($request->validated());
+        $rewriteRoute = new AutoRouteController();
+        $rewriteRoute->rewriteRouteFile($newMenu->id);
 
-            if ($newMenu) {
-                return ResponseFormatter::created("Menu created successfully", $newMenu);
-            } else {
-                return ResponseFormatter::error("Menu failed to create", code: 500);
-            }
-        } catch (\Exception $e) {
-            return ResponseFormatter::error("Menu failed to create", [
-                "message" => $e->getMessage()
-            ], code: 500);
+
+        $addPermissions = new Permission();
+        $addPermissions->name = $request->module;
+        $addPermissions->guard_name = "web";
+        $addPermissions->save();
+
+        if ($newMenu) {
+            return redirect()->route('menus.index')->with('success', 'Data berhasil ditambahkan.');
+        } else {
+            return redirect()->route('menus.index')->with('error', 'Gagal menambahkan data. Coba lagi !.');
         }
     }
 
@@ -49,9 +53,9 @@ class MenusController extends Controller
     {
         try {
             $menu->deleteOrFail();
-            return ResponseFormatter::success("Menu deleted successfully");
+            return ResponseFormatter::created('Menu berhasil dihapus.');
         } catch (\Exception $e) {
-            return ResponseFormatter::error("Menu failed to delete", [
+            return ResponseFormatter::error("Gagal menghapus menu. Coba lagi !", [
                 "message" => $e->getMessage()
             ], code: 500);
         }
@@ -60,20 +64,19 @@ class MenusController extends Controller
     public function edit(Menus $menu)
     {
         $parents = Menus::where('id', '!=', $menu->id)->get();
-        return view('pages.admin.menus.edit', compact('menu', 'parents'));
+        return view('pages.admin.setting.menus.edit', compact('menu', 'parents'));
     }
 
     public function update(StoreMenuRequest $request, Menus $menu)
     {
-
         try {
             $payload = $request->validated();
-            // $rewriteRoute = new AutoRouteController();
-            $menu->updateOrFail($payload);
-            // $rewriteRoute->updateRouteFile($menu->id, $payload);
-            return ResponseFormatter::success("Menu updated successfully", $menu);
+            $rewriteRoute = new AutoRouteController();
+            $menu->update($payload);
+            $rewriteRoute->updateRouteFile($menu->id, $payload);
+            return ResponseFormatter::success("Menu berhasil diupdate", $menu);
         } catch (\Exception $e) {
-            return ResponseFormatter::error("Menu failed to update", [
+            return ResponseFormatter::error("Gagal mengupdate menu. Coba lagi !", [
                 "message" => $e->getMessage()
             ], code: 500);
         }
@@ -81,28 +84,26 @@ class MenusController extends Controller
         return redirect()->route('menus.index');
     }
 
+
     public function iconsRef(Request $request)
-    {
-        $iconFile =  file_get_contents(public_path('assets/libs/fontawesome/css/all.css'));
-        preg_match_all("/\.fa-[a-z A-Z]*:before/", $iconFile, $matches);
-        $result = [];
-        foreach ($matches[0] as $match) {
-            $name = str_replace([":before", "."], "", $match);
-            $result[] = [
-                "id" => "fal $name",
-                "name" => "fal $name"
-            ];
-        }
-        if ($request->term) {
-            $result = collect($result)->filter(function ($value, $key) use ($request) {
-                return stripos($value['name'], $request->term);
-            })->values()->toArray();
-        }
-
-        // $result = $this->generateReference($result);
-        $result = $this->generateSelect2Reference($result);
-
-        // dd($result);
-        return ResponseFormatter::success("success get icons", $result);
+{
+    $iconFile = file_get_contents(public_path('assets/libs/fontawesome/css/all.css'));
+    preg_match_all("/\.fa-[a-zA-Z0-9\-]+:before/", $iconFile, $matches);
+    $result = [];
+    foreach ($matches[0] as $match) {
+        $name = str_replace([":before", "."], "", $match);
+        $result[] = [
+            "id" => "fa $name",
+            "text" => "fa $name"
+        ];
     }
+    if ($request->term) {
+        $result = collect($result)->filter(function ($value) use ($request) {
+            return stripos($value['text'], $request->term) !== false;
+        })->values()->toArray();
+    }
+
+    return response()->json(['results' => $result]);
+}
+
 }

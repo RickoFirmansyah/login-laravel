@@ -2,12 +2,9 @@
 
 namespace App\DataTables\Master;
 
-use App\Models\TypeOfQurban;
-use Yajra\DataTables\Html\Button;
+use App\Models\Master\TypeOfQurban;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;

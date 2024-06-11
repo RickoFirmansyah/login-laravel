@@ -2,8 +2,7 @@
 
 namespace App\DataTables\Master;
 
-use App\Models\Year;
-use Yajra\DataTables\Html\Button;
+use App\Models\Master\Year;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Master;
 
+use App\Models\SlaughteringPlace;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,7 @@ class TypeOfPlace extends Model
     
     protected $table = 'type_of_places';
     protected $guards = [];
-    protected $fillable=['id','type_of_place'];
+    protected $fillable=['type_of_place', 'created_by', 'update_by'];
 
     public function slaughtering_place(){
         return $this->hasMany(SlaughteringPlace::class, 'type_of_place_id', 'id');

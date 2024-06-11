@@ -11,7 +11,7 @@
                 <input type="text" data-table-id="menus-table" id="searchBox" data-action="search"
                     class="form-control form-control-solid w-250px ps-13" placeholder="Search Menu" />
             </div>
-            <a href="{{ route('admin.setting.menus.create') }}">
+            <a href="{{ route('menus.create') }}">
                 <button type="button" class="btn btn-primary">
                     <i class="fal fa-plus fs-2"></i>
                     <span class="ms-2">Add Menu</span>

@@ -1,13 +1,10 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Master;
 
-use App\Models\TypeOfPlace;
-use Yajra\DataTables\Html\Button;
+use App\Models\Master\TypeOfPlace;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -22,7 +19,9 @@ class TypeOfPlaceDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'typeofplace.action')
+            ->addColumn('action', function (TypeOfPlace $row) {
+                return view('pages.admin.master.jenis_tempat_pemotongan.action', ['agency' => $row]);
+            })
             ->setRowId('id');
     }
 
@@ -40,20 +39,20 @@ class TypeOfPlaceDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('typeofplace-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('jenis_tempat-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax(script: "
+                        data._token = '" . csrf_token() . "';
+                        data._p = 'POST';
+                    ")
+            ->dom('rt' . "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-7'p>>")
+            ->addTableClass('table align-middle table-row-dashed  gy-5 dataTable no-footer text-gray-600 fw-semibold')
+            ->setTableHeadClass('text-start text-muted fw-bold  text-uppercase gs-0')
+            ->language(url('json/lang.json'))
+            ->drawCallbackWithLivewire(file_get_contents(public_path('/assets/js/dataTables/drawCallback.js')))
+            // ->orderBy(2)
+            ->select(false)
+            ->buttons([]);
     }
 
     /**
@@ -63,12 +62,12 @@ class TypeOfPlaceDataTable extends DataTable
     {
         return [
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('type_of_place'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];

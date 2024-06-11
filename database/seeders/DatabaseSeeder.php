@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,13 +25,16 @@ class DatabaseSeeder extends Seeder
             KabupatenKotaSeeder::class,
             KecamatanSeeder::class,
             KelurahanSeeder::class,
-            JenisKurban::class,
-            TypeOfPlacesSeeder::class,
-            TahunSeeder::class,
-            // SlaughteringPlacesSeeder::class,
-
+            DataMaster::class,
+            MonitoringOfficersSeeder::class,
             SystemSettingSeeder::class,
             SlaughteringPlacesSeeder::class,
+            AnnouncementSeeder::class,
+            NewsSeeder::class,
+            MonitoringOfficersSeeder::class,
+            AssignmentsSeeder::class,
+            QurbanReportsSeeder::class,
+            QurbanDataSeeder::class,
         ]);
     }
 }

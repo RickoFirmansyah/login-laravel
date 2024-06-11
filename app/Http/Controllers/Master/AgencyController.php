@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Master;
 
-use App\DataTables\Master\YearDataTable;
+use App\DataTables\Master\AgencyDataTable;
 use App\Http\Controllers\Controller;
-use App\Models\Year;
+use App\Models\Master\Agency;
 use Illuminate\Http\Request;
 use ResponseFormatter;
 
-class YearController extends Controller
+class AgencyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(YearDataTable $yearDataTable)
+    public function index(AgencyDataTable $agencyDataTable)
     {
-        return $yearDataTable->render('pages.admin.master.tahun.index');
+        return $agencyDataTable->render('pages.admin.master.agency.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class YearController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.master.tahun.create');
+        return view('pages.admin.master.agency.create');
     }
 
     /**
@@ -32,35 +32,30 @@ class YearController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tahun' => 'required'
+            'jenis_kurban' => 'required',
         ]);
 
         if ($request->id != null) {
-            $data = Year::findOrFail($request->id);
+            $data = Agency::findOrFail($request->id);
             $data->update(
                 array_merge(
-                    ['tahun' => $request->tahun],
-                    ['status' => $request->status],
+                    ['name_agencies' => $request->jenis_kurban],
                     ['update_by' => auth()->user()->id]
                 )
             );
 
-            return response()->json(['success' => 'Updated successfully']);
+            return response()->json(['success' => ' updated successfully']);
         } else {
-            Year::create(
+            Agency::create(
                 array_merge(
-                    ['tahun' => $request->tahun],
-                    ['status' => 'Aktif'],
+                    ['name_agencies' => $request->jenis_kurban],
                     ['created_by' => auth()->user()->id],
                     ['update_by' => auth()->user()->id]
                 )
             );
 
-            Year::where('tahun', '!=', $request->tahun)
-                ->update(['status' => 'Non Aktif']);
-
             return
-                redirect()->route('tahun.index')->with('success', 'Created successfully');
+                redirect()->route('instansi.index')->with('success', 'created successfully');
         }
     }
 
@@ -77,8 +72,8 @@ class YearController extends Controller
      */
     public function edit(string $id)
     {
-        $user = Year::findOrFail($id);
-        return view('pages.admin.master.tahun.edit', compact('user'));
+        $agency = Agency::findOrFail($id);
+        return view('pages.admin.master.agency.edit', compact('agency'));
     }
 
     /**
@@ -86,15 +81,11 @@ class YearController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = Year::findOrFail($id);
-        $user->tahun = $request->tahun;
-        $user->status = $request->status;
+        $user = Agency::findOrFail($id);
+        $user->name_agencies = $request->name;
         $user->save();
 
-        if ($request->status == 'Aktif') Year::where('tahun', '!=', $request->tahun)
-            ->update(['status' => 'Non Aktif']);
-
-        return redirect()->route('tahun.index')->with('success', 'Berhasil Updated successfully');
+        return redirect()->route('instansi.index')->with('success', 'Data Instansi Berhasil updated successfully');
     }
 
     /**
@@ -102,7 +93,7 @@ class YearController extends Controller
      */
     public function destroy(string $id)
     {
-        $provinsi = Year::find($id);
+        $provinsi = Agency::find($id);
         $provinsi->delete();
         return ResponseFormatter::success('Deleted successfully');
     }

@@ -41,6 +41,28 @@
                 "order": "2",
                 "is_active": "1",
                 "childrens": []
+            },
+            {
+                "name": "Jenis Penyakit",
+                "module": "jenis-penyakit",
+                "slug": "jenis-penyakit",
+                "icon": "fal fa-user-tie",
+                "url": "/jenis-penyakit",
+                "parent_id": 1,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
+            },
+            {
+                "name": "Instansi",
+                "module": "instansi",
+                "slug": "instansi",
+                "icon": "fal fa-user-tie",
+                "url": "/instansi",
+                "parent_id": 1,
+                "order": "2",
+                "is_active": "1",
+                "childrens": []
             }
         ]
     },
@@ -189,10 +211,10 @@
         "is_active": "1",
         "childrens": [
             {
-                "name": "Pengumuman",
-                "module": "cms-pengumuman",
-                "slug": "cms-pengumuman",
-                "icon": "fal fa-bullhorn",
+                "name": "Announcement",
+                "module": "csm-announcement",
+                "slug": "cms-announcement",
+                "icon": "fal fa-megaphone",
                 "url": "/admin/cms/pengumuman",
                 "parent_id": 11,
                 "order": "1",

@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@arkatama.test',
-            'nomor_hp' => '081234567890',
+            'phone_number' => '081234567890',
             'email_verified_at' => now(),
             'password' => Hash::make('12345'),
             'remember_token' => Str::random(10),
@@ -25,25 +25,12 @@ class UserSeeder extends Seeder
         $operator = User::create([
             'name' => 'Operator',
             'email' => 'operator@arkatama.test',
-            'nomor_hp' => '081234577890',
+            'phone_number' => '081234577890',
             'email_verified_at' => now(),
             'password' => Hash::make('12345'),
             'remember_token' => Str::random(10),
         ]);
 
         $operator->assignRole('admin-kabupaten');
-
-        for ($i = 1; $i <= 10; $i++) {
-            $camaba = User::create([
-                'name' => 'Petugas ' . $i,
-                'email' => 'Petugas' . $i . '@arkatama.test',
-                'nomor_hp' => '0812344' . $i . '890',
-                'email_verified_at' => now(),
-                'password' => Hash::make('12345'),
-                'remember_token' => Str::random(10),
-            ]);
-
-            $camaba->assignRole('admin-petugas-lapangan');
-        }
     }
 }

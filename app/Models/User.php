@@ -25,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'nomor_hp',
+        'phone_number',
         'password',
     ];
 
@@ -57,5 +57,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(MonitoringOfficer::class);
     }
-
 }

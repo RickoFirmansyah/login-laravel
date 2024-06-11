@@ -17,32 +17,49 @@ class PetugasPemantauanController extends Controller
         return $dataTable->render('pages.admin.petugas-pemantauan.index');
     }
 
-    public function create(){
+    public function create()
+    {
         $user = User::all();
-        return view('pages/admin/petugas-pemantauan/create',compact('user'));
+        return view('pages/admin/petugas-pemantauan/create', compact('user'));
     }
-    
-    public function store(Request $request){
-        //    dd($request);
+
+    public function store(Request $request)
+    {
         $request->validate([
-            'user_id' => 'required',
             'gender' => 'required',
-            'phone_number' => 'required|digits:12',
-            'address' => 'required',
+            'phone_number' => 'required|max:13|unique:users,phone_number',
+            'email' => 'nullable|email|unique:users,email',
+            'agency' => 'required',
             'name' => 'required',
         ], [
-            'user_id.required' => 'Kolom user harus diisi.',
             'gender.required' => 'Kolom gender harus diisi.',
             'phone_number.required' => 'Kolom no telepon harus diisi.',
-            'address.required' => 'Kolom alamat harus diisi.',
+            'phone_number.max' => 'Kolom no telepon maksimal berisi 13 digit angka',
+            'phone_number.unique' => 'Nomor Telepon sudah terdaftar',
+            'email.unique' => 'Email sudah terdaftar',
+            'agency.required' => 'Kolom alamat harus diisi.',
             'name.required' => 'Kolom nama harus diisi.',
-            'phone_number.digit' => 'kolom nomor telepon harus berisi 12 digit angka'
         ]);
+
+
+        $user = new User();
+        $user->name = $request->name;
+        if ($request->email) {
+            $user->email = $request->email;
+        } else {
+            $user->email = null;
+        }
+        $user->phone_number = $request->phone_number;
+        $user->password = Hash::make($request->phone_number);
+        $user->save();
+
+        $user->assignRole($request->role);
+
         $petugas = new PetugasPemantauan();
-        $petugas->user_id = $request->user_id;
+        $petugas->user_id = $user->id;
         $petugas->name = $request->name;
         $petugas->gender = $request->gender;
-        $petugas->address = $request->address;
+        $petugas->agency = $request->agency;
         $petugas->phone_number = $request->phone_number;
         $petugas->created_by = auth()->user()->name;
         $petugas->update_by = auth()->user()->name;
@@ -51,36 +68,47 @@ class PetugasPemantauanController extends Controller
             return redirect()->route('petugas-pemantauan.index')->with('success', 'Data Petugas Berhasil Ditambahkan');
         } else {
             return redirect()->route('petugas-pemantauan.index')->with('error', 'Gagal Menambahkan Data Petugas');
-        } 
+        }
     }
+
+
     public function edit($id)
     {
         $user = User::all();
         $petugas = PetugasPemantauan::findOrFail($id);
-        return view('pages.admin.petugas-pemantauan.edit', compact('user','petugas'));
+        return view('pages.admin.petugas-pemantauan.edit', compact('user', 'petugas'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required',
             'gender' => 'required',
-            'phone_number' => 'required|digits:12',
-            'address' => 'required',
+            'phone_number' => 'required|max:13',
+            'agency' => 'required',
             'name' => 'required',
         ], [
             'user_id.required' => 'Kolom user harus diisi.',
             'gender.required' => 'Kolom gender harus diisi.',
             'phone_number.required' => 'Kolom no telepon harus diisi.',
-            'address.required' => 'Kolom alamat harus diisi.',
+            'agency.required' => 'Kolom alamat harus diisi.',
             'name.required' => 'Kolom nama harus diisi.',
-            'phone_number.digit' => 'kolom nomor telepon harus berisi 12 digit angka'
         ]);
+
+        $user = User::findOrFail($request->user_id);
+        $user->name = $request->name;
+        if ($request->email) {
+            $user->email = $request->email;
+        } else {
+            $user->email = null;
+        }
+        $user->phone_number = $request->phone_number;
+        $user->save();
+
         $petugas = PetugasPemantauan::findOrFail($id);
         $petugas->user_id = $request->user_id;
         $petugas->name = $request->name;
         $petugas->gender = $request->gender;
-        $petugas->address = $request->address;
+        $petugas->agency = $request->agency;
         $petugas->phone_number = $request->phone_number;
         $petugas->update_by = auth()->user()->name;
 
@@ -88,16 +116,20 @@ class PetugasPemantauanController extends Controller
             return redirect()->route('petugas-pemantauan.index')->with('success', 'Data Petugas Berhasil Diupdate');
         } else {
             return redirect()->route('petugas-pemantauan.index')->with('error', 'Gagal Mengupdate Data Petugas');
-        } 
+        }
     }
 
     public function destroy($id)
     {
         $petugas = PetugasPemantauan::findOrFail($id);
+
+        $user = User::findOrFail($petugas->user_id);
+        $user->delete();
+
         if ($petugas->delete()) {
             return ResponseFormatter::created('Data berhasil dihapus');
         } else {
-            return ResponseFormatter::created('Gagal menghapus data');    
+            return ResponseFormatter::created('Gagal menghapus data');
         }
     }
 }

@@ -23,6 +23,8 @@
                             required>{{ $data->description }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="{{ route('admin.cms.news.index') }}" class="btn btn-secondary ms-2">Kembali</a>
+
                 </form>
             </div>
         </div>

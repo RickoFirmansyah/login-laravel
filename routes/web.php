@@ -1,31 +1,39 @@
 <?php
 
+use App\Http\Controllers\Master\AgencyController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\User\RoleController;
+use App\Http\Controllers\Setting\MenusController;
 use App\Http\Controllers\Guest\NewsGuestController;
 use App\Http\Controllers\PetugasPemantauanController;
-use Illuminate\Support\Facades\View;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\JenisHewanController;
+use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\MapController;
 
-
-use App\Http\Controllers\QurbanDataController;
 use App\Http\Controllers\QurbanData2Controller;
-use App\Http\Controllers\JenisHewanController;
-use App\Http\Controllers\SlaughteringPlaceController;
 use App\Http\Controllers\TypeOfQurbanController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\YearController;
+use App\Http\Controllers\LaporanPemantauanController;
+use App\Http\Controllers\SlaughteringPlaceController;
+use App\Http\Controllers\Master\YearController;
 use App\Http\Controllers\MonitoringLocationsController;
-use App\Http\Controllers\MonitoringOfficerController; // Added this line
+use App\Http\Controllers\MonitoringOfficerController;
 use App\Http\Controllers\Setting\SystemSettingController;
+use App\Http\Controllers\Master\TypeOfDiseasesController;
+use App\Http\Controllers\Master\TypeOfPlaceController;
+use App\Http\Controllers\PelaporanPemantauanController;
+
 
 
 Auth::routes();
@@ -41,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::resource('/user-list', UserController::class)->names('user-list');
 
+
+    Route::get('admin/setting/menu/icons/ref', [MenusController::class, 'iconsRef'])->name('icons.ref');
+    // Route::post('/menu', [MenusController::class, 'store'])->name('menus.store');
+
     // PANDUAN
     Route::resource('/admin/data-pokok/panduan', PanduanController::class)->names('admin.data-pokok.panduan');
 
@@ -49,15 +61,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/data-pokok/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
     Route::get('/admin/data-pokok/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
     Route::get('/admin/data-pokok/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');
-    Route::resource('/admin/lokasi-pemotongan', MapController::class)->names('map-pemotongan');
     Route::resource('/admin/panduan', PanduanController::class)->names('admin.panduan');
 
+    // MENU
+    Route::resource('/admin/setting/menu', MenusController::class)->names('menus');
+
     // TEMPAT PEMOTONGAN
-    // Route::resource('/admin/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.tempat-pemotongan');
-    // Route::get('/admin/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
-    // Route::get('/admin/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
-    // Route::get('/admin/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');
-    // Route::resource('/map-pemotongan', MapController::class)->names('map-pemotongan');
+    Route::resource('/admin/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.tempat-pemotongan');
+    Route::resource('/admin/lokasi-pemotongan', MapController::class)->names('map-pemotongan');
+    Route::get('get-kelurahans', [MapController::class, 'getKelurahans'])->name('get-kelurahans');
 
     // PETUGAS PEMANTAUAN
     Route::resource('/admin/data-pokok/petugas-pemantauan', PetugasPemantauanController::class)->names('petugas-pemantauan');
@@ -79,17 +91,19 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/role', RoleController::class);
     Route::get('/impersonate/{user}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.myprofile');
-
+    Route::resource('/admin/dokumentasi', DocumentationController::class)->names('dokumentasi');
+    Route::get('/admin/dokumentasi/filter/desa/{kecamatanId}', [DocumentationController::class, 'filterDesa']);
+    Route::get('/admin/dokumentasi/filter/tempat/{kelurahanId}', [DocumentationController::class, 'filterTempat']);
+    Route::get('/admin/dokumentasi/filter/photos', [DocumentationController::class, 'filterPhotos']);
     Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
+
+    Route::resource('/admin/laporan-pemantauan', PelaporanPemantauanController::class)->names('laporan-pemantauan');
+   
 });
 
 Route::middleware("auth")->prefix("user")->name("user.")->group(function () {
     Route::view('/dashboard', "pages.admin.dashboard")->name("dashboard");
 });
-
-// Route::get('/', function () {
-//     return view('pages.landing.index');
-// });
 
 Route::get('/', [LandingController::class, 'index']);
 
@@ -112,13 +126,17 @@ Route::get('/auth/passwords/confirm', function () {
 
 
 Route::resource('jenis-kurban', TypeOfQurbanController::class)->names('jenis-kurban');
+Route::resource('jenis-tempat', TypeOfPlaceController::class)->names('jenis-tempat');
+Route::resource('jenis-penyakit', TypeOfDiseasesController::class)->names('jenis-penyakit');
+Route::resource('instansi', AgencyController::class)->names('instansi');
+Route::get('/export-jenis-kurban', [TypeOfQurbanController::class, 'export']);
+Route::post('/import-jenis-kurban', [TypeOfQurbanController::class, 'import']);
+
 Route::resource('tahun', YearController::class)->names('tahun');
 
 
 // DETAIL BERITA
 Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
-// Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
-// Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
 
 
 Route::resource('penugasan', AssignmentController::class);
@@ -131,11 +149,30 @@ Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasa
 
 
 // Route::get('/berita', function(){
-    Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
-    //     return view('pages.guest.news');
-    // });
-    
-    
+Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
+//     return view('pages.guest.news');
+// });
+
+
 // Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
 Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
 
+<<<<<<< HEAD
+=======
+Route::get('/admin/penugasan/add/{id}', [AssignmentController::class, 'addPenugasan'])->name('admin.penugasan.add');
+Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
+
+Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
+Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
+
+// Your new content here
+// Your new content here
+Route::get('/pengaturan', function () {
+    return view('pages.admin.pengaturan.index');
+});
+// Your new content here
+// Your new content here
+Route::get('/admin/setting/test', function () {
+    return view('pages.admin.test.index');
+});
+>>>>>>> 600b3eeffa28f8cd7c7cbe437599b10067602b48
