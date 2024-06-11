@@ -134,11 +134,6 @@ Route::post('/import-jenis-kurban', [TypeOfQurbanController::class, 'import']);
 
 Route::resource('tahun', YearController::class)->names('tahun');
 
-
-// DETAIL BERITA
-Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
-
-
 Route::resource('penugasan', AssignmentController::class);
 Route::delete('/delete-add-penugasan/{id}', [SlaughteringPlaceController::class, 'destroy']);
 Route::get('/add-penugasan', [SlaughteringPlaceController::class, 'index']);
@@ -147,21 +142,9 @@ Route::get('/admin/penugasan/add/{id}', [AssignmentController::class, 'addPenuga
 Route::get('/admin/penugasan', [AssignmentController::class, 'index'])->name('admin.penugasan.index');
 Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
 
-
-// Route::get('/berita', function(){
-Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
-//     return view('pages.guest.news');
-// });
-
-
+// DETAIL BERITA
 // Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
 Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
-
-<<<<<<< HEAD
-=======
-Route::get('/admin/penugasan/add/{id}', [AssignmentController::class, 'addPenugasan'])->name('admin.penugasan.add');
-Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
-
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
 Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
 
@@ -175,4 +158,3 @@ Route::get('/pengaturan', function () {
 Route::get('/admin/setting/test', function () {
     return view('pages.admin.test.index');
 });
->>>>>>> 600b3eeffa28f8cd7c7cbe437599b10067602b48
