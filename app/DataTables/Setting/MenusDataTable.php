@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Setting;
 
 use App\Models\Setting\Menus;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -18,7 +18,7 @@ class MenusDataTable extends DataTable
             ->addColumn('action', 'menus.action')
             ->addIndexColumn()
             ->addColumn('action', function (Menus $val) {
-                return view('pages.admin.menus.action', ['menus' => $val]);
+                return view('pages.admin.setting.menus.action', ['menus' => $val]);
             })
             ->editColumn('is_active', function (Menus $val) {
                 return '<span class="badge bg-' . ($val->is_active == '1' ? 'success' : 'danger') . '">' . ($val->is_active == '1' ? 'Active' : 'Inactive') . '</span>';

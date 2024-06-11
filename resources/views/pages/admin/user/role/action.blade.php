@@ -3,9 +3,7 @@
     <a href="{{ route("role.edit", $role->id) }}" class="btn btn-success">
         <i class="fas fa-pen fs-3"></i>
     </a>
-    <a href="{{ route("role.show", $role->id) }}" class="btn btn-secondary">
-        <i class="fas fa-eye fs-3"></i>
-    </a>
+    
     <button data-csrf-token="{{ csrf_token() }}" data-url="{{ route('role.destroy', $role->id) }}"
         data-action="delete" data-table-id="roles-table" data-name="{{ $role->name }}"
         class="btn btn-warning">
