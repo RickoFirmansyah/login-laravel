@@ -15,13 +15,13 @@ class Assignment extends Model
         'jumlah_penugasan',
     ];
 
-    public function monitoringOfficer()
+    public function monitoringOfficers()
     {
-        return $this->belongsTo(MonitoringOfficer::class);
+        return $this->belongsTo(MonitoringOfficer::class, 'monitoring_officer_id');
     }
 
     public function slaughteringPlace()
     {
-        return $this->belongsTo(SlaughteringPlace::class);
+       return $this->belongsTo(SlaughteringPlace::class, 'slaughtering_place_id');
     }
 }

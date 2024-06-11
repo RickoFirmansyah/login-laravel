@@ -11,22 +11,31 @@ class AssignmentController extends Controller
 {
     public function index()
     {
-        $assignments = Assignment::with(['monitoringOfficer', 'slaughteringPlace'])->get();
-        $bcs = [
-            ['name' => 'Penugasan', 'link' => '#']
-        ];
-        return view('pages.admin.penugasan.index', compact('assignments', 'bcs'));
+        $monitoringOfficers = MonitoringOfficer::withCount('assignments')->get();
+
+        return view('pages.admin.penugasan.index', compact('monitoringOfficers'));
     }
 
-    public function create()
+    public function addPenugasan($id)
     {
-        $monitoringOfficers = MonitoringOfficer::all();
+        $officer = MonitoringOfficer::findOrFail($id);
         $slaughteringPlaces = SlaughteringPlace::all();
-        $bcs = [
-            ['name' => 'Penugasan', 'link' => route('penugasan.index')],
-            ['name' => 'Tambah Penugasan', 'link' => '#']
-        ];
-        return view('pages.admin.penugasan.create', compact('monitoringOfficers', 'slaughteringPlaces', 'bcs'));
+
+        return view('pages.admin.penugasan.add-penugasan', compact('officer', 'slaughteringPlaces'));
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'slaughtering_place_id' => 'required|exists:slaughtering_places,id',
+            'officer_id' => 'required|exists:monitoring_officers,id',
+            'task_description' => 'nullable|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+        ]);
+
+        Assignment::create($request->all());
+
+        return redirect()->route('admin.penugasan.index')->with('success', 'Penugasan berhasil ditambahkan');
+    }
 }

@@ -15,7 +15,7 @@ class SlaughteringPlace extends Model
     use HasFactory;
 
     protected $table = 'slaughtering_places';
-    protected $guards = ['id'];
+    protected $guarded = ['id'];
     protected $fillable = ['cutting_place', 'address', 'latitude', 'longitude', 'user_id', 'type_of_place_id', 'kecamatan_id', 'kelurahan_id', 'provinsi_id', 'kabupaten_id', 'created_by', 'update_by',];
 
 
@@ -55,5 +55,10 @@ class SlaughteringPlace extends Model
     public function updatedByUser()
     {
         return $this->belongsTo(User::class, 'update_by');
+    }
+
+    public function assignments()
+    {
+        return $this->belongsTo(Assignment::class, 'slaughtering_place_id');
     }
 }

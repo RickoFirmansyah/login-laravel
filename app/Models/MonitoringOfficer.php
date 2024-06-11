@@ -22,4 +22,8 @@ class MonitoringOfficer extends Model
     {
         return $this->hasMany(QurbanReport::class, 'monitoring_officer_id', 'id');
     }
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class, 'monitoring_officer_id', 'id');
+    }
 }

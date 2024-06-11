@@ -26,6 +26,7 @@ use App\Http\Controllers\Master\TypeOfQurbanController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Master\YearController;
 use App\Http\Controllers\MonitoringLocationsController;
+use App\Http\Controllers\MonitoringOfficerController; // Added this line
 use App\Http\Controllers\Setting\SystemSettingController;
 use App\Http\Controllers\Master\TypeOfDiseasesController;
 use App\Http\Controllers\Master\TypeOfPlaceController;
@@ -121,6 +122,21 @@ Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.de
 
 
 Route::resource('penugasan', AssignmentController::class);
+Route::delete('/delete-add-penugasan/{id}', [SlaughteringPlaceController::class, 'destroy']);
+Route::get('/add-penugasan', [SlaughteringPlaceController::class, 'index']);
+Route::get('/admin/data-pokok/penugasan', [MonitoringOfficerController::class, 'index']); // Added this line
+Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
+
+// Route::get('/berita', function(){
+    Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
+    //     return view('pages.guest.news');
+    // });
+    
+    
+// Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');
+Route::get('/berita/{id}', [NewsGuestController::class, 'show'])->name('guest.detail');
+
+Route::get('/admin/penugasan/add/{id}', [AssignmentController::class, 'addPenugasan'])->name('admin.penugasan.add');
 Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
 
 Route::get('/berita', [NewsGuestController::class, 'index'])->name('guest.berita');
