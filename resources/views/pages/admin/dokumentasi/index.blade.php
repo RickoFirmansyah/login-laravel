@@ -37,7 +37,6 @@
                 <div>
                     <button class="btn btn-outline-primary">Tahun - 2024</button>
                     <button class="btn btn-primary">Unduh Laporan</button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">Tambah Foto</button>
                 </div>
             </div>
             <div class="col-2 sidebar">
@@ -95,7 +94,35 @@
                 </div>
             </div>
 
-            
+            <div class="modal" id="addItem" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Tambah Foto</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('dokumentasi.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="mb-3">
+                                <label for="photo">Tambah Foto</label>
+                                <input type="file" accept="photo/*" name="photo" id="photo" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="caption">Caption</label>
+                                <textarea name="caption" id="caption" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Simpan</button>
+
+                        </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
         </div>
     </div>
