@@ -16,7 +16,7 @@
             <div class="col-md-12 d-flex justify-content-between align-items-center p-3 card-header">
                 <h4 class="fw-semibold">Dokumentasi</h4>
                 <div>
-                    <button class="btn btn-outline-primary">Tahun - 2024</button>
+                    {{-- <button class="btn btn-outline-primary">Tahun - 2024</button> --}}
                     <button class="btn btn-primary">Unduh Laporan</button>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">Tambah Foto</button>
                 </div>
