@@ -18,7 +18,7 @@
                 <div>
                     <button class="btn btn-outline-primary">Tahun - 2024</button>
                     <button class="btn btn-primary">Unduh Laporan</button>
-                    {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">Tambah Foto</button> --}}
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItem">Tambah Foto</button>
                 </div>
             </div>
             <div class="col-md-3 pt-4 pinggir">
@@ -85,6 +85,9 @@
                         </div>
                     @endforeach                    
                 </div>
+                <div class="d-flex justify-content-center">
+                  {{ $items->links() }}
+              </div>
             </div>
 
             <div class="modal" id="addItem" tabindex="-1" role="dialog">

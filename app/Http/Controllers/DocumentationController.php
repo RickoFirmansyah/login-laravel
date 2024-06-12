@@ -15,7 +15,7 @@ class DocumentationController extends Controller
      */
     public function index()
     {
-        $items = Documentation::all();
+        $items = Documentation::paginate(12);
         $kecamatans = Kecamatan::where('kabupaten_kota_id', 5)->get();
 
         return view('pages.admin.dokumentasi.index', [
