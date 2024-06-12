@@ -46,11 +46,24 @@ class TypeOfQurbanController extends Controller
         return redirect('file/world.xlsx');
     }
 
-    public function import()
+    public function import(Request $request)
     {
+        $file = $request->file('data');
+
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-        $reader->setLoadSheetsOnly(["Sheet 1", "My special sheet"]);
-        $spreadsheet = $reader->load("files/world.xlsx");
+        $reader->setLoadSheetsOnly("data");
+        $spreadsheet = $reader->load($file);
+        $sheet = $spreadsheet->getActiveSheet();
+        foreach ($sheet->getRowIterator() as $row) {
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(FALSE);
+            $position = 0;
+            foreach ($cellIterator as $cell) {
+                echo $position . $cell->getValue() . "\t";
+                $position++;
+            }
+            echo "<br>";
+        }
     }
 
     /**
