@@ -23,7 +23,7 @@ use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\MapController;
 
 use App\Http\Controllers\QurbanData2Controller;
-use App\Http\Controllers\TypeOfQurbanController;
+use App\Http\Controllers\Master\TypeOfQurbanController;
 use App\Http\Controllers\LaporanPemantauanController;
 use App\Http\Controllers\SlaughteringPlaceController;
 use App\Http\Controllers\Master\YearController;
