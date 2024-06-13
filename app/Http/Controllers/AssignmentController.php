@@ -26,16 +26,25 @@ class AssignmentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'slaughtering_place_id' => 'required|exists:slaughtering_places,id',
-            'officer_id' => 'required|exists:monitoring_officers,id',
-            'task_description' => 'nullable|string',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date',
-        ]);
+        try {
+            $request->validate([
+                'assignments' => 'required|array',
+                'assignments.*' => 'exists:slaughtering_places,id'
+            ]);
 
-        Assignment::create($request->all());
+            foreach ($request->assignments as $slaughteringPlaceId) {
+                Assignment::create([
+                    'monitoring_officer_id' => auth()->id(),
+                    'slaughtering_place_id' => $slaughteringPlaceId,
+                    'jumlah_penugasan' => 1,
+                    'created_by' => auth()->user()->id,
+                    'update_by' => auth()->user()->id
+                ]);
+            }
 
-        return redirect()->route('admin.penugasan.index')->with('success', 'Penugasan berhasil ditambahkan');
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

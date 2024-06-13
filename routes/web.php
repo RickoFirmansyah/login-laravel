@@ -141,6 +141,7 @@ Route::get('/admin/data-pokok/penugasan', [MonitoringOfficerController::class, '
 Route::get('/admin/penugasan/add/{id}', [AssignmentController::class, 'addPenugasan'])->name('admin.penugasan.add');
 Route::get('/admin/penugasan', [AssignmentController::class, 'index'])->name('admin.penugasan.index');
 Route::get('/penugasan', [AssignmentController::class, 'index'])->name('penugasan.index');
+Route::post('/admin/penugasan/store', [AssignmentController::class, 'store'])->name('admin.penugasan.store');
 
 // DETAIL BERITA
 // Route::get('/show', [NewsGuestController::class, 'show'])->name('guest.show');

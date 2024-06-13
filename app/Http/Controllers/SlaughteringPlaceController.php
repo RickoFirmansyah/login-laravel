@@ -19,10 +19,19 @@ class SlaughteringPlaceController extends Controller
      */
     public function index(SlaughteringPlaceDataTable $dataTable)
     {
-        $slaughteringPlaces = SlaughteringPlace::all(['latitude', 'longitude', 'cutting_place']);
+        $slaughteringPlaces = SlaughteringPlace::with(['kecamatan', 'kelurahan'])->get(['latitude', 'longitude', 'cutting_place']);
         return $dataTable->render('pages.admin.data-pokok.tempat-pemotongan.index', compact('slaughteringPlaces'));
     }
 
+    public function kecamatan()
+{
+    return $this->belongsTo(ModelsKecamatan::class, 'kecamatan_id');
+}
+
+public function kelurahan()
+{
+    return $this->belongsTo(ModelsKelurahan::class, 'kelurahan_id');
+}
     /**
      * Show the form for creating a new resource.
      */

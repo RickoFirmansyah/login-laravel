@@ -27,7 +27,7 @@
                             <th>Nama Petugas</th>
                             <th>Jenis Kelamin</th>
                             <th>Nomor Telepon</th>
-                            <th>Alamat</th>
+                            <th>Asal Instansi</th>
                             <th>Jumlah Penugasan</th>
                         </tr>
                     </thead>
@@ -41,7 +41,7 @@
                             <td>{{ $officer->name }}</td>
                             <td>{{ $officer->gender }}</td>
                             <td>{{ $officer->phone_number }}</td>
-                            <td>{{ $officer->address }}</td>
+                            <td>{{ $officer->agency }}</td>
                             <td>{{ $officer->assignments_count }}</td>
                         </tr>
                         @endforeach
