@@ -23,23 +23,26 @@
                             <h4>Daftar Tempat Penugasan</h4>
                             <button class="btn btn-primary" data-toggle="modal" data-target="#slaughteringPlaceModal">Tambah Penugasan</button>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Tempat Pemotongan</th>
-                                        <th>Kecamatan</th>
-                                        <th>Desa / Kelurahan</th>
-                                        <th>Alamat</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="assignmentTableBody">
-                                    <!-- Data akan ditambahkan di sini oleh JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
+                        <form method="POST" action="{{ route('admin.penugasan.store') }}">
+                            @csrf
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Tempat Pemotongan</th>
+                                            <th>Kecamatan</th>
+                                            <th>Desa / Kelurahan</th>
+                                            <th>Alamat</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="assignmentTableBody">
+                                        <!-- Data akan ditambahkan di sini oleh JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="submit" class="btn btn-success" id="saveAssignmentButton">Simpan Penugasan</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -65,16 +68,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($slaughteringPlaces as $place)
-                                <tr>
-                                    <td>{{ $place->cutting_place }}</td>
-                                    <td>{{ $place->kecamatan->name ?? 'N/A' }}</td>
-                                    <td>{{ $place->kelurahan->name ?? 'N/A' }}</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" onclick="addPlaceToAssignment({{ $place->id }}, '{{ $place->cutting_place }}', '{{ $place->kecamatan->name }}', '{{ $place->kelurahan->name }}', '{{ $place->address }}')">Pilih</button>
-                                    </td>
-                                </tr>
-                                @endforeach
+                            @foreach($slaughteringPlaces as $place)
+                            <tr>
+                                <td>{{ $place->cutting_place }}</td>
+                                <td>{{ $place->kecamatan->nama ?? 'N/A' }}</td>
+                                <td>{{ $place->kelurahan->nama ?? 'N/A' }}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" onclick="addPlaceToAssignment({{ $place->id }}, '{{ $place->cutting_place }}', '{{ $place->kecamatan->nama }}', '{{ $place->kelurahan->nama }}', '{{ $place->address }}')">Pilih</button>
+                                </td>
+                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -125,7 +128,7 @@
                 const row = document.createElement('tr');
 
                 row.innerHTML = `
-                    <td>${id}</td>
+                    <input type="hidden" name="assignments[]" value="${id}">
                     <td>${cuttingPlace}</td>
                     <td>${kecamatan}</td>
                     <td>${kelurahan}</td>
@@ -147,6 +150,29 @@
                     row.children[0].textContent = index + 1;
                 });
             }
+
+            $('#saveAssignmentButton').click(function() {
+                var assignments = [];
+                $('#assignmentTableBody tr').each(function() {
+                    var id = $(this).find('input[type="hidden"]').val(); // Asumsi ID tempat pemotongan disimpan dalam input hidden
+                    assignments.push(id);
+                });
+
+                $.ajax({
+                    url: '{{ route("admin.penugasan.store") }}',
+                    type: 'POST',
+                    data: {
+                        assignments: assignments,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        alert('Penugasan berhasil disimpan!');
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan saat menyimpan penugasan.');
+                    }
+                });
+            });
         });
     </script>
 @endsection

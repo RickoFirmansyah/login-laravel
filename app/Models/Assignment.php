@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Master\SlaughteringPlace;
+use App\Models\Master\MonitoringOfficer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

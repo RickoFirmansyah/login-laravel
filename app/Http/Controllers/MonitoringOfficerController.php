@@ -12,7 +12,7 @@ class MonitoringOfficerController extends Controller
      */
     public function index()
     {
-        $monitoringOfficers = MonitoringOfficer::all(); // Mengambil semua data
+        $monitoringOfficers = MonitoringOfficer::withCount('assignments')->get(); // Mengambil semua data dengan jumlah penugasan
         return view('pages.admin.penugasan.index', compact('monitoringOfficers'));
     }
 
