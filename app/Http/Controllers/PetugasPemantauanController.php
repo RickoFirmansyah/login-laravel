@@ -99,7 +99,7 @@ class PetugasPemantauanController extends Controller
                     $petugas->gender = $cell->getValue();
                 }
                 if ($position === 3) {
-                    $user->password = $cell->getValue();
+                    $user->password = Hash::make($cell->getValue());
                     $user->phone_number = $cell->getValue();
                     $petugas->phone_number = $cell->getValue();
                 }
