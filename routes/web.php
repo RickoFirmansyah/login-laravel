@@ -98,7 +98,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
 
     Route::resource('/admin/laporan-pemantauan', PelaporanPemantauanController::class)->names('laporan-pemantauan');
-   
 });
 
 Route::middleware("auth")->prefix("user")->name("user.")->group(function () {
@@ -131,6 +130,9 @@ Route::resource('jenis-penyakit', TypeOfDiseasesController::class)->names('jenis
 Route::resource('instansi', AgencyController::class)->names('instansi');
 Route::get('/export-jenis-kurban', [TypeOfQurbanController::class, 'export']);
 Route::post('/import-jenis-kurban', [TypeOfQurbanController::class, 'import']);
+Route::post('import-petugas-pemantauan', [PetugasPemantauanController::class, 'import'])->name('import-petugas-pemantauan');
+Route::get('import-petugas-pemantauan', [PetugasPemantauanController::class, 'view_import'])->name('view-petugas-pemantauan');
+
 
 Route::resource('tahun', YearController::class)->names('tahun');
 
