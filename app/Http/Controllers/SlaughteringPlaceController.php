@@ -6,7 +6,7 @@ use ResponseFormatter;
 use Illuminate\Http\Request;
 use App\Models\SlaughteringPlace;
 use App\Http\Controllers\Controller;
-use App\Models\TypeOfPlace as ModelsTypeOfPlace;
+use App\Models\Master\TypeOfPlace as ModelsTypeOfPlace;
 use App\Models\Master\Kecamatan as ModelsKecamatan;
 use App\Models\Master\Kelurahan as ModelsKelurahan;
 use App\DataTables\Pokok\SlaughteringPlaceDataTable;
@@ -24,14 +24,14 @@ class SlaughteringPlaceController extends Controller
     }
 
     public function kecamatan()
-{
-    return $this->belongsTo(ModelsKecamatan::class, 'kecamatan_id');
-}
+    {
+        return $this->belongsTo(ModelsKecamatan::class, 'kecamatan_id');
+    }
 
-public function kelurahan()
-{
-    return $this->belongsTo(ModelsKelurahan::class, 'kelurahan_id');
-}
+    public function kelurahan()
+    {
+        return $this->belongsTo(ModelsKelurahan::class, 'kelurahan_id');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -89,8 +89,12 @@ public function kelurahan()
         $kecamatan = ModelsKecamatan::pluck('nama', 'id');
         $kelurahan = ModelsKelurahan::all();
         $slaughteringPlace = SlaughteringPlace::findOrFail($id);
-        return view('pages.admin.data-pokok.tempat-pemotongan.edit', compact('typeOfPlace', 'kecamatan', 'kelurahan', 
-        'slaughteringPlace'));
+        return view('pages.admin.data-pokok.tempat-pemotongan.edit', compact(
+            'typeOfPlace',
+            'kecamatan',
+            'kelurahan',
+            'slaughteringPlace'
+        ));
     }
 
     /**
@@ -116,10 +120,9 @@ public function kelurahan()
         $slaughteringPlace = SlaughteringPlace::findOrFail($request->id);
         if ($slaughteringPlace->update($requestData)) {
             return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan berhasil diubah');
-        } else{
+        } else {
             return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan gagal diubah');
         }
-
     }
 
     /**
@@ -131,7 +134,7 @@ public function kelurahan()
         if ($slaughteringPlace->delete()) {
             return ResponseFormatter::created('Data berhasil dihapus');
         } else {
-            return ResponseFormatter::created('Gagal menghapus data');    
+            return ResponseFormatter::created('Gagal menghapus data');
         }
     }
 }
