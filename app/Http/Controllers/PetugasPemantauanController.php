@@ -71,6 +71,83 @@ class PetugasPemantauanController extends Controller
         }
     }
 
+    public function view_import()
+    {
+        return view('pages/admin/petugas-pemantauan/import');
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('data');
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $reader->setLoadSheetsOnly("data");
+        $spreadsheet = $reader->load($file->getPathname());
+        $sheet = $spreadsheet->getActiveSheet();
+        foreach ($sheet->getRowIterator() as $row) {
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(FALSE);
+            $user = new User();
+            $petugas = new PetugasPemantauan();
+            $position = 0;
+            foreach ($cellIterator as $cell) {
+                if ($position === 1) {
+                    $user->name = $cell->getValue();
+                    $petugas->name = $cell->getValue();
+                }
+                if ($position === 2) {
+                    $petugas->gender = $cell->getValue();
+                }
+                if ($position === 3) {
+                    $user->password = $cell->getValue();
+                    $user->phone_number = $cell->getValue();
+                    $petugas->phone_number = $cell->getValue();
+                }
+                if ($position === 4) {
+                    $user->assignRole("admin-petugas-lapangan");
+                    $petugas->agency = $cell->getValue();
+                }
+                $petugas->created_by = auth()->user()->name;
+                $petugas->update_by = auth()->user()->name;
+                echo $position . ". " . $cell->getValue() . "\t";
+                $position++;
+            }
+
+            $user->save();
+            $petugas->user_id = $user->id;
+            $petugas->save();
+            echo "<br>";
+        }
+
+        // $user = new User();
+        // $user->name = $request->name;
+        // if ($request->email) {
+        //     $user->email = $request->email;
+        // } else {
+        //     $user->email = null;
+        // }
+        // $user->phone_number = $request->phone_number;
+        // $user->password = Hash::make($request->phone_number);
+        // $user->save();
+
+        // $user->assignRole($request->role);
+
+        // $petugas = new PetugasPemantauan();
+        // $petugas->user_id = $user->id;
+        // $petugas->name = $request->name;
+        // $petugas->gender = $request->gender;
+        // $petugas->agency = $request->agency;
+        // $petugas->phone_number = $request->phone_number;
+        // $petugas->created_by = auth()->user()->name;
+        // $petugas->update_by = auth()->user()->name;
+
+        // if ($petugas->save()) {
+        return redirect()->route('petugas-pemantauan.index')->with('success', 'Data Petugas Berhasil Ditambahkan');
+        // } else {
+        // return redirect()->route('petugas-pemantauan.index')->with('error', 'Gagal Menambahkan Data Petugas');
+        // }
+    }
+
 
     public function edit($id)
     {
