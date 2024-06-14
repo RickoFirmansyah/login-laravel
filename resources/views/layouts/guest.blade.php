@@ -35,16 +35,15 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="{{ asset('landing/images/hero-img.png') }}" class="d-block w-100"
-                                    alt="...">
+                                <img src="{{ asset('landing/images/hero-img.png') }}" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5 class="text-white fs-13 fw-bolder">Pemantauan Hewan Kurban yang Terorganisi</h5>
+                                    <h5 class="text-white fs-13 fw-bolder">Pemantauan Hewan Kurban yang Terorganisir
+                                    </h5>
                                     <p>Manajemen Hewan Kurban yang Mudah dan Terstruktur</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ asset('landing/images/hero-img.png') }}" class="d-block w-100"
-                                    alt="...">
+                                <img src="{{ asset('landing/images/hero-img.png') }}" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5 class="text-white fs-13 fw-bolder">Pendataan Hewan Kurban yang Akurat dan Tepat
                                     </h5>
@@ -52,8 +51,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ asset('landing/images/hero-img.png') }}" class="d-block w-100"
-                                    alt="...">
+                                <img src="{{ asset('landing/images/hero-img.png') }}" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5 class="text-white fs-13 fw-bolder">Kualitas dan Transparansi dalam Pendataan
                                         Kurban</h5>
@@ -106,8 +104,8 @@
                                 <p class="fw-normal fs-4">Petugas Pemantauan</p>
                             </div>
                         </div>
-                        <div class="d-flex flex-md-row flex-column theCard-statistik gap-4 align-items-center"data-aos="fade-left"
-                            data-aos-duration="1000">
+                        <div class="d-flex flex-md-row flex-column theCard-statistik gap-4 align-items-center"
+                            data-aos="fade-left" data-aos-duration="1000">
                             <div class=" p-3">
                                 <img src="{{ asset('landing/images/logo_map.png') }}" alt="">
                             </div>
@@ -127,8 +125,7 @@
                     <div class="d-flex flex-md-row flex-column justify-content-beetween align-items-center border-bottom border-2 border-light-subtle rounded p-3"
                         data-aos="fade-left">
                         <div class="col-md-2">
-                            <img width="50" height="50"
-                                src="{{ asset('landing/images/logo_kab_blitar.png') }}" alt="">
+                            <img width="50" height="50" src="{{ asset('landing/images/logo_kab_blitar.png') }}" alt="">
                         </div>
                         <h1 class="fw-semibold fs-12 text-center col-md-8">Lokasi Pemotongan</h1>
                         <input type="text" name="search" class="col-md-2 border-2 border-dark border rounded p-2"
@@ -153,9 +150,9 @@
                         <div class='content-pengumuman  '>
                             <h1 class="fw-semibold fs-12 text-white mb-3">Pengumuman</h1>
                             @foreach ($pengumuman as $p)
-                                <div class="border border-2 border-light-subtle rounded p-3 mb-3 text-white">
-                                    <p>{{ strip_tags($p->description) }}</p>
-                                </div>
+                            <div class="border border-2 border-light-subtle rounded p-3 mb-3 text-white">
+                                <p>{{ strip_tags($p->description) }}</p>
+                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -179,37 +176,36 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" data-aos="fade-up"
                         data-aos-duration="1000">
                         @foreach ($news as $item)
-                            <div class="col">
-                                <div class="card shadow-sm h-100">
-                                    <div class="card-img-top rounded" style="height: 200px; overflow: hidden;">
-                                        <img src="{{ url('storage/' . $item->image) }}"
-                                            class="w-100 h-100 object-cover" alt="...">
-                                    </div>
-                                    <div class="card-body d-flex flex-column">
-                                        <h1 class="card-title fs-5">
-                                            <a class="a-news" href="{{ route('guest.detail', $item->id) }}">
-                                                {{ Str::limit($item->title, 50) }}
+                        <div class="col">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-img-top rounded" style="height: 200px; overflow: hidden;">
+                                    <img src="{{ url('storage/' . $item->image) }}" class="w-100 h-100 object-cover"
+                                        alt="...">
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h1 class="card-title fs-5">
+                                        <a class="a-news" href="{{ route('guest.detail', $item->id) }}">
+                                            {{ Str::limit($item->title, 50) }}
+                                        </a>
+                                    </h1>
+                                    <p class="card-text flex-grow-1">
+                                        {{ Str::limit(strip_tags($item->description), 100) }}
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                                        <div class="btn-group">
+                                            <a href="{{ route('guest.detail', $item->id) }}">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary">Baca
+                                                    selengkapnya</button>
                                             </a>
-                                        </h1>
-                                        <p class="card-text flex-grow-1">
-                                            {{ Str::limit(strip_tags($item->description), 100) }}
-                                        </p>
-                                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                                            <div class="btn-group">
-                                                <a href="{{ route('guest.detail', $item->id) }}">
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-outline-secondary">Baca
-                                                        selengkapnya</button>
-                                                </a>
-                                            </div>
-                                            <small>
-                                                <i style="font-size: 18px;" class="ti ti-calendar-time px-2"></i>
-                                                {{ $item->created_at->format('Y-m-d') }}
-                                            </small>
                                         </div>
+                                        <small>
+                                            <i style="font-size: 18px;" class="ti ti-calendar-time px-2"></i>
+                                            {{ $item->created_at->format('Y-m-d') }}
+                                        </small>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -223,24 +219,20 @@
         <div class="offcanvas-body p-4">
             <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="#"
-                        target="_blank">Beranda</a>
+                    <a class="nav-link active text-white" aria-current="page" href="#" target="_blank">Beranda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active text-white" aria-current="page" href="#" target="_blank">Lokasi
                         Kurban</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="#"
-                        target="_blank">Statistik</a>
+                    <a class="nav-link active text-white" aria-current="page" href="#" target="_blank">Statistik</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="#"
-                        target="_blank">Pengumuman</a>
+                    <a class="nav-link active text-white" aria-current="page" href="#" target="_blank">Pengumuman</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="#"
-                        target="_blank">Berita</a>
+                    <a class="nav-link active text-white" aria-current="page" href="#" target="_blank">Berita</a>
                 </li>
                 <li class="nav-item">
                     <div class="mt-5">
@@ -263,7 +255,7 @@
     <script src="{{ asset('landing/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('landing/js/custom.js') }}"></script>
     <script>
-        AOS.init();
+    AOS.init();
     </script>
 </body>
 
