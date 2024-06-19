@@ -6,6 +6,7 @@ use App\Models\Master\KabupatenKota;
 use App\Models\Master\Kecamatan;
 use App\Models\Master\Kelurahan;
 use App\Models\Master\Provinsi;
+use App\Models\Master\TypeOfPlace;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

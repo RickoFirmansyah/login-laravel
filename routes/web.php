@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
 
     // TEMPAT PEMOTONGAN
     Route::resource('/admin/data-pokok/tempat-pemotongan', SlaughteringPlaceController::class)->names('admin.data-pokok.tempat-pemotongan');
+    Route::post('/admin/data-pokok/import', [SlaughteringPlaceController::class, 'import'])->name('admin.data-pokok.tempat-pemotongan.import');
     Route::get('/admin/data-pokok/tempat-pemotongan/kabupaten/{provinsi}', [SlaughteringPlaceController::class, 'getKabupaten'])->name('getKabupaten');
     Route::get('/admin/data-pokok/tempat-pemotongan/kecamatan/{kabupaten}', [SlaughteringPlaceController::class, 'getKecamatan'])->name('getKecamatan');
     Route::get('/admin/data-pokok/tempat-pemotongan/kelurahan/{kecamatan}', [SlaughteringPlaceController::class, 'getKelurahan'])->name('getKelurahan');

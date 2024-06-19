@@ -10,6 +10,7 @@ use App\Models\Master\TypeOfPlace as ModelsTypeOfPlace;
 use App\Models\Master\Kecamatan as ModelsKecamatan;
 use App\Models\Master\Kelurahan as ModelsKelurahan;
 use App\DataTables\Pokok\SlaughteringPlaceDataTable;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 
 class SlaughteringPlaceController extends Controller
@@ -136,5 +137,53 @@ class SlaughteringPlaceController extends Controller
         } else {
             return ResponseFormatter::created('Gagal menghapus data');
         }
+    }
+}
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        // return $file;
+        $spreadsheet = IOFactory::load($file->getPathName());
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        $data = []; // Inisialisasi array di luar loop
+
+        $highestRow = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+
+        for ($row = 2; $row <= $highestRow; $row++) { // Mulai dari baris ketiga
+            $rowData = [];
+            for ($col = 'A'; $col <= $highestColumn; $col++) {
+                $cell = $worksheet->getCell($col . $row);
+                $value = $cell->getValue();
+                $rowData[] = $value !== null ? trim($value) : ''; // Pastikan nilai tidak null dan hapus ruang putih
+            }
+            // Tambahkan hanya jika baris tidak kosong
+            if (!empty(array_filter($rowData))) {
+                $data[] = $rowData; // Tambahkan setiap baris ke dalam array
+            }
+            $slaughteringPlace = new SlaughteringPlace();
+            $slaughteringPlace->cutting_place = $rowData[1];
+            $slaughteringPlace->address = $rowData[2];
+            $slaughteringPlace->type_of_place_id = 2;
+            $slaughteringPlace->provinsi_id = 15;
+            
+            $kecamatan = ModelsKecamatan::where('nama', $rowData[5])->first()->id ?? 1;
+            $slaughteringPlace->kecamatan_id = $kecamatan;
+            $slaughteringPlace->kabupaten_id = 5;
+            $slaughteringPlace->kelurahan_id = 5;
+            $slaughteringPlace->kelurahan_id = 5;
+
+            $slaughteringPlace->latitude = '-8.07300100';
+            $slaughteringPlace->longitude = '112.05370';
+
+            $slaughteringPlace->user_id = auth()->user()->id;
+            $slaughteringPlace->created_by = auth()->user()->id;
+            $slaughteringPlace->update_by = auth()->user()->id;
+            $slaughteringPlace->save();
+        }
+        return ResponseFormatter::created('Data berhasil diimport');
+        // return redirect('/admin/tempat-pemotongan')->with('success', 'Tempat pemotongan berhasil diimport');
     }
 }
