@@ -138,7 +138,6 @@ class SlaughteringPlaceController extends Controller
             return ResponseFormatter::created('Gagal menghapus data');
         }
     }
-}
 
     public function import(Request $request)
     {
@@ -168,7 +167,7 @@ class SlaughteringPlaceController extends Controller
             $slaughteringPlace->address = $rowData[2];
             $slaughteringPlace->type_of_place_id = 2;
             $slaughteringPlace->provinsi_id = 15;
-            
+
             $kecamatan = ModelsKecamatan::where('nama', $rowData[5])->first()->id ?? 1;
             $slaughteringPlace->kecamatan_id = $kecamatan;
             $slaughteringPlace->kabupaten_id = 5;
