@@ -156,11 +156,6 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="d-flex flex-column gap-2 col-md-6 mx-5  mx-md-0 border border-2 border-light-subtle rounded p-3"
-                        data-aos="fade-left" data-aos-duration="1000">
-                        <h1 class="fw-semibold fs-12 text-start text-white">Statistik</h1>
-                        <img src="{{ asset('landing/images/grafik.png') }}" alt="">
-                    </div>
                 </div>
         </div>
         </section>
