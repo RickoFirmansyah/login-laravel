@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Master\SlaughteringPlace;
-use App\Models\Master\MonitoringOfficer;
+use App\Models\SlaughteringPlace;
+use App\Models\MonitoringOfficer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +15,8 @@ class Assignment extends Model
         'monitoring_officer_id',
         'slaughtering_place_id',
         'jumlah_penugasan',
+        'created_by',
+        'update_by',
     ];
 
     public function monitoringOfficers()

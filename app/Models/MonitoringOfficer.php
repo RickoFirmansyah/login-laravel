@@ -11,7 +11,7 @@ class MonitoringOfficer extends Model
     use HasFactory;
     protected $table = 'monitoring_officers';
     protected $guards = [];
-    protected $fillable = ['name', 'gender', 'address', 'phone_number'];
+    protected $fillable = ['name', 'gender', 'address', 'phone_number','created_by','update_by'];
 
 
     public function user()

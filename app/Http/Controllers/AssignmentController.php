@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assignment;
+use App\Models\QurbanReport;
+use Illuminate\Http\Request;
 use App\Models\MonitoringOfficer;
 use App\Models\SlaughteringPlace;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class AssignmentController extends Controller
 {
     public function index()
     {
-        $monitoringOfficers = MonitoringOfficer::withCount('assignments')->get();
+        $monitoringOfficers = MonitoringOfficer::withCount([
+            'qurban_report as assignments_count' => function($query) {
+                $query->select(DB::raw('count(distinct id)'));
+            }
+        ])->get();
 
         return view('pages.admin.penugasan.index', compact('monitoringOfficers'));
     }
@@ -28,15 +34,25 @@ class AssignmentController extends Controller
     {
         try {
             $request->validate([
+                'monitoring_officer_id' => 'required|exists:monitoring_officers,id',
                 'assignments' => 'required|array',
-                'assignments.*' => 'exists:slaughtering_places,id'
+                'assignments.*.place_id' => 'exists:slaughtering_places,id',
+                'assignments.*.date' => 'required|date'
             ]);
 
-            foreach ($request->assignments as $slaughteringPlaceId) {
-                Assignment::create([
-                    'monitoring_officer_id' => auth()->id(),
-                    'slaughtering_place_id' => $slaughteringPlaceId,
-                    'jumlah_penugasan' => 1,
+            // Mendapatkan year_id untuk tahun saat ini
+            $currentYear = date('Y');
+            $year = DB::table('years')->where('tahun', $currentYear)->first();
+            if (!$year) {
+                return response()->json(['error' => 'Year not found'], 404);
+            }
+
+            foreach ($request->assignments as $assignment) {
+                QurbanReport::create([
+                    'monitoring_officer_id' => $request->monitoring_officer_id,
+                    'slaughtering_place_id' => $assignment['place_id'],
+                    'year_id' => $year->id, // Menggunakan id dari tabel years
+                    'date' => $assignment['date'],
                     'created_by' => auth()->user()->id,
                     'update_by' => auth()->user()->id
                 ]);
@@ -47,4 +63,5 @@ class AssignmentController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
 }

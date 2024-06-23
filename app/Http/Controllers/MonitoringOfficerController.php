@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MonitoringOfficer;
 use Illuminate\Http\Request;
+use App\Models\MonitoringOfficer;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class MonitoringOfficerController extends Controller
 {
@@ -12,7 +14,11 @@ class MonitoringOfficerController extends Controller
      */
     public function index()
     {
-        $monitoringOfficers = MonitoringOfficer::withCount('assignments')->get(); // Mengambil semua data dengan jumlah penugasan
+        $monitoringOfficers = MonitoringOfficer::withCount([
+            'qurban_report as assignments_count' => function($query) {
+                $query->select(DB::raw('count(distinct id)'));
+            }
+        ])->get();
         return view('pages.admin.penugasan.index', compact('monitoringOfficers'));
     }
 

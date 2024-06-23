@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('qurban_reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('monitoring_officer_id')->constrained('monitoring_officers');
-            $table->foreignId('slaughtering_place_id')->constrained('slaughtering_places');
+            $table->foreignId('monitoring_officer_id')->constrained('monitoring_officers')->onDelete('cascade');
+            $table->foreignId('slaughtering_place_id')->constrained('slaughtering_places')->onDelete('cascade');
             $table->foreignId('year_id')->constrained('years');
             $table->date('date');
             $table->char('created_by',36);

@@ -83,11 +83,6 @@ class DataMaster extends Seeder
                 'update_by' => '1'
             ],
             [
-                'type_of_animal' => 'Unta',
-                'created_by' => '1',
-                'update_by' => '1'
-            ],
-            [
                 'type_of_animal' => 'Kerbau',
                 'created_by' => '1',
                 'update_by' => '1'
@@ -132,6 +127,108 @@ class DataMaster extends Seeder
             ],
             [
                 'tahun' => '2007',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2008',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2009',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2010',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2011',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2012',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2013',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2014',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2015',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2016',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2017',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2018',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2019',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2020',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2021',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2022',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2023',
+                'status' => 'Non Aktif',
+                'created_by' => '1',
+                'update_by' => '1'
+            ],
+            [
+                'tahun' => '2024',
                 'status' => 'Aktif',
                 'created_by' => '1',
                 'update_by' => '1'

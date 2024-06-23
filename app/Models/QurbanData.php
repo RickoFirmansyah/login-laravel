@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\QurbanReport;
+use App\Models\Master\TypeOfQurban;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class QurbanData extends Model
 {
@@ -11,7 +13,7 @@ class QurbanData extends Model
     
     protected $table = 'qurban_data';
     protected $guards = [];
-    protected $fillable=['gender','weight','disease','price'];
+    protected $fillable=['qurban_report_id','type_of_qurban_id','gender','weight','disease','price','created_by','update_by'];
 
 
     public function qurbanReport() {

@@ -97,8 +97,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dokumentasi/filter/tempat/{kelurahanId}', [DocumentationController::class, 'filterTempat']);
     Route::get('/admin/dokumentasi/filter/photos', [DocumentationController::class, 'filterPhotos']);
     Route::resource('/admin/setting/system-setting', SystemSettingController::class)->names('system');
-
+    
+    // pelaporan pemantauan
+    Route::get('/admin/laporan-pemantauan/up-photo', [PelaporanPemantauanController::class, 'up_photo'])->name('admin.laporan-pemantauan.up_photo');
+    Route::post('/admin/laporan-pemantauan/store_photo', [PelaporanPemantauanController::class, 'store_photo'])->name('admin.laporan-pemantauan.store_photo');
     Route::resource('/admin/laporan-pemantauan', PelaporanPemantauanController::class)->names('laporan-pemantauan');
+    
 });
 
 Route::middleware("auth")->prefix("user")->name("user.")->group(function () {
@@ -137,7 +141,7 @@ Route::get('import-petugas-pemantauan', [PetugasPemantauanController::class, 'vi
 
 Route::resource('tahun', YearController::class)->names('tahun');
 
-Route::resource('penugasan', AssignmentController::class);
+// Route::resource('penugasan', AssignmentController::class);
 Route::delete('/delete-add-penugasan/{id}', [SlaughteringPlaceController::class, 'destroy']);
 Route::get('/add-penugasan', [SlaughteringPlaceController::class, 'index']);
 Route::get('/admin/data-pokok/penugasan', [MonitoringOfficerController::class, 'index']); // Added this line

@@ -23,15 +23,15 @@
                         <input type="text" data-table-id="slaughteringplace-table" id="searchBox" data-action="search"
                             class="form-control form-control-solid w-250px ps-13" placeholder="Cari Tempat Pemotongan" />
                     </div>
-                    <div>
+                    <div class="">
                         <a href="{{ route('admin.data-pokok.tempat-pemotongan.create') }}" class="btn btn-primary py-2">
-                            <i class="fas fa-plus fa-sm text-white-50"></i>
+                            <i class="fas fa-plus fa-sm text-white"></i>
                             <span class="ms-2">
                                 Tambah Tempat Pemotongan
                             </span>
                         </a>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fas fa-file fa-sm text-white-50" aria-hidden="true"></i>
+                            <i class="fas fa-file fa-sm text-white" aria-hidden="true"></i>
                             <span class="ms-2">
                                 Import
                             </span>

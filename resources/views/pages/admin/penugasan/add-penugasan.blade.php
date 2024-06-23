@@ -6,9 +6,9 @@
             <div class="col-12">
                 <!-- Menggunakan flexbox untuk menyelaraskan item ke kiri dan kanan -->
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
                         <img src="{{ asset('assets/images/profile/user-4.jpg') }}" alt="Profile Image" class="rounded-circle" width="100" height="100">
-                        <div class="ml-4">
+                        <div class="ms-4">
                             <h2>Nama : {{ $officer->name }}</h2>
                             <p>No.Telp : {{ $officer->phone_number }}</p>
                             <p>Alamat : {{ $officer->address }}</p>
@@ -19,12 +19,26 @@
                 </div>
                 <div class="card mt-4">
                     <div class="card-body">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session()->get('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session()->get('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h4>Daftar Tempat Penugasan</h4>
                             <button class="btn btn-primary" data-toggle="modal" data-target="#slaughteringPlaceModal">Tambah Penugasan</button>
                         </div>
                         <form method="POST" action="{{ route('admin.penugasan.store') }}">
                             @csrf
+                            <input type="hidden" name="monitoring_officer_id" value="{{ $officer->id }}">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
@@ -33,6 +47,7 @@
                                             <th>Kecamatan</th>
                                             <th>Desa / Kelurahan</th>
                                             <th>Alamat</th>
+                                            <th>Tanggal Penugasan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -98,24 +113,7 @@
             // Event delegation untuk menghapus baris dan mengembalikan ke pop-up
             $('#assignmentTableBody').on('click', '.btn-danger', function() {
                 const row = $(this).closest('tr');
-                const id = row.find('td').eq(0).text(); // Misalkan ID disimpan di kolom pertama
-                const cuttingPlace = row.find('td').eq(1).text();
-                const kecamatan = row.find('td').eq(2).text();
-                const kelurahan = row.find('td').eq(3).text();
-                const address = row.find('td').eq(4).text();
-
-                // Menambahkan kembali ke pop-up
-                const modalBody = $('#slaughteringPlaceModal').find('tbody');
-                modalBody.append(`
-                    <tr>
-                        <td>${cuttingPlace}</td>
-                        <td>${kecamatan}</td>
-                        <td>${kelurahan}</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" onclick="addPlaceToAssignment(${id}, '${cuttingPlace}', '${kecamatan}', '${kelurahan}', '${address}')">Pilih</button>
-                        </td>
-                    </tr>
-                `);
+                const id = row.find('input[type="hidden"]').val(); // ID disimpan dalam input hidden
 
                 // Menghapus baris dari tabel penugasan
                 row.remove();
@@ -128,11 +126,12 @@
                 const row = document.createElement('tr');
 
                 row.innerHTML = `
-                    <input type="hidden" name="assignments[]" value="${id}">
+                    <input type="hidden" name="assignments[${id}][place_id]" value="${id}">
                     <td>${cuttingPlace}</td>
                     <td>${kecamatan}</td>
                     <td>${kelurahan}</td>
                     <td>${address}</td>
+                    <td><input type="date" name="assignments[${id}][date]" class="form-control"></td>
                     <td>
                         <button class="btn btn-danger btn-sm">Hapus</button>
                     </td>
@@ -150,29 +149,6 @@
                     row.children[0].textContent = index + 1;
                 });
             }
-
-            $('#saveAssignmentButton').click(function() {
-                var assignments = [];
-                $('#assignmentTableBody tr').each(function() {
-                    var id = $(this).find('input[type="hidden"]').val(); // Asumsi ID tempat pemotongan disimpan dalam input hidden
-                    assignments.push(id);
-                });
-
-                $.ajax({
-                    url: '{{ route("admin.penugasan.store") }}',
-                    type: 'POST',
-                    data: {
-                        assignments: assignments,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        alert('Penugasan berhasil disimpan!');
-                    },
-                    error: function() {
-                        alert('Terjadi kesalahan saat menyimpan penugasan.');
-                    }
-                });
-            });
         });
     </script>
 @endsection

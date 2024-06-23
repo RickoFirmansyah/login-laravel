@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\QurbanData;
+use App\Models\Master\Year;
+use App\Models\Documentation;
+use App\Models\MonitoringOfficer;
+use App\Models\SlaughteringPlace;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class QurbanReport extends Model
 {
@@ -11,7 +16,14 @@ class QurbanReport extends Model
 
     protected $table = 'qurban_reports';
     protected $guards = [];
-    protected $fillable=['date'];
+    protected $fillable = [
+        'monitoring_officer_id',
+        'slaughtering_place_id',
+        'year_id',
+        'date',
+        'created_by',
+        'update_by'
+    ];
 
 
     public function year() {

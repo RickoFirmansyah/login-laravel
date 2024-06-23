@@ -3,13 +3,18 @@
 @section('content')
     <div class="d-flex flex-column flex-column-fluid">
         <div class="app-toolbar py3 py-lg-6">
-            <div class="app-container container-xxl d-flex flex-stack">    
+            <div class="app-container container-xxl d-flex flex-stack">
                 <!--end::Title-->
-                </div>
             </div>
         </div>
 
         <div class="card-body py-2">
+            @if (session()->has('store'))
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    {{ session('store') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <div class="d-flex align-items-center position-relative my-1">
                     <span class="ki-outline ki-magnifier fs-3 position-absolute ms-5"></span>
@@ -25,8 +30,7 @@
                             <th>Aksi</th>
                             <th>No</th>
                             <th>Tempat Pemotongan</th>
-                            <th>Jumlah</th>
-                           
+                            <th>Jumlah Qurban</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,11 +38,15 @@
                         <tr>
                             <td>
                                 <a href="{{ route("laporan-pemantauan.create") }}" class="btn btn-success">
-                                    <i class="fas fa-plus fa-sm text-white-50"></i>
+                                    <i class="fas fa-plus fa-sm"></i>
+                                </a>
+                                <a href="{{ route("admin.laporan-pemantauan.up_photo") }}" class="btn btn-warning">
+                                    <i class="fas fa-upload fa-sm"></i>
                                 </a>
                             </td>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $officer->slaughteringPlace->cutting_place }}</td>
+                            <td>{{ $officer->qurban_data_count }}</td> <!-- Menampilkan jumlah qurban -->
                         </tr>
                         @endforeach
                     </tbody>

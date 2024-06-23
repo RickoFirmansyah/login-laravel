@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 
 class DocumentationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $items = Documentation::paginate(12);
@@ -23,7 +20,6 @@ class DocumentationController extends Controller
             'kecamatans' => $kecamatans,
         ]);
     }
-
 
     public function filterDesa($kecamatanId)
     {
@@ -64,8 +60,6 @@ class DocumentationController extends Controller
         return response()->json($photos);
     }
 
-
-    
     public function store(Request $request)
     {
         $request->validate([
@@ -74,7 +68,7 @@ class DocumentationController extends Controller
         ]);
 
         $doc = new Documentation;
-        $doc->qurban_report_id = 1;
+        $doc->qurban_report_id = 1; // Change this to the correct report ID if necessary
         $doc->caption = $request->caption;
         $doc->created_by = auth()->user()->id;
         $doc->updated_by = auth()->user()->id;
@@ -88,41 +82,38 @@ class DocumentationController extends Controller
 
         $doc->save();
 
-        // dd($doc); // Debugging, periksa apakah data sudah benar sebelum disimpan
-
-        return redirect()->route('pages.admin.dokumentasi.index')->with('success', 'Foto berhasil ditambahkan');
+        return redirect()->route('dokumentasi.index')->with('success', 'Foto berhasil ditambahkan');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Documentation $documentation)
+    public function destroy($id)
     {
-        //
+        $documentation = Documentation::find($id);
+        if ($documentation) {
+            // Delete the photo file from the server
+            $photoPath = public_path('assets/images/documentations/' . $documentation->photo);
+            if (file_exists($photoPath)) {
+                unlink($photoPath);
+            }
+            // Delete the record from the database
+            $documentation->delete();
+            return redirect()->route('dokumentasi.index')->with('success', 'Foto berhasil dihapus');
+        }
+        return redirect()->route('dokumentasi.index')->with('error', 'Foto tidak ditemukan');
     }
+    // public function destroy($id)
+    // {
+    //     $documentation = Documentation::find($id);
+    //     if ($documentation) {
+    //         // Delete the photo file from the server
+    //         $photoPath = public_path('assets/images/documentations/' . $documentation->photo);
+    //         if (file_exists($photoPath)) {
+    //             unlink($photoPath);
+    //         }
+    //         // Delete the record from the database
+    //         $documentation->delete();
+    //         return response()->json(['success' => true]);
+    //     }
+    //     return response()->json(['success' => false, 'message' => 'Foto tidak ditemukan']);
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Documentation $documentation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Documentation $documentation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Documentation $documentation)
-    {
-        //
-    }
 }
