@@ -30,7 +30,10 @@ class PanduanDataTable extends DataTable
             ->editColumn('numbers', function (Panduan $Panduan) {
                 return (int)$Panduan->numbers;
             })
-            ->rawColumns(['action'])
+            ->editColumn('file', function (Panduan $Panduan) {
+                return '<a href="/panduan/'.$Panduan->file.'" class="btn btn-secondary ms-2">Download</a>';
+            })
+            ->rawColumns(['action', 'file'])
             ->setRowId('id');
     }
 
@@ -82,6 +85,7 @@ class PanduanDataTable extends DataTable
             Column::make('title')->title('Title'),
             Column::make('description')->title('Description'),
             Column::make('numbers')->title('Numbers'),
+            Column::make('file')->title('File'),
         ];
     }
 
