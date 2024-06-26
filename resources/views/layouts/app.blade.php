@@ -298,11 +298,11 @@
     </div>
 
     <script>
-        ClassicEditor
-            .create(document.querySelector('#description'))
-            .catch(error => {
-                console.error(error);
-            });
+        // ClassicEditor
+        //     .create(document.querySelector('#description'))
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
     </script>
 
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>

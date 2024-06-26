@@ -26,7 +26,7 @@
     <div class="py-4">
         <div class="row">
             <div class="">
-                <form method="POST" action="{{ route('admin.panduan.store') }}" custom-action="true">
+                <form method="POST" action="{{ route('admin.panduan.store') }}" custom-action="true" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
@@ -49,6 +49,16 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="file" class="form-label">File</label>
+                                <input type="file" class="form-control" id="file" name="file" placeholder="Enter file"
+                                    required>
+                                @if ($errors->has('file'))
+                                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
@@ -61,7 +71,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="{{ route('admin.tempat-pemotongan.index') }}" class="btn btn-secondary ms-2">Back</a>
+                    <a href="{{ route('admin.panduan.index') }}" class="btn btn-secondary ms-2">Back</a>
                 </form>
             </div>
         </div>

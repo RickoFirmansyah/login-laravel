@@ -45,12 +45,21 @@ class PanduanController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $StoreTempatPemotonganRequest = new Panduan();
         $StoreTempatPemotonganRequest->title = $request->title;
         $StoreTempatPemotonganRequest->numbers = $request->numbers;
         $StoreTempatPemotonganRequest->description = $request->description;
         $StoreTempatPemotonganRequest->created_by = Auth::id();
         $StoreTempatPemotonganRequest->update_by = Auth::id();
+        
+        $file = $request->file('file');
+        // return $file;
+        // $file->move()
+        $tujuan_upload = public_path('panduan/');
+        $file->move($tujuan_upload,$file->getClientOriginalName());
+        $StoreTempatPemotonganRequest->file = $file->getClientOriginalName();
+
         $StoreTempatPemotonganRequest->save();
 
         // return response()->json(['url' => route('admin.panduan.index'),'pesan' => 'Tempat Pemotongan berhasil dibuat.' ]);
